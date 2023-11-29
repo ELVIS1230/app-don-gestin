@@ -51,4 +51,17 @@ body {
     transition: all 0.5s; /* Transición para cambios */
     position: relative; /* Posición relativa */
   }
+  .sidebar {
+    display: flex;
+    align-items: center;
+    margin-top: 2px;
+    padding: 4px;
+    border-radius: 8px; /* Se cambió rounded-lg por el valor correspondiente */
+    cursor: pointer;
+    transition: all 300ms; /* Se ajustó la sintaxis de transition */
+  }
+  
+  .sidebar:hover {
+    background-color: white;
+  }
 }
