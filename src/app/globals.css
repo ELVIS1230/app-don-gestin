@@ -1,8 +1,45 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-body{
-  background: #D2D2D2;
+
+body {
+  background-color: whitesmoke;
 }
 
+@layer base {
+  @font-face {
+    font-family: "Poppins";
+    src: url(./Fonts/Poppins-Regular.ttf);
+  }
+  * {
+    padding: 0;
+    left: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+  }
+  .sidebar-container {
+    background-color: rgba(0, 0, 0, 0.822); /* Color de fondo con efecto glass */
+    height: 96%; /* Altura del 96% del contenedor padre */
+    width: 20rem; /* Ancho de 20rem */
+    border-radius: 1.5rem; /* Bordes redondeados */
+    margin-left: 1.5rem; /* Margen izquierdo de 1.5rem */
+    padding: 1rem; /* Relleno interno de 1rem en todas las direcciones */
+    border: 1px solid transparent; /* Borde sólido transparente */
+    transition: all 0.5s; /* Transición para cambios */
+    position: relative; /* Posición relativa */
+  }
+  .sidebar {
+    display: flex;
+    align-items: center;
+    margin-top: 2px;
+    padding: 4px;
+    border-radius: 8px; /* Se cambió rounded-lg por el valor correspondiente */
+    cursor: pointer;
+    transition: all 300ms; /* Se ajustó la sintaxis de transition */
+  }
+  
+  .sidebar:hover {
+    background-color: white;
+  }
+}
