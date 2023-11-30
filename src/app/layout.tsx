@@ -21,8 +21,8 @@ export default function RootLayout({
         <div className='w-full h-screen bg-back object-cover
         flex items-center'>
           <Sidebar></Sidebar>
-        </div>
         {children}
+        </div>
         </body> 
 
     </html>
