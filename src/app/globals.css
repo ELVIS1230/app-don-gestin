@@ -19,5 +19,9 @@
     p-4 border transition-all duration-500 border-solid
     border-gray-300 relative 
   }
-  
+  .sidebar {
+    @apply flex items-center mt-2 p-4 rounded-lg
+    cursor-pointer hover:bg-white transition-all
+    duration-300
+  }
 }
