@@ -1,13 +1,14 @@
-
 export default function Home() {
   return (
-    <div className="flex justify-center overflow-hidden rounded-lg mx-auto" >
+    <div className="flex justify-center overflow-hidden rounded-lg" style={{ margin: "10px" }}>
       <hr />
       <div className="flex flex-col md:flex-row justify-center shadow-inner"
-      style={{ 
-      backgroundColor: "white",
-      marginTop: "100px",
-      borderRadius:"10px" }} >
+        style={{
+          backgroundColor: "white",
+          marginTop: "100px",
+          padding: "100px",
+          borderRadius: "10px"
+        }} >
         {/* Div izquierdo */}
         <div className="container mx-auto p-4 flex flex-col justify-center" >
           <h1 className="text-3xl font-bold">Don Gestión</h1>
@@ -39,20 +40,29 @@ export default function Home() {
               <input type="password"
                 name="password"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Ingrese su Contraseña"
+                placeholder="Contraseña"
                 id="password" />
 
             </div>
 
             <div className="flex justify-center">
 
-<button 
-  className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
->
-  Iniciar Sesión
-</button>
+              <button
+                className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
+              >
+                Iniciar Sesión
+              </button>
+               </div>
+               <div className="flex justify-center">
 
-</div>
+              <button
+                className="hover:bg-gray-800 text-white py-2 px-4 rounded" 
+                style={{marginTop:"10px",
+              background:"#4b5563"}}
+              >
+                ¿No tienes una Cuenta?
+              </button>
+           </div>
           </form>
         </div>
       </div>
