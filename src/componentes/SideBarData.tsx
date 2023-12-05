@@ -16,11 +16,11 @@ const SideBarData = ({ toggle }) => {
             } sidebar last:absolute left-4 bottom-4`} 
             >
                 <div className="mr-8 text-[1-7rem]
-                text-brown"><TbHome2 size={35}/></div>
+                text-brown"><TbHome2 style={{ color: 'white' }} size={35}/></div>
                 <div 
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
-                } text-[1rem] text-brown whitespace-pre text-`}>
+                } text-[1rem] text-white whitespace-pre text-`}>
                 <Link href="/">Home</Link>
                 </div>
              </div>  
@@ -30,11 +30,11 @@ const SideBarData = ({ toggle }) => {
             } sidebar last:absolute left-4 bottom-4`} 
             >
                 <div className="mr-8 text-[1-7rem]
-                text-brown"><BiWallet size={35}/></div>
+                text-brown"><BiWallet style={{ color: 'white' }} size={35}/></div>
                 <div 
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
-                } text-[1rem] text-brown whitespace-pre text-`}>
+                } text-[1rem] text-white whitespace-pre text-`}>
                 <Link href="/billetera-general">Billetera General</Link>
                 </div>
              </div>  
@@ -44,11 +44,11 @@ const SideBarData = ({ toggle }) => {
             } sidebar last:absolute left-4 bottom-4`} 
             >
                 <div className="mr-8 text-[1-7rem]
-                text-brown"><FaSearchDollar size={35}/></div>
+                text-brown"><FaSearchDollar style={{ color: 'white' }} size={35}/></div>
                 <div 
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
-                } text-[1rem] text-brown whitespace-pre text-`}>
+                } text-[1rem] text-white whitespace-pre text-`}>
                 <Link href="/control-de-gastos">Control de Gastos</Link>
                 </div>
              </div>  
@@ -58,11 +58,11 @@ const SideBarData = ({ toggle }) => {
             } sidebar last:absolute left-4 bottom-4`} 
             >
                 <div className="mr-8 text-[1-7rem]
-                text-brown"><MdOutlineSavings size={35}/></div>
+                text-brown"><MdOutlineSavings style={{ color: 'white' }} size={35}/></div>
                 <div 
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
-                } text-[1rem] text-brown whitespace-pre text-`}>
+                } text-[1rem] text-white whitespace-pre text-`}>
                 <Link href="/plan-de-ahorros">Plan de Ahorros</Link>
                 </div>
              </div>  
@@ -72,11 +72,11 @@ const SideBarData = ({ toggle }) => {
             } sidebar last:absolute left-4 bottom-4`} 
             >
                 <div className="mr-8 text-[1-7rem]
-                text-brown"><IoCardOutline size={35}/></div>
+                text-brown"><IoCardOutline style={{ color: 'white' }} size={35}/></div>
                 <div 
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
-                } text-[1rem] text-brown whitespace-pre text-`}>
+                } text-[1rem] text-white whitespace-pre text-`}>
                 <Link href="/tarjetas">Tarjetas</Link>
                 </div>
              </div>  
@@ -86,11 +86,11 @@ const SideBarData = ({ toggle }) => {
             } sidebar last:absolute left-4 bottom-4`} 
             >
                 <div className="mr-8 text-[1-7rem]
-                text-brown"><TbCalendarStats size={35}/></div>
+                text-brown"><TbCalendarStats style={{ color: 'white' }} size={35}/></div>
                 <div 
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
-                } text-[1rem] text-brown whitespace-pre text-`}>
+                } text-[1rem] text-white whitespace-pre text-`}>
                 <Link href="/recordatorios">Recordatorios</Link>
                 </div>
              </div>  
@@ -100,11 +100,11 @@ const SideBarData = ({ toggle }) => {
             } sidebar last:absolute left-4 bottom-4`} 
             >
                 <div className="mr-8 text-[1-7rem]
-                text-brown"><FaRegUser size={35}/></div>
+                text-brown"><FaRegUser style={{ color: 'white' }} size={35}/></div>
                 <div 
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
-                } text-[1rem] text-brown whitespace-pre text-`}>
+                } text-[1rem] text-white whitespace-pre text-`}>
                 <Link href="/recordatorios">Perfil</Link>
                 </div>
              </div>  

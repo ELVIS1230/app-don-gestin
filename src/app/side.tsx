@@ -16,7 +16,7 @@ const Sidebar = () => {
       <div 
       className="absolute top-[7rem] flex 
       justify-center items-center -left-5 w-10 h-10 
-      bg-gray-300 rounded-full cursor-pointer"
+      bg-gray-300 rounded-full cursor-pointer shadow-md"
       onClick={() => {
         setToggle(!toggle);
       }}>
