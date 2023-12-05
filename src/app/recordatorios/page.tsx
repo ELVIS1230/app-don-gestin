@@ -7,7 +7,7 @@ function Recordatorios() {
 
       <div className="w-3/5 p-4 h-[100%]">
 
-        <div className="mb-6 bg-zinc-200 p-4 rounded-2xl min-h-25% shadow-lg">
+        <div className="mb-6 bg-zinc-200 p-4 rounded-2xl min-h-25% shadow-xl">
           <div className='p-4'>
             <div className='flex justify-between'>
               <div className='item-center'>
@@ -19,7 +19,7 @@ function Recordatorios() {
             </div>
           </div>
         </div>
-        <div className="mb-6 bg-zinc-200 px-4 rounded-2xl shadow-lg">
+        <div className="mb-6 bg-zinc-200 px-4 rounded-2xl shadow-xl">
           <div><h1 className='font-bold text-base py-2'>Pagos Consumo</h1></div>
           <div className="grid grid-cols-4 gap-4 py-3">
             <div className="font-bold text-lg">Tarjeta</div>
@@ -67,7 +67,7 @@ function Recordatorios() {
             </div>
           </div>
         </div>
-        <div className="mb-6 bg-zinc-200 px-4 rounded-2xl shadow-lg">
+        <div className="mb-6 bg-zinc-200 px-4 rounded-2xl shadow-xl">
           <div><h1 className='font-bold text-base py-2'>Pagos Tarjeta</h1></div>
           <div className="grid grid-cols-3 gap-4 py-3">
             <div className="font-bold text-lg">Tarjeta</div>
@@ -120,8 +120,8 @@ function Recordatorios() {
 
 
       <div className="w-2/5 p-4 h-full">
-        <div className="mb-6 bg-neutral-100 p-4 rounded-2xl shadow-lg">
-          <h2 className="text-lg font-semibold mb-4">Agregar Elemento</h2>
+        <div className="mb-6 bg-neutral-100 p-4 rounded-2xl shadow-xl">
+          <h2 className="text-lg font-semibold mb-4">Agregar Recordatorio</h2>
           <div className="">
             <div className="mb-4">
               <label htmlFor="title" className="block text-neutral-900 text-sm font-bold mb-2"></label>
