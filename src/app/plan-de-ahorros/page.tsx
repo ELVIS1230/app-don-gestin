@@ -3,78 +3,81 @@ import { FaCar } from "react-icons/fa6";
 import { IoHome } from "react-icons/io5";
 import { MdOutlineSavings } from "react-icons/md";
 
-
 function PlanAhorros() {
   return (
     <div className='flex'>
       <div className="w-3/5 p-4">
         <div className="mb-4 bg-gray-200 p-4 rounded-2xl">
-          <div className="flex items-center">
-            <h1 className='text-xl font-bold flex-1'>Elige tu plan de ahorro</h1>
-            <MdOutlineSavings size={150} className="text-black-500" />
+
+          <div className="flex flex-col md:flex-row items-center">
+            <div className="flex-grow ">
+              <h1 className='text-xl font-bold'>Elige tu plan de ahorro</h1>
+              <p className="text-gray-700 pt-4">
+                Usa un plan de ahorro para mejorar tu economía.
+              </p>
+            </div>
+            <div className="ml-auto ">
+              <MdOutlineSavings size={150} className="text-black-500" />
+            </div>
           </div>
-          <p className="text-gray-700"
-            style={{ paddingBottom: "8px" }}>
-            Usa un plan de ahorro para mejorar tu economía.
-          </p>
-        </div>
-        <div className="mb-4 bg-gray-200 p-4 rounded-2xl" id='planes_ahorro'
-          style={{
-            borderRadius: "10px"
-          }}>
-          <p className='font-bold mb-4'>Tus Planes de Ahorro</p>
-          {/* Div de cada plan creado */}
-          <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-            paddingTop: "20px",
-            marginTop: "20px"
-          }}>
-            <div className="bg-white rounded-lg p-2 flex items-center">
-              <FaCar size={30} className="mr-2" />
-              <h3 className="font-medium">Auto Nuevo</h3>
-            </div>
-            <div className="flex-grow text-center">
-              <p>$ Ahorrado</p>
-              <p>$200.00</p>
-            </div>
-            <div className="flex-grow text-center">
-              <p>$ Por Ahorrar</p>
-              <p>$800.00</p>
-            </div>
-
-            <div className="flex-grow text-center">
-              <p>$ Meta</p>
-              <p>$1000.00</p>
-            </div>
-            <button className=" bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Ver</button>
           </div>
+          <div className="mb-4 bg-gray-200 p-4 rounded-2xl" id='planes_ahorro'
+            style={{
+              borderRadius: "10px"
+            }}>
+            <p className='font-bold mb-4'>Tus Planes de Ahorro</p>
+            {/* Div de cada plan creado */}
+            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
+              paddingTop: "20px",
+              marginTop: "20px"
+            }}>
+              <div className="bg-white rounded-lg p-2 flex items-center">
+                <FaCar size={30} className="mr-2" />
+                <h3 className="font-medium">Auto Nuevo</h3>
+              </div>
+              <div className="flex-grow text-center">
+                <p>$ Ahorrado</p>
+                <p>$200.00</p>
+              </div>
+              <div className="flex-grow text-center">
+                <p>$ Por Ahorrar</p>
+                <p>$800.00</p>
+              </div>
 
-          {/* Div de cada plan creado */}
-          <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-            paddingTop: "20px",
-            marginTop: "20px"
-          }}>
-
-            <div className="bg-white rounded-lg p-2 flex items-center">
-              <IoHome size={30} className="mr-2" />
-              <h3 className="font-medium">Casa Nueva</h3>
-            </div>
-            <div className="flex-grow text-center">
-              <p>$ Ahorrado</p>
-              <p>$200.00</p>
-            </div>
-            <div className="flex-grow text-center">
-              <p>$ Por Ahorrar</p>
-              <p>$800.00</p>
+              <div className="flex-grow text-center">
+                <p>$ Meta</p>
+                <p>$1000.00</p>
+              </div>
+              <button className=" bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Ver</button>
             </div>
 
-            <div className="flex-grow text-center">
-              <p>$ Meta</p>
-              <p>$1000.00</p>
+            {/* Div de cada plan creado */}
+            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
+              paddingTop: "20px",
+              marginTop: "20px"
+            }}>
+
+              <div className="bg-white rounded-lg p-2 flex items-center">
+                <IoHome size={30} className="mr-2" />
+                <h3 className="font-medium">Casa Nueva</h3>
+              </div>
+              <div className="flex-grow text-center">
+                <p>$ Ahorrado</p>
+                <p>$200.00</p>
+              </div>
+              <div className="flex-grow text-center">
+                <p>$ Por Ahorrar</p>
+                <p>$800.00</p>
+              </div>
+
+              <div className="flex-grow text-center">
+                <p>$ Meta</p>
+                <p>$1000.00</p>
+              </div>
+              <button className=" bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Ver</button>
             </div>
-            <button className=" bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Ver</button>
           </div>
-        </div>
-
+      
       </div>
       <div className='w-2/5 p-4'>
 
@@ -117,6 +120,7 @@ function PlanAhorros() {
         </div>
       </div>
     </div>
+
   )
 }
 export default PlanAhorros;
