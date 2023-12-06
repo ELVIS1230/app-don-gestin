@@ -5,9 +5,9 @@ import { MdOutlineAddCard } from "react-icons/md";
 
 function Tarjetas() {
   return (
-    <div className='flex'>
-      <div className="w-3/5 p-4">
-        <div className="mb-4 bg-gray-200 p-4 rounded-2xl">
+    <div className='grid grid-rows-2 border-2 border-red-600'>
+      <div className="flex p-4">
+        <div className="mb-4 bg-gray-200 p-4 rounded-2xl w-3/5">
           <div className="flex flex-col md:flex-row items-center">
             <div className="flex-grow ">
               <h1 className='text-xl font-bold'>Tus Tarjetas</h1>
@@ -20,6 +20,25 @@ function Tarjetas() {
             </div>
           </div>
         </div>
+        <div className="w-2/5">
+        <div className="p-4">
+          <div className="rounded shadow-lg">
+            <div className="py-4 bg-gray-200 rounded-2xl">
+              <div className="border-b-4 border-gray-500">
+                <div className="font-bold text-xl mb-2 text-center">Tarjeta de Crédito</div>
+              </div>
+              <div className="text-gray-700 text-base mx-6 mt-2">
+                <div>Banco: Pichincha</div>
+                <div>Saldo Disponible: $20.00,09</div>
+                <div>Fecha de Corte: 01-12-2023</div>
+                <div>Fecha de Vencimiento: 15-12-2023</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
         <div className=" mb-4 bg-gray-200 p-4 rounded-2xl " id='planes_ahorro'
           style={{
             borderRadius: "10px"
@@ -86,26 +105,7 @@ function Tarjetas() {
             </div>
           </div>
         </div>
-
-      </div>
-
-      <div className="w-2/5 p-4">
-        <div className="p-4">
-          <div className="rounded shadow-lg">
-            <div className="py-4 bg-gray-200 rounded-2xl">
-              <div className="border-b-4 border-gray-500">
-                <div className="font-bold text-xl mb-2 text-center">Tarjeta de Crédito</div>
-              </div>
-              <div className="text-gray-700 text-base mx-6 mt-2">
-                <div>Banco: Pichincha</div>
-                <div>Saldo Disponible: $20.00,09</div>
-                <div>Fecha de Corte: 01-12-2023</div>
-                <div>Fecha de Vencimiento: 15-12-2023</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
 
     </div>
   )
