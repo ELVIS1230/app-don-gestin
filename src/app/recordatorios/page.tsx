@@ -11,7 +11,7 @@ function Recordatorios() {
           <div className='p-4'>
             <div className='flex justify-between'>
               <div className='item-center'>
-                <h1 className='font-bold text-2xl py-4'>Recordatorios</h1>
+                <h1 className='font-black text-5xl py-4'>Recordatorios</h1>
                 <p>Tu sitio para revisar todos tus pendientes económicos</p>
 
               </div>

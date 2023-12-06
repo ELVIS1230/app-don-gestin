@@ -35,7 +35,7 @@
   
   /* Estilo de la barra de desplazamiento */
   ::-webkit-scrollbar-thumb {
-    background: #2e2e2e; /* Cambia este color si es necesario */
+    background: #818181; /* Cambia este color si es necesario */
     
   }
   .placeholder {
