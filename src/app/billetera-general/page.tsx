@@ -26,7 +26,7 @@ function BilleteraG() {
           </div>
         </div>
         <div className="mb-6 bg-zinc-200 px-4 rounded-2xl shadow-xl">
-          <div><h1 className='font-bold text-xl py-2 pb-6'>Movimientos de Ingresos y Egresos a tus tarjetas</h1></div>
+          <div><h1 className='font-bold text-xl py-5 pb-6'>Movimientos</h1></div>
           {/* <div className="grid grid-cols-10 gap-4 py-3">
             <div className="font-bold text-lg col-span-1"></div>
             <div className="font-bold text-lg col-span-2">Transacción</div>
