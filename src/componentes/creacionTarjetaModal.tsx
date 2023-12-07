@@ -36,8 +36,8 @@ const Modal = ({ show, handleClose, handleAccept }) => {
                     <div className="grid gap-4 mb-4 grid-cols-2">
                         <div className="col-span-2">
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de Banco</label>
-                            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white " 
-                            placeholder="Banco" type="Nombre" />
+                            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
+                                placeholder="Banco" type="Nombre" />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Tarjeta</label>
@@ -56,8 +56,8 @@ const Modal = ({ show, handleClose, handleAccept }) => {
                                 </div>
                                 <div className="col-span-2 sm:col-span-1 mt-2">
                                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cupo</label>
-                                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white " 
-                                    type="number" />
+                                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
+                                        type="number" />
                                 </div>
                             </div>
                         )}
