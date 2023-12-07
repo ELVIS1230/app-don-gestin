@@ -1,11 +1,11 @@
 export default function Home() {
   return (
     <div className="flex justify-center overflow-hidden rounded-lg" style={{ margin: "10px" }}>
-      <hr />
+   
       <div className="flex flex-col md:flex-row justify-center shadow-inner"
         style={{
           backgroundColor: "white",
-          marginTop: "100px",
+          marginTop:"40px",
           padding: "100px",
           borderRadius: "10px"
         }} >

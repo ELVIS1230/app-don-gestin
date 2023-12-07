@@ -26,10 +26,9 @@ function Tarjetas() {
           }}
         >
           <div className="flex">
-            <p className='static font-bold mt-3'>Movimiento de las Tarjetas</p>
+            <p className='static font-bold mt-3'>Movimientos de la Tarjeta</p>
             <button className="ml-auto bg-black hover:bg-gray-800 text-white py-2 px-4 mr-1 rounded-lg"><MdOutlineAddCard size={25} /></button>
           </div>
-
           {/* Div de cada plan creado */}
           <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
             paddingTop: "20px",
@@ -57,7 +56,6 @@ function Tarjetas() {
               <p>$1000.00</p>
             </div>
 
-            <button className=" bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Ver</button>
           </div>
 
           {/* Div de cada plan creado */}
@@ -86,42 +84,28 @@ function Tarjetas() {
               <p>Total</p>
               <p>$1000.00</p>
             </div>
-            <button className=" bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Ver</button>
           </div>
         </div>
+
       </div>
 
-      <div className="w-2/5 p-4 justify-center ">
+      <div className="w-2/5 p-4">
         <div className="p-4">
-          <div className="py-4 bg-gray-200 rounded-2xl shadow-lg">
-            <div className="border-b-4 border-gray-500">
-              <div className="font-bold text-xl mb-2 text-center">Tarjeta de Crédito</div>
-            </div>
-            <div className="text-gray-700 text-base mx-6 mt-2">
-              <div>Banco: Pichincha</div>
-              <div>Saldo Disponible: $20.00,09</div>
-              <div>Fecha de Corte: 01-12-2023</div>
-              <div>Fecha de Vencimiento: 15-12-2023</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="p-4">
-          <div className="py-4 bg-gray-200 rounded-2xl shadow-lg">
-            <div className="border-b-4 border-gray-500">
-              <div className="font-bold text-xl mb-2 text-center">Tarjeta de Débito</div>
-            </div>
-            <div className="text-gray-700 text-base mx-6 mt-2">
-              <div>Banco: Pichincha</div>
-              <div>Saldo Disponible: $20.00,09</div>
-              <div>Fecha de Caducidad: 15-12-2023</div>
+          <div className="rounded shadow-lg">
+            <div className="py-4 bg-gray-200 rounded-2xl">
+              <div className="border-b-4 border-gray-500">
+                <div className="font-bold text-xl mb-2 text-center">Tarjeta de Crédito</div>
+              </div>
+              <div className="text-gray-700 text-base mx-6 mt-2">
+                <div>Banco: Pichincha</div>
+                <div>Saldo Disponible: $20.00,09</div>
+                <div>Fecha de Corte: 01-12-2023</div>
+                <div>Fecha de Vencimiento: 15-12-2023</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-
-
 
     </div>
   )
