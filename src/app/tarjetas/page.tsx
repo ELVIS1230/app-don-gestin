@@ -31,9 +31,8 @@ function Tarjetas() {
             <p className='static font-bold mt-3 mr-auto'>Movimiento de las Tarjetas</p>
             <ModalTarjeta></ModalTarjeta>
           </div>
-          
-          <div >
 
+          <div >
           </div>
           <div className='max-h-[450px] overflow-auto scrollbar-thumb:!rounded scroll-container'>
             {/* Div de cada plan creado */}
@@ -63,7 +62,6 @@ function Tarjetas() {
               </div>
             </div>
 
-
             {/* Div de cada plan creado */}
             <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
               paddingTop: "20px",
@@ -89,7 +87,6 @@ function Tarjetas() {
                 <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >$1000.00</p>
               </div>
             </div>
-
 
             {/* Div de cada plan creado */}
             <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
