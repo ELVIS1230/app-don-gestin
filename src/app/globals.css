@@ -41,5 +41,8 @@
   .placeholder {
     color: text-neutral-900
   }
-  
+  .bg-section {
+    background-image: url(../assets/landscape.jpg);
+    background-size:34%;
+  }
 }

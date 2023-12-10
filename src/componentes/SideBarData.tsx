@@ -38,7 +38,7 @@ const SideBarData = ({ toggle }) => {
                 <Link href="/home/billetera-general">Billetera General</Link>
                 </div>
              </div>  
-            <div 
+            {/* <div 
             className={`${
                 toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"
             } sidebar last:absolute left-4 bottom-4`} 
@@ -51,7 +51,7 @@ const SideBarData = ({ toggle }) => {
                 } text-[1rem] text-white whitespace-pre text-`}>
                 <Link href="/home/control-de-gastos">Control de Gastos</Link>
                 </div>
-             </div>  
+             </div>   */}
             <div 
             className={`${
                 toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"

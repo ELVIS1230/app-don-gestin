@@ -1,3 +1,4 @@
+import Link from "next/link"
 export default function Login() {
     return (
       <div className="flex justify-center overflow-hidden rounded-lg " style={{ margin: "10px" }}>
@@ -11,7 +12,7 @@ export default function Login() {
           }} >
           {/* Div izquierdo */}
           <div className="container mx-auto p-4 flex flex-col justify-center " >
-            <h1 className="text-3xl font-bold">Don Gestión</h1>
+            <h1 className="text-3xl font-bold"><Link href="/">Don Gestín</Link></h1>
             <p>Facilita la gestión de tus finanzas</p>
           </div>
   
@@ -60,7 +61,7 @@ export default function Login() {
                   style={{marginTop:"10px",
                 background:"#4b5563"}}
                 >
-                  ¿No tienes una Cuenta?
+                  <Link href="/auth/register">¿No tienes una Cuenta?</Link>
                 </button>
              </div>
             </form>

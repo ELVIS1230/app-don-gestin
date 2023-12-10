@@ -24,6 +24,14 @@ const Modal = ({ show, handleClose, handleAccept }) => {
         break;
     }
   };
+  const handleResetFields = () => {
+    setName('');
+    setDescription('');
+    setValue('');
+    setMovementType('');
+    setSelectedCard('');
+    setShowCardSelect(false);
+  };
 
   const handleMovementTypeChange = (e) => {
     const selectedType = e.target.value;
@@ -42,7 +50,8 @@ const Modal = ({ show, handleClose, handleAccept }) => {
     const selectedCard = e.target.value;
     setSelectedCard(selectedCard);
   };
-
+  
+  
   const handleAcceptClick = () => {
     // Aquí se puede realizar la acción con los datos ingresados
     const data = {
@@ -53,11 +62,13 @@ const Modal = ({ show, handleClose, handleAccept }) => {
       selectedCard, // Aquí puedes utilizar la tarjeta seleccionada si está disponible
     };
     handleAccept(data);
+    handleResetFields();
+    console.log(data);
   };
 
   return (
     <div className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center ${show ? 'block' : 'hidden'}`}>
-      <div className="bg-neutral-300 p-6 rounded-lg w-2/6 shadow-md">
+      <div className="bg-white p-6 rounded-lg w-2/6 shadow-md">
         <h2 className="text-lg font-bold mb-4">Ingresar Movimiento</h2>
         <input
           type="text"
@@ -103,11 +114,11 @@ const Modal = ({ show, handleClose, handleAccept }) => {
             {/* ... Otras opciones de nombres de tarjetas */}
           </select>
         )}
-        <div className="flex justify-end">
-          <button onClick={handleClose} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2">
+        <div className="flex justify-center">
+          <button onClick={handleClose} className="bg-neutral-700 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2">
             Cancelar
           </button>
-          <button onClick={handleAcceptClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button onClick={handleAcceptClick} className="bg-neutral-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
             Aceptar
           </button>
         </div>
@@ -123,12 +134,14 @@ const ModalBGIngreso = () => {
   };
 
   const closeModal = () => {
+    
     setShowModal(false);
   };
 
   const handleAccept = (amount) => {
     // Aquí puedes realizar la acción con el número ingresado
     console.log(`Cantidad ingresada: ${amount}`);
+    
     closeModal();
   };
 

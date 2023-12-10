@@ -1,5 +1,6 @@
 "use client";
 
+import ImageCarousel from '@/componentes/Carousel';
 import ModalBGIngreso from '@/componentes/IngresosBGmodal';
 import React from 'react'
 import { BiWallet } from "react-icons/bi";
@@ -251,8 +252,35 @@ function BilleteraG() {
 
 
         </div>
-        <div className="mb-6 bg-neutral-100 p-4 rounded-2xl">Fila 2 - Columna 2</div>
-        <div className="bg-neutral-500 p-4 rounded-2xl">Fila 3 - Columna 2</div>
+        <div className="mb-6 bg-neutral-100 p-2 rounded-2xl shadow-xl">
+        
+            <div className="flex ">
+             
+              <div className="flex flex-col justify-center items-center w-1/2">
+                <h1 className="text-3xl font-black">Saldo Total</h1>
+                <p className="text-4xl font-semibold">$ 1,000.00</p>
+              </div>
+
+          
+              <div className="flex flex-col w-1/2 gap-4 py-3">
+           
+                <div className="flex flex-col justify-center items-center h-1/2">
+                  <h1 className="text-base font-bold">Saldo Tarjetas</h1>
+                  <p className="text-3xl">$ 800.00</p>
+                </div>
+
+         
+                <div className="flex flex-col justify-center items-center h-1/2">
+                  <h1 className="text-lg font-bold">Saldo Ahorros</h1>
+                  <p className="text-3xl">$ 700.00</p>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+        <div className="bg-neutral-100 p-4 rounded-2xl shadow-xl">
+          <ImageCarousel></ImageCarousel>
+        </div>
       </div>
     </div>
   )
