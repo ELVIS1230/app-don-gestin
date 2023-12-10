@@ -18,14 +18,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className='w-full h-screen bg-back object-cover
+        {/* <div className='w-full h-screen bg-back object-cover
         flex items-center'>
           <Sidebar></Sidebar>
           <div className=" h-[96%] w-full mx-8 bg-back rounded-3xl">
             {children}
-          </div  >
-
-        </div>
+            </div  >
+            
+          </div> */}
+          {children}
       </body>
 
     </html>

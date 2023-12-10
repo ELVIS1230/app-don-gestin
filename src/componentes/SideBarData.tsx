@@ -21,7 +21,7 @@ const SideBarData = ({ toggle }) => {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/">Home</Link>
+                <Link href="/home">Home</Link>
                 </div>
              </div>  
             <div 
@@ -35,7 +35,7 @@ const SideBarData = ({ toggle }) => {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/billetera-general">Billetera General</Link>
+                <Link href="/home/billetera-general">Billetera General</Link>
                 </div>
              </div>  
             <div 
@@ -49,7 +49,7 @@ const SideBarData = ({ toggle }) => {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/control-de-gastos">Control de Gastos</Link>
+                <Link href="/home/control-de-gastos">Control de Gastos</Link>
                 </div>
              </div>  
             <div 
@@ -63,7 +63,7 @@ const SideBarData = ({ toggle }) => {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/plan-de-ahorros">Plan de Ahorros</Link>
+                <Link href="/home/plan-de-ahorros">Plan de Ahorros</Link>
                 </div>
              </div>  
             <div 
@@ -77,7 +77,7 @@ const SideBarData = ({ toggle }) => {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/tarjetas">Tarjetas</Link>
+                <Link href="/home/tarjetas">Tarjetas</Link>
                 </div>
              </div>  
             <div 
@@ -91,7 +91,7 @@ const SideBarData = ({ toggle }) => {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/recordatorios">Recordatorios</Link>
+                <Link href="/home/recordatorios">Recordatorios</Link>
                 </div>
              </div>  
             <div 
@@ -105,7 +105,7 @@ const SideBarData = ({ toggle }) => {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/recordatorios">Perfil</Link>
+                <Link href="/home/recordatorios">Perfil</Link>
                 </div>
              </div>  
             
