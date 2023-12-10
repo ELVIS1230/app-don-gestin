@@ -53,13 +53,16 @@ function Tarjetas() {
                 <p className='font-bold text-lg'>Fecha</p>
                 <p>01/02/2023</p>
               </div>
-              <div className="flex-grow text-center items-center">
-                <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
-              </div>
+            
               <div className="flex-grow text-center">
                 <p></p>
                 <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >$1000.00</p>
               </div>
+
+              <div className="flex-grow text-center">
+              <p>Total</p>
+              <p>$1000.00</p>
+            </div>
             </div>
 
             {/* Div de cada plan creado */}
@@ -83,9 +86,9 @@ function Tarjetas() {
                 <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
               </div>
               <div className="flex-grow text-center">
-                <p></p>
-                <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >$1000.00</p>
-              </div>
+              <p>Total</p>
+              <p>$1000.00</p>
+            </div>
             </div>
 
             {/* Div de cada plan creado */}
@@ -109,9 +112,9 @@ function Tarjetas() {
                 <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
               </div>
               <div className="flex-grow text-center">
-                <p></p>
-                <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >$1000.00</p>
-              </div>
+              <p>Total</p>
+              <p>$1000.00</p>
+            </div>
             </div>
 
             {/* Div de cada plan creado */}
@@ -135,9 +138,9 @@ function Tarjetas() {
                 <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
               </div>
               <div className="flex-grow text-center">
-                <p></p>
-                <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >$1000.00</p>
-              </div>
+              <p>Total</p>
+              <p>$1000.00</p>
+            </div>
             </div>
 
             {/* Div de cada plan creado */}
@@ -161,9 +164,10 @@ function Tarjetas() {
                 <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
               </div>
               <div className="flex-grow text-center">
-                <p></p>
-                <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >$1000.00</p>
-              </div>
+              <p>Total</p>
+              <p>$1000.00</p>
+            </div>
+              
             </div>
 
             {/* Div de cada plan creado */}
@@ -186,10 +190,12 @@ function Tarjetas() {
               <div className="flex-grow text-center items-center">
                 <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
               </div>
+
               <div className="flex-grow text-center">
-                <p></p>
-                <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >$1000.00</p>
-              </div>
+              <p>Total</p>
+              <p>$1000.00</p>
+            </div>
+
             </div>
 
             {/* Div de cada plan creado */}
@@ -209,13 +215,17 @@ function Tarjetas() {
                 <p className='font-bold text-lg'>Fecha</p>
                 <p>01/02/2023</p>
               </div>
-              <div className="flex-grow text-center items-center">
-                <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
-              </div>
+              
               <div className="flex-grow text-center">
                 <p></p>
                 <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >$1000.00</p>
               </div>
+
+              <div className="flex-grow text-center">
+              <p>Total</p>
+              <p>$1000.00</p>
+            </div>
+
             </div>
           </div>
         </div>

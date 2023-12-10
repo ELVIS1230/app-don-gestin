@@ -1,7 +1,12 @@
+"use client";
+import ModalAhorro from '@/componentes/planAhorrosModal';
 import React from 'react'
 import { FaCar } from "react-icons/fa6";
 import { IoHome } from "react-icons/io5";
 import { MdOutlineSavings } from "react-icons/md";
+import { TfiBarChart } from "react-icons/tfi";
+
+
 
 function PlanAhorros() {
   return (
@@ -20,12 +25,17 @@ function PlanAhorros() {
               <MdOutlineSavings size={150} className="text-black-500" />
             </div>
           </div>
+        </div>
+        <div className=" mb-4 bg-gray-200 p-4 rounded-2xl " id='planes_ahorro'
+          style={{
+            borderRadius: "10px"
+          }}
+        >
+          <div className="flex">
+            <p className='static font-bold mt-3 mr-auto'>Tus Planes de Ahorro</p>
           </div>
-          <div className="mb-4 bg-gray-200 p-4 rounded-2xl" id='planes_ahorro'
-            style={{
-              borderRadius: "10px"
-            }}>
-            <p className='font-bold mb-4'>Tus Planes de Ahorro</p>
+
+          <div className='max-h-[450px] overflow-auto scrollbar-thumb:!rounded scroll-container'>
             {/* Div de cada plan creado */}
             <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
               paddingTop: "20px",
@@ -33,7 +43,10 @@ function PlanAhorros() {
             }}>
               <div className="bg-white rounded-lg p-2 flex items-center">
                 <FaCar size={30} className="mr-2" />
-                <h3 className="font-medium">Auto Nuevo</h3>
+                <div className='flex-grow font-medium'>
+                  <h1>Auto</h1>
+                  <h1>Nuevo</h1>
+                </div>
               </div>
               <div className="flex-grow text-center">
                 <p>$ Ahorrado</p>
@@ -51,7 +64,6 @@ function PlanAhorros() {
               <button className=" bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Ver</button>
             </div>
 
-            {/* Div de cada plan creado */}
             <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
               paddingTop: "20px",
               marginTop: "20px"
@@ -59,8 +71,14 @@ function PlanAhorros() {
 
               <div className="bg-white rounded-lg p-2 flex items-center">
                 <IoHome size={30} className="mr-2" />
-                <h3 className="font-medium">Casa Nueva</h3>
+                <div className='flex-grow font-medium'>
+                  
+                  <h3>Casa</h3>
+                  <h3>Nueva</h3>
+
+                </div>
               </div>
+
               <div className="flex-grow text-center">
                 <p>$ Ahorrado</p>
                 <p>$200.00</p>
@@ -77,9 +95,35 @@ function PlanAhorros() {
               <button className=" bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Ver</button>
             </div>
           </div>
-      
+        </div>
+
       </div>
       <div className='w-2/5 p-4'>
+
+        <div className='bg-gray-200 '
+          style={{
+            padding: "10px",
+            borderRadius: "10px",
+            marginBottom: "10px"
+          }}>
+
+          <p className='text-black text-center font-bold'
+            style={{
+              paddingBottom: "5px"
+            }}>Nuevo Plan de Ahorro</p>
+
+          <div style={{
+            marginLeft: "20px",
+            marginRight: "20px"
+          }}>
+
+            <div className="flex justify-center">
+              <TfiBarChart size={150} />
+            </div>
+
+          </div>
+        </div>
+
 
         <div className='bg-gray-200 '
           style={{
@@ -113,11 +157,16 @@ function PlanAhorros() {
               <p style={{ marginLeft: '10px' }}>12 Meses</p>
             </div>
             <div><p>Descripcion</p></div>
+
             <div className="flex justify-center">
-              <button className=" bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg" >Crea plan</button>
+              <ModalAhorro></ModalAhorro>
             </div>
+
           </div>
         </div>
+
+
+
       </div>
     </div>
 
