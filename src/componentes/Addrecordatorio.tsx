@@ -52,8 +52,8 @@ const Modal = ({ show, handleClose }) => {
         />
       </div>
 
-      <div className="flex lg:flex-row flex-col lg:items-center">
-        <div className="flex-grow lg:mr-2 mb-4 lg:mb-0">
+      <div>
+        <div className="">
           <label htmlFor="date" className="block text-neutral-900 text-sm font-bold mb-2">Fecha</label>
           <input
             type="date"
@@ -64,20 +64,7 @@ const Modal = ({ show, handleClose }) => {
             onChange={(e) => setDate(e.target.value)}
             className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
           />
-        </div>
-
-        <div className="flex-grow">
-          <label htmlFor="time" className="block text-neutral-900 text-sm font-bold mb-2">Hora</label>
-          <input
-            type="time"
-            id="time"
-            name="time"
-            placeholder="Seleccione hora"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
-          />
-        </div>
+        </div>    
       </div>
 
       <div className="">
@@ -121,7 +108,7 @@ const Modal = ({ show, handleClose }) => {
   );
 };
 
-const ModalRecordatorio = () => {
+const   ModalRecordatorio = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => {
