@@ -1,4 +1,28 @@
+'use client'
+import axios from "axios";
+import { useState } from "react"
+
 export default function Login() {
+
+  const [user, setUser ] = useState({
+    email:'',
+    password: ''
+  })
+
+   const handleSubmit =async (e:any)=>{
+    e.preventDefault();
+    try{
+      console.log(user)
+      const response = await axios.post('http://127.0.0.1:3000/api/users/login', user) 
+      console.log(response.data)
+      // console.log('Login acpetado')
+
+    }catch (error){
+      console.log(error)
+    }
+  }
+
+  const handleChange = (e:any) => setUser({...user, [e.target.name]: e.target.value})
     return (
       <div className="flex justify-center overflow-hidden rounded-lg " style={{ margin: "10px" }}>
      
@@ -18,7 +42,9 @@ export default function Login() {
           {/* Div derecho con el formulario */}
           <div className="container mx-auto p-4 flex justify-center items-center" >
   
-            <form className="max-w-md bg-white p-8 rounded shadow-md">
+            <form 
+            onSubmit={handleSubmit}
+            className="max-w-md bg-white p-8 rounded shadow-md">
               <h2 className="text-center text-gray-900 text-lg font-bold mb-2">Ingresa a tu Cuenta</h2>
               <div className="mb-4">
                 <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
@@ -28,6 +54,8 @@ export default function Login() {
                   type="email"
                   id="email"
                   name="email"
+                  value= {user.email}
+                  onChange={handleChange}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Ingrese su correo electrónico"
                 />
@@ -39,15 +67,19 @@ export default function Login() {
                 </label>
                 <input type="password"
                   name="password"
+                  id="password"
+                  onChange={handleChange}
+                  value= {user.password}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Contraseña"
-                  id="password" />
+                  />
   
               </div>
   
               <div className="flex justify-center">
   
                 <button
+                type="submit"
                   className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
                 >
                   Iniciar Sesión
