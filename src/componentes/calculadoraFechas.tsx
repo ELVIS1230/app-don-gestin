@@ -41,11 +41,11 @@ const TuComponentePrincipal = () => {
     };
 
     return (
-        <div>
+        <div className="grid gap-4 grid-cols-2">
             <div className="col-span-2 sm:col-span-1">
-                <label className=" block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de Inicio</label>
+                <label className=" block mb-2 text-sm font-medium text-gray-900 ">Fecha de Inicio</label>
                 <input
-                    className="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                    className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                     placeholder="Fecha de Inicio"
                     type="date"
                     value={fechaInicio}
@@ -55,9 +55,9 @@ const TuComponentePrincipal = () => {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de Culminación</label>
+                <label className="block mb-2 text-sm font-medium text-gray-900">Fecha de Culminación</label>
                 <input
-                    className={`mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
+                    className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
                         error ? 'border-red-500' : ''
                     }`}
                     placeholder="Fecha de Culminación"
@@ -69,11 +69,12 @@ const TuComponentePrincipal = () => {
             </div>
 
             <div className="col-span-2">
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Duración</label>
+                <label className="block text-sm font-medium text-gray-900">Duración</label>
                 <input
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                     placeholder="Duración"
                     type="text"
+                    id="duracion"
                     value={duracion}
                     readOnly
                 />

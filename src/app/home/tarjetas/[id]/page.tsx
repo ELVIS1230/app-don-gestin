@@ -65,11 +65,12 @@ function Tarjetas() {
           </div>
 
           <div className="flex-grow text-center">
-            <p className='font-bold text-lg'>Saldo Inicial</p>
-            <p>100.000</p>
+            <p className='font-bold text-lg'>Descripción</p>
+            <p>Comida</p>
           </div>
 
           <div className="flex-grow text-center items-center">
+          <p className='font-bold text-lg'>Valor</p>
             <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >+ $800.00</p>
           </div>
           <div className="flex-grow text-center">
@@ -93,14 +94,17 @@ function Tarjetas() {
             <p className='font-bold text-lg'>Fecha</p>
             <p>01/02/2023</p>
           </div>
+
           <div className="flex-grow text-center">
-            <p className='font-bold text-lg'>Saldo Inicial</p>
-            <p>100.000</p>
+            <p className='font-bold text-lg'>Descripción</p>
+            <p>Comida</p>
           </div>
+
           <div className="flex-grow text-center">
-            <p></p>
+            <p className='font-bold text-lg'>Valor</p>
             <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >- $1000.00</p>
           </div>
+
           <div className="flex-grow text-center">
             <p className='font-bold text-lg'>Total</p>
             <p>$1000.00</p>

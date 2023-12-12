@@ -1,5 +1,6 @@
 "use client";
 import ModalAhorro from '@/componentes/planAhorrosModal';
+import ModalIngresoAhorro from '@/componentes/ingresoPlanAhorro';
 import React from 'react'
 import { FaCar } from "react-icons/fa6";
 import { IoHome } from "react-icons/io5";
@@ -43,25 +44,29 @@ function PlanAhorros() {
             }}>
               <div className="bg-white rounded-lg p-2 flex items-center">
                 <FaCar size={30} className="mr-2" />
-                <div className='flex-grow font-medium'>
+                <div className='flex-grow'>
                   <h1>Auto</h1>
                   <h1>Nuevo</h1>
                 </div>
               </div>
               <div className="flex-grow text-center">
-                <p>$ Ahorrado</p>
+                <p className='font-bold'>Ahorrado</p>
                 <p>$200.00</p>
               </div>
               <div className="flex-grow text-center">
-                <p>$ Por Ahorrar</p>
+                <p className='font-bold '>Por Ahorrar</p>
                 <p>$800.00</p>
               </div>
 
               <div className="flex-grow text-center">
-                <p>$ Meta</p>
+                <p className='font-bold'>Meta</p>
                 <p>$1000.00</p>
               </div>
-              <button className=" bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Ver</button>
+              <div className="flex-grow text-center">
+                <p className='font-bold'>Duración</p>
+                <p>1 año</p>
+              </div>
+              <ModalIngresoAhorro></ModalIngresoAhorro>
             </div>
 
             <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
@@ -80,19 +85,24 @@ function PlanAhorros() {
               </div>
 
               <div className="flex-grow text-center">
-                <p>$ Ahorrado</p>
+                <p className='font-bold '>Ahorrado</p>
                 <p>$200.00</p>
               </div>
               <div className="flex-grow text-center">
-                <p>$ Por Ahorrar</p>
+                <p className='font-bold'>Por Ahorrar</p>
                 <p>$800.00</p>
               </div>
 
               <div className="flex-grow text-center">
-                <p>$ Meta</p>
+                <p className='font-bold'>Meta</p>
                 <p>$1000.00</p>
               </div>
-              <button className=" bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Ver</button>
+              <div className="flex-grow text-center">
+                <p className='font-bold'>Duración</p>
+                <p>1 año</p>
+              </div>
+
+              <ModalIngresoAhorro></ModalIngresoAhorro>
             </div>
           </div>
         </div>
