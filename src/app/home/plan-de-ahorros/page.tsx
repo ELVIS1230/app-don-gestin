@@ -1,6 +1,6 @@
 "use client";
-import ModalAhorro from '@/componentes/planAhorrosModal';
-import ModalIngresoAhorro from '@/componentes/ingresoPlanAhorro';
+import ModalAhorro from '@/componentes/plan-de-ahorros/planAhorrosModal';
+import ModalIngresoAhorro from '@/componentes/plan-de-ahorros/ingresoPlanAhorro';
 import React from 'react'
 import { FaCar } from "react-icons/fa6";
 import { IoHome } from "react-icons/io5";

@@ -1,5 +1,5 @@
 "use client";
-import TransactionModal from '@/componentes/NuevaTransaccionTarjetaModal';
+import TransactionModal from '@/componentes/tarjetas/NuevaTransaccionTarjetaModal';
 import React from 'react'
 import { FaCcMastercard } from "react-icons/fa";
 import { IoIosCard } from "react-icons/io";

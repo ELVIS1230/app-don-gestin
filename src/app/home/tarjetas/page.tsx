@@ -1,6 +1,6 @@
 "use client";
 
-import ModalTarjeta from '@/componentes/creacionTarjetaModal';
+import ModalTarjeta from '@/componentes/tarjetas/creacionTarjetaModal';
 import React from 'react'
 import { FaCcMastercard } from "react-icons/fa";
 
