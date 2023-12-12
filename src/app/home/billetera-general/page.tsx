@@ -241,6 +241,32 @@ function BilleteraG() {
 
 
       <div className="w-2/5 p-4 h-full">
+      <div className="mb-6 bg-neutral-100 p-2 rounded-2xl shadow-xl">
+        
+        <div className="flex ">
+         
+          <div className="flex flex-col justify-center items-center w-1/2">
+            <h1 className="text-3xl font-black">Saldo Total</h1>
+            <p className="text-4xl font-semibold">$ 1,000.00</p>
+          </div>
+
+      
+          <div className="flex flex-col w-1/2 gap-4 py-3">
+       
+            <div className="flex flex-col justify-center items-center h-1/2">
+              <h1 className="text-base font-bold">Saldo Tarjetas</h1>
+              <p className="text-3xl">$ 800.00</p>
+            </div>
+
+     
+            <div className="flex flex-col justify-center items-center h-1/2">
+              <h1 className="text-lg font-bold">Saldo Ahorros</h1>
+              <p className="text-3xl">$ 700.00</p>
+            </div>
+          </div>
+        </div>
+      
+    </div>
         <div className="mb-6 bg-neutral-100 p-4 rounded-2xl shadow-xl">
           <h2 className="text-lg font-semibold mb-4">Agregar a tu Billetera</h2>
           <div className="">
@@ -252,32 +278,7 @@ function BilleteraG() {
 
 
         </div>
-        <div className="mb-6 bg-neutral-100 p-2 rounded-2xl shadow-xl">
         
-            <div className="flex ">
-             
-              <div className="flex flex-col justify-center items-center w-1/2">
-                <h1 className="text-3xl font-black">Saldo Total</h1>
-                <p className="text-4xl font-semibold">$ 1,000.00</p>
-              </div>
-
-          
-              <div className="flex flex-col w-1/2 gap-4 py-3">
-           
-                <div className="flex flex-col justify-center items-center h-1/2">
-                  <h1 className="text-base font-bold">Saldo Tarjetas</h1>
-                  <p className="text-3xl">$ 800.00</p>
-                </div>
-
-         
-                <div className="flex flex-col justify-center items-center h-1/2">
-                  <h1 className="text-lg font-bold">Saldo Ahorros</h1>
-                  <p className="text-3xl">$ 700.00</p>
-                </div>
-              </div>
-            </div>
-          
-        </div>
         <div className="bg-neutral-100 p-4 rounded-2xl shadow-xl">
           <ImageCarousel></ImageCarousel>
         </div>
