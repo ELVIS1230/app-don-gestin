@@ -1,114 +1,163 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const Modal = ({ show, handleClose }) => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
   const [description, setDescription] = useState('');
   const [selectedCard, setSelectedCard] = useState('');
 
-  const handleResetFields = () => {
-    setTitle('');
-    setDate('');
-    setTime('');
-    setDescription('');
-    setSelectedCard('');
+  const [errors, setErrors] = useState({
+    title: '',
+    date: '',
+    description: '',
+    selectedCard: '',
+  });
+
+  const handleInputChange = (fieldName, value) => {
+    let error = '';
+
+    if (!value.trim()) {
+      error = 'Este campo es obligatorio';
+    } else if ((fieldName === 'title' || fieldName === 'description') && value.length > 35) {
+      error = 'El máximo de caracteres es 35';
+    } else if (fieldName === 'date') {
+      error = '';
+    } else if (fieldName === 'selectedCard') {
+      error = '';
+    } else if (fieldName === 'value' && !/^\d{1,10}(\.\d{0,2})?$/.test(value)) {
+      error = 'Por favor, ingrese un valor numérico válido';
+    }
+
+    setErrors({ ...errors, [fieldName]: error });
+
+    switch (fieldName) {
+      case 'title':
+        setTitle(value);
+        break;
+      case 'date':
+        setDate(value);
+        break;
+      case 'description':
+        setDescription(value);
+        break;
+      case 'selectedCard':
+        setSelectedCard(value);
+        break;
+      default:
+        break;
+    }
   };
 
   const handleCreateClick = () => {
-    const data = {
-      title,
-      date,
-      time,
-      description,
-      selectedCard,
-    };
-    console.log(data); // Aquí puedes realizar las acciones con los datos (guardar en la base de datos, etc.)
-    handleClose();
-    handleResetFields();
+    if (title && date && description && selectedCard && !errors.title && !errors.date && !errors.description && !errors.selectedCard) {
+      const data = {
+        title,
+        date,
+        description,
+        selectedCard,
+      };
+      console.log(data); // Puedes realizar acciones con los datos (guardar en la base de datos, etc.)
+      handleClose();
+      handleResetFields();
+    }
   };
 
   const handleCancelClick = () => {
     handleClose();
-    handleResetFields(); 
+    handleResetFields();
+  };
+
+  const handleResetFields = () => {
+    setTitle('');
+    setDate('');
+    setDescription('');
+    setSelectedCard('');
+    setErrors({
+      title: '',
+      date: '',
+      description: '',
+      selectedCard: '',
+    });
   };
 
   return (
     <div className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center ${show ? 'block' : 'hidden'}`}>
-  <div className="mb-6 bg-white w-2/6 p-6 rounded-lg shadow-md">
-    <h2 className="text-lg font-bold mb-4 text-center">Agregar Recordatorio</h2>
-    
-      <div className="mb-1">
-        <label htmlFor="title" className="block text-neutral-900 text-sm font-bold mb-2">Nombre</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          placeholder="Ingrese título o nombre"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
-        />
-      </div>
+      <div className="mb-6 bg-white w-2/6 p-6 rounded-lg shadow-md">
+        <h2 className="text-lg font-bold mb-4 text-center">Agregar Recordatorio</h2>
 
-      <div>
-        <div className="">
-          <label htmlFor="date" className="block text-neutral-900 text-sm font-bold mb-2">Fecha</label>
+        <div className="mb-1">
+          <label htmlFor="title" className="block text-neutral-900 text-sm font-bold mb-2">Nombre</label>
           <input
-            type="date"
-            id="date"
-            name="date"
-            placeholder="Seleccione fecha"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Ingrese título o nombre"
+            value={title}
+            onChange={(e) => handleInputChange('title', e.target.value)}
             className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
           />
-        </div>    
-      </div>
+          {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
+        </div>
 
-      <div className="">
-        <label htmlFor="description" className="block text-neutral-900 text-sm font-bold mb-2">Descripción</label>
-        <textarea
-          id="description"
-          name="description"
-          placeholder="Ingrese descripción"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2 mb-4 w-full"
-        ></textarea>
-      </div>
+        <div>
+          <div className="">
+            <label htmlFor="date" className="block text-neutral-900 text-sm font-bold mb-2">Fecha</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              placeholder="Seleccione fecha"
+              value={date}
+              onChange={(e) => handleInputChange('date', e.target.value)}
+              className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
+            />
+            {errors.date && <p className="text-red-500 text-sm">{errors.date}</p>}
+          </div>
+        </div>
 
-      <div className="">
-        <label htmlFor="cards" className="block text-neutral-900 text-sm font-bold mb-2">Seleccione una tarjeta</label>
-        <select
-          id="cards"
-          name="cards"
-          value={selectedCard}
-          onChange={(e) => setSelectedCard(e.target.value)}
-          className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
-        >
-          <option value="">Tarjetas</option>
-          <option value="card1">Tarjeta 1</option>
-          <option value="card2">Tarjeta 2</option>
-          <option value="card3">Tarjeta 3</option>
-        </select>
-      </div>
+        <div className="">
+          <label htmlFor="description" className="block text-neutral-900 text-sm font-bold mb-2">Descripción</label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Ingrese descripción"
+            value={description}
+            onChange={(e) => handleInputChange('description', e.target.value)}
+            className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2 mb-4 w-full"
+          ></textarea>
+          {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
+        </div>
 
-      <div className='flex justify-center'>
-        <button onClick={handleCancelClick} type="button" className="bg-neutral-500 hover:bg-stone-900 hover:text-white font-bold w-full py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline mr-4 mt-4 lg:mt-0">
-          Cancelar</button>
-        <button onClick={handleCreateClick} type="button" className="bg-neutral-500 hover:bg-stone-900 hover:text-white font-bold w-full py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline mt-4 lg:mt-0">
-          Crear recordatorio</button>
-      </div>
-    
-  </div>
-</div>
+        <div className="">
+          <label htmlFor="cards" className="block text-neutral-900 text-sm font-bold mb-2">Seleccione una tarjeta</label>
+          <select
+            id="cards"
+            name="cards"
+            value={selectedCard}
+            onChange={(e) => handleInputChange('selectedCard', e.target.value)}
+            className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
+          >
+            <option value="">Tarjetas</option>
+            <option value="card1">Tarjeta 1</option>
+            <option value="card2">Tarjeta 2</option>
+            <option value="card3">Tarjeta 3</option>
+          </select>
+          {errors.selectedCard && <p className="text-red-500 text-sm">{errors.selectedCard}</p>}
+        </div>
 
+        <div className='flex justify-center'>
+          <button onClick={handleCancelClick} type="button" className="bg-neutral-500 hover:bg-stone-900 hover:text-white font-bold w-full py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline mr-4 mt-4 lg:mt-0">
+            Cancelar</button>
+          <button onClick={handleCreateClick} type="button" className="bg-neutral-500 hover:bg-stone-900 hover:text-white font-bold w-full py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline mt-4 lg:mt-0">
+            Crear recordatorio</button>
+        </div>
+
+      </div>
+    </div>
   );
 };
 
-const   ModalRecordatorio = () => {
+const ModalRecordatorio = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => {
