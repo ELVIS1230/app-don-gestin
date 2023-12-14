@@ -1,6 +1,8 @@
+import axios from 'axios';
 import { useState } from 'react';
 
-const Modal = ({ show, handleClose }) => {
+
+export function Modal ({ show, handleClose,credentialUser}:any){
   const [value, setValue] = useState('');
   const [valueError, setValueError] = useState('');
   const [movementType, setMovementType] = useState('');
@@ -11,7 +13,7 @@ const Modal = ({ show, handleClose }) => {
   const [descriptionError, setDescriptionError] = useState('');
   const [valueVisible, setValueVisible] = useState(false);
 
-  const handleAcceptClick = () => {
+  const handleAcceptClick = async() => {
     let isValid = true;
 
     // Validaciones para el campo de valor numérico
@@ -24,7 +26,7 @@ const Modal = ({ show, handleClose }) => {
     }
 
     // Validaciones para los campos de texto
-    if (['Gasto', 'Ingreso'].includes(movementType)) {
+    if (['2', '1'].includes(movementType)) {
       if (name.length > 35) {
         setNameError('El nombre debe tener menos de 35 caracteres.');
         isValid = false;
@@ -51,9 +53,19 @@ const Modal = ({ show, handleClose }) => {
         trasac_nombre: name,
         trasac_descripcion: description,
         trasac_cantidad: value,
-        trasac_id: { ttrac_id: movementType },
-        cardType,
+        ttrac_id_fk: { ttrac_id: movementType },
+        cuenta_id_fk: { cuenta_id :credentialUser.credentialUser.cuenta}
+        
       };
+
+      try {
+        const response = await axios.post('http://localhost:3000/api/transactions',data);
+
+      } catch (error) {
+        console.error(error);
+      }
+
+
       console.log(data);
       handleClose();
       handleResetFields();
@@ -85,7 +97,7 @@ const Modal = ({ show, handleClose }) => {
     return null;
   };
 
-  const handleMovementTypeChange = (selectedMovementType) => {
+  const handleMovementTypeChange = (selectedMovementType:any) => {
     setMovementType(selectedMovementType);
     setCardType('');
     setName('');
@@ -173,7 +185,7 @@ const Modal = ({ show, handleClose }) => {
   );
 };
 
-const ModalBGIngreso = () => {
+export default function ModalBGIngreso(credentialUser:any){
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -192,9 +204,9 @@ const ModalBGIngreso = () => {
       >
         Ingresar Dinero
       </button>
-      <Modal show={showModal} handleClose={closeModal} />
+      <Modal show={showModal} credentialUser={credentialUser} handleClose={closeModal} />
     </div>
   );
 };
 
-export default ModalBGIngreso;
+

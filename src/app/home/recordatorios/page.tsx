@@ -1,11 +1,12 @@
 "use client";
 
-import ModalRecordatorio from '@/componentes/Addrecordatorio';
-import PieChart from '@/componentes/GraficaPastel';
+import ModalRecordatorio from '@/componentes/recordatorios/Addrecordatorio';
+import PieChart from '@/componentes/recordatorios/GraficaPastel';
 import React from 'react'
 import { TbCalendarStats, TbHome2 } from "react-icons/tb";
 
-function Recordatorios() {
+export default function Recordatorios() {
+  const credentialUser = JSON.parse(sessionStorage.getItem('usuario')as string);
   return (
     <div className='flex'>
 
@@ -127,7 +128,7 @@ function Recordatorios() {
         <div className="mb-6 bg-neutral-100 p-4 rounded-2xl shadow-xl">
           <h2 className="text-lg font-semibold mb-4">Agregar Recordatorio</h2>
           <div className="">
-            <ModalRecordatorio></ModalRecordatorio>
+            <ModalRecordatorio credentialUser={credentialUser}/>
           </div>
 
 
@@ -146,4 +147,3 @@ function Recordatorios() {
   )
 }
 
-export default Recordatorios

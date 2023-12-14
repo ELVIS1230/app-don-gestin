@@ -4,7 +4,7 @@ import { IoHome } from "react-icons/io5";
 import { MdHealthAndSafety } from "react-icons/md";
 import { IoLogoGameControllerB } from "react-icons/io";
 import { MdFastfood } from "react-icons/md";
-import CalculadoraFecha from './calculadoraFechas';
+import CalculadoraFecha from '../calculadoraFechas';
 
 const Modal = ({ show, handleClose, handleAccept }) => {
     const [selectedIcon, setSelectedIcon] = useState(null);
