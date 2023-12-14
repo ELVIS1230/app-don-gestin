@@ -35,15 +35,26 @@ import { useEffect, useState } from "react"
   // console.log(data)
   return (
     <div className='flex'>
-      <div className="w-3/5 p-4">
+      <div className="w-full p-4">
         <div className="mb-4 bg-gray-200 p-4 rounded-2xl">
           <div className='p-4'>
             <div>
-              <h1 className='font-bold text-2xl'>Dashboard</h1>
-              <p>{credentialUser.nombre} {credentialUser.apellido}</p>
+              <h1 className='font-bold text-3xl'>Bienvenido de nuevo, {credentialUser.nombre}</h1>
+              <p>El reporte de todas tus estadisticas esta al dia</p>
             </div>
           </div>
         </div>
+    <div className='flex gap-4 mb-4'>
+        
+        <div className="w-3/5 bg-gray-200 rounded-2xl  h-72">
+          Aqui va el line chart
+        </div>
+        <div className="w-2/5 bg-gray-200 rounded-2xl  h-72">
+          Aqui va el pastel chart
+        </div>
+        </div>
+      <div className="w-full h-56 p-4 bg-gray-200 rounded-2xl">
+      </div>
       </div>
     </div>
   )

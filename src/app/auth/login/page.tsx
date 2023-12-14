@@ -3,8 +3,6 @@ import axios from "axios";
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation";
-// import { UserApi } from "@/app/lib/data";
-import { authenticate } from "@/app/lib/actions";
 export default function Login() {
   const [user, setUser ] = useState({
     email:'',
