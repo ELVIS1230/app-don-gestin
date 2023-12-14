@@ -51,7 +51,7 @@ const Modal = ({ show, handleClose }) => {
         trasac_nombre: name,
         trasac_descripcion: description,
         trasac_cantidad: value,
-        trasac_id: { ttrac_id: movementType },
+        trasac_id_fk: { ttrac_id: movementType },
         cardType,
       };
       console.log(data);
