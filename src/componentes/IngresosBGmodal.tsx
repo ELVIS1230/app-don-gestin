@@ -45,15 +45,14 @@ const Modal = ({ show, handleClose }) => {
       isValid &&
       value &&
       movementType &&
-      ((movementType === 'Ahorro' && cardType) ||
-        (['Gasto', 'Ingreso'].includes(movementType) && name && description))
+      (['2', '1'].includes(movementType) && name && description)
     ) {
       const data = {
-        value,
-        movementType,
+        trasac_nombre: name,
+        trasac_descripcion: description,
+        trasac_cantidad: value,
+        trasac_id: { ttrac_id: movementType },
         cardType,
-        name,
-        description,
       };
       console.log(data);
       handleClose();
@@ -74,12 +73,14 @@ const Modal = ({ show, handleClose }) => {
   };
 
   const getIcon = () => {
-    if (movementType === 'Ingreso') {
-      return <div className="mr-2 text-white items-center bg-green-500 p-4 rounded-lg ">&#43;</div>;
-    } else if (movementType === 'Gasto') {
-      return <div className="mr-2 text-white items-center bg-red-500 p-4 rounded-lg ">&#45;</div>;
-    } else if (movementType === 'Ahorro') {
-      return <span className="mr-2 text-white items-center bg-neutral-500 p-4 rounded-lg ">&amp;</span>;
+    if (movementType === '1') {
+      return (
+        <div className="mr-2 text-white items-center bg-green-500 p-4 rounded-lg ">&#43;</div>
+      );
+    } else if (movementType === '2') {
+      return (
+        <div className="mr-2 text-white items-center bg-red-500 p-4 rounded-lg ">&#45;</div>
+      );
     }
     return null;
   };
@@ -123,30 +124,11 @@ const Modal = ({ show, handleClose }) => {
           required
         >
           <option value="">Seleccionar tipo de movimiento</option>
-          <option value="Ahorro">Ahorro</option>
-          <option value="Gasto">Gasto</option>
-          <option value="Ingreso">Ingreso</option>
+          <option value={2}>Gasto</option>
+          <option value={1}>Ingreso</option>
         </select>
 
-        {movementType === 'Ahorro' && (
-          <select
-            value={cardType}
-            onChange={(e) => {
-              setCardType(e.target.value);
-              setName('');
-              setDescription('');
-            }}
-            className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
-            required
-          >
-            <option value="">Seleccionar tarjeta</option>
-            <option value="card-1">Card-1</option>
-            <option value="card-2">Card-2</option>
-            <option value="card-3">Card-3</option>
-          </select>
-        )}
-
-        {['Gasto', 'Ingreso'].includes(movementType) && (
+        {['2', '1'].includes(movementType) && (
           <>
             <input
               type="text"
@@ -179,7 +161,10 @@ const Modal = ({ show, handleClose }) => {
           >
             Cancelar
           </button>
-          <button onClick={handleAcceptClick} className="bg-neutral-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+          <button
+            onClick={handleAcceptClick}
+            className="bg-neutral-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+          >
             Ingresar
           </button>
         </div>
@@ -201,7 +186,10 @@ const ModalBGIngreso = () => {
 
   return (
     <div className="flex justify-center">
-      <button onClick={openModal} className="bg-neutral-700 hover:bg-neutral-900 text-white font-bold py-2 px-4 rounded">
+      <button
+        onClick={openModal}
+        className="bg-neutral-700 hover:bg-neutral-900 text-white font-bold py-2 px-4 rounded"
+      >
         Ingresar Dinero
       </button>
       <Modal show={showModal} handleClose={closeModal} />
