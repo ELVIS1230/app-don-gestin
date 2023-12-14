@@ -2,40 +2,42 @@
 import axios from "axios";
 import { useState } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation";
-
+// import { useRouter } from "next/navigation";
+// import { UserApi } from "@/app/lib/data";
+import { authenticate } from "@/app/lib/actions";
 export default function Login() {
   const [user, setUser ] = useState({
     email:'',
     password: ''
   })
-  const router = useRouter()
+  // const router = useRouter()
+  
+  //  const handleSubmit = async (e:any)=>{
+  //   e.preventDefault();
+  //   try{
+    //     console.log(user)
+    
+  //     const response = await axios.post('http://127.0.0.1:3000/api/users/login', user) 
+  
+  //     UserApi.valor = response.data
 
-   const handleSubmit = async (e:any)=>{
-    e.preventDefault();
-    try{
-      console.log(user)
+  //     sessionStorage.setItem('usuario', JSON.stringify({
+  //       cedula: response.data.u_cedula,
+  //       nombre: response.data.u_nombre, 
+  //       apellido: response.data.u_apellido,
+  //       cuenta: response.data.cuenta_id_fk.cuenta_id 
+  //     }));
+  //     console.log(response.data)
       
-      const response = await axios.post('http://127.0.0.1:3000/api/users/login', user) 
-      
-
-      sessionStorage.setItem('usuario', JSON.stringify({
-        cedula: response.data.u_cedula,
-        nombre: response.data.u_nombre, 
-        apellido: response.data.u_apellido,
-        cuenta: response.data.cuenta_id_fk.cuenta_id 
-      }));
-      console.log(response.data)
-      
-      router.push('/home', { scroll: false })
-    }catch (error:any){
-      // throw new Error(error.response?.data || 'Error en la solicitud a la API');
-      console.log(error)
-    }
-  }
-
+  //     router.push('/home', { scroll: false })
+  //   }catch (error:any){
+  //     // throw new Error(error.response?.data || 'Error en la solicitud a la API');
+  //     console.log(error)
+  //   }
+  // }
+  
   const handleChange = (e:any) => setUser({...user, [e.target.name]: e.target.value})
-    return (
+  return (
       <div className="flex justify-center overflow-hidden rounded-lg " style={{ margin: "10px" }}>
      
         <div className="flex flex-col md:flex-row justify-center shadow-inner border-4 border-black "
@@ -55,7 +57,7 @@ export default function Login() {
           <div className="container mx-auto p-4 flex justify-center items-center" >
   
             <form 
-            onSubmit={handleSubmit}
+            action={authenticate}
             className="max-w-md bg-white p-8 rounded shadow-md">
               <h2 className="text-center text-gray-900 text-lg font-bold mb-2">Ingresa a tu Cuenta</h2>
               <div className="mb-4">
@@ -66,8 +68,8 @@ export default function Login() {
                   type="email"
                   id="email"
                   name="email"
-                  value= {user.email}
-                  onChange={handleChange}
+                  // value= {user.email}
+                  // onChange={handleChange}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Ingrese su correo electrónico"
                 />
@@ -80,8 +82,8 @@ export default function Login() {
                 <input type="password"
                   name="password"
                   id="password"
-                  onChange={handleChange}
-                  value= {user.password}
+                  // onChange={handleChange}
+                  // value= {user.password}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Contraseña"
                   />
@@ -91,11 +93,12 @@ export default function Login() {
               <div className="flex justify-center">
   
                 <button
-                type="submit"
+                // type="submit"
                   className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
                 >
                   Iniciar Sesión
                 </button>
+                 {/* <LoginButton /> */}
                  </div>
                  <div className="flex justify-center">
   
@@ -113,3 +116,5 @@ export default function Login() {
       </div>
     )
   }
+
+
