@@ -1,5 +1,5 @@
 "use client";
-import ModalAhorro from '@/componentes/planAhorrosModal';
+import ModalAhorro from '@/componentes/planAhorros/planAhorrosModal';
 import React from 'react'
 import { FaCar } from "react-icons/fa6";
 import { IoHome } from "react-icons/io5";

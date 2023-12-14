@@ -1,14 +1,42 @@
 "use client";
 
-import ImageCarousel from '@/componentes/Carousel';
-import ModalBGIngreso from '@/componentes/IngresosBGmodal';
+import ImageCarousel from '@/componentes/billeteraGnrl/Carousel';
+import ModalBGIngreso from '@/componentes/billeteraGnrl/IngresosBGmodal';
+import axios from 'axios';
 import React from 'react'
 import { BiWallet } from "react-icons/bi";
 import { IoMdAdd } from "react-icons/io";
 import { RiSubtractFill } from "react-icons/ri";
+import { useEffect, useState } from "react"
+
+
+
 {/* <RiSubtractFill /> */ }
 
-function BilleteraG() {
+export function BilleteraG() {
+
+  const [data, setData] = useState(null);
+  const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
+
+  
+
+  useEffect(() => {
+    // Función asíncrona para realizar la petición GET
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:3000/api/transactions/${credentialUser.cuenta}`) 
+        setData(response.data); // Guarda los datos en el estado
+    
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    };
+
+    // Llama a la función para realizar la petición cuando el componente se monta
+    fetchData();
+  }, []); 
+  console.log(data)
+
   return (
     <div className='flex'>
 
@@ -38,28 +66,37 @@ function BilleteraG() {
           </div> */}
           <div className='min-h-[450px] max-h-[450px] overflow-auto scrollbar-thumb:!roudend'>
             <div className="grid grid-cols-10 gap-4 pb-7">
-              <div className="flex items-center py-3 bg-white rounded-xl">
-                <div className='ml-3'><RiSubtractFill style={{ color: 'red' }} size={25} />
-                </div></div>
-              <div className="col-span-2">
-                <div>
-                  <p className='font-bold text-base'>Gasto</p>
-                  <p className="font-bold text-xs">Tarjeta de Debito</p>
+              
+
+              <div className=' flex flex-col md:flex-row items-start border-t border-gray-300' style={{
+                paddingTop: "20px",
+                marginTop: "20px"
+              }}>
+                <div className="flex-grow text-center">
+                  <p className='font-bold text-lg' >Tipo</p>
+                  <p>Debito</p>
+                </div>
+                <div className="flex-grow text-center">
+                  <p className='font-bold text-lg'>Banco</p>
+                  <p>Pichincha</p>
+                </div>
+                <div className="flex-grow text-center">
+                  <p className='font-bold text-lg'>Fecha</p>
+                  <p>01/02/2023</p>
+                </div>
+
+                <div className="flex-grow text-center">
+                  <p></p>
+                  <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >$1000.00</p>
+                </div>
+
+                <div className="flex-grow text-center">
+                  <p>Total</p>
+                  <p>$1000.00</p>
                 </div>
               </div>
-              <div className="font-bold text-base px-3 col-span-2">
-                <div>
-                  <p className='font-bold text-base'>Lunes,</p>
-                  <p className="text-sm">22 - 12 - 2023</p>
-                </div>
-              </div>
-              <div className="font-bold text-xs col-span-3">
-                <div>
-                  <p className='font-bold text-base'>Banco Bolivariano</p>
-                  <p className="font-bold text-xs">22******15</p>
-                </div>
-              </div>
-              <div className="font-bold text-xl col-span-2 px-3 grid justify-items-end">$ 300.00</div>
+
+
             </div>
             <div className="grid grid-cols-10 gap-4 pb-7">
               <div className="flex items-center py-3 bg-white rounded-xl">
@@ -109,6 +146,9 @@ function BilleteraG() {
               </div>
               <div className="font-bold text-xl col-span-2 px-3 grid justify-items-end">$ 300.00</div>
             </div>
+
+
+
             <div className="grid grid-cols-10 gap-4 pb-7">
               <div className="flex items-center py-3 bg-white rounded-xl">
                 <div className='ml-3'><IoMdAdd style={{ color: 'green' }} size={25} />
@@ -241,44 +281,44 @@ function BilleteraG() {
 
 
       <div className="w-2/5 p-4 h-full">
-      <div className="mb-6 bg-neutral-100 p-2 rounded-2xl shadow-xl">
-        
-        <div className="flex ">
-         
-          <div className="flex flex-col justify-center items-center w-1/2">
-            <h1 className="text-3xl font-black">Saldo Total</h1>
-            <p className="text-4xl font-semibold">$ 1,000.00</p>
-          </div>
+        <div className="mb-6 bg-neutral-100 p-2 rounded-2xl shadow-xl">
 
-      
-          <div className="flex flex-col w-1/2 gap-4 py-3">
-       
-            <div className="flex flex-col justify-center items-center h-1/2">
-              <h1 className="text-base font-bold">Saldo Tarjetas</h1>
-              <p className="text-3xl">$ 800.00</p>
+          <div className="flex ">
+
+            <div className="flex flex-col justify-center items-center w-1/2">
+              <h1 className="text-3xl font-black">Saldo Total</h1>
+              <p className="text-4xl font-semibold">$ 1,000.00</p>
             </div>
 
-     
-            <div className="flex flex-col justify-center items-center h-1/2">
-              <h1 className="text-lg font-bold">Saldo Ahorros</h1>
-              <p className="text-3xl">$ 700.00</p>
+
+            <div className="flex flex-col w-1/2 gap-4 py-3">
+
+              <div className="flex flex-col justify-center items-center h-1/2">
+                <h1 className="text-base font-bold">Saldo Tarjetas</h1>
+                <p className="text-3xl">$ 800.00</p>
+              </div>
+
+
+              <div className="flex flex-col justify-center items-center h-1/2">
+                <h1 className="text-lg font-bold">Saldo Ahorros</h1>
+                <p className="text-3xl">$ 700.00</p>
+              </div>
             </div>
           </div>
+
         </div>
-      
-    </div>
         <div className="mb-6 bg-neutral-100 p-4 rounded-2xl shadow-xl">
           <h2 className="text-lg font-semibold mb-4">Agregar a tu Billetera</h2>
           <div className="">
             <div >
-              <ModalBGIngreso></ModalBGIngreso>
+              <ModalBGIngreso credentialUser={credentialUser} />
             </div>
           </div>
 
 
 
         </div>
-        
+
         <div className="bg-neutral-100 p-4 rounded-2xl shadow-xl">
           <ImageCarousel></ImageCarousel>
         </div>
