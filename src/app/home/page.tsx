@@ -19,7 +19,7 @@ import { useEffect, useState } from "react"
     // Función asíncrona para realizar la petición GET
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:3000/api/reminders/${credentialUser.cedula}` ) 
+        const response = await axios.get(`http://127.0.0.1:3000/api/reminders/${credentialUser.cedula}`) 
         setData(response.data); // Guarda los datos en el estado
       } catch (error) {
         console.error('Error al obtener los datos:', error);
@@ -40,6 +40,7 @@ import { useEffect, useState } from "react"
           <div className='p-4'>
             <div>
               <h1 className='font-bold text-2xl'>Dashboard</h1>
+              <p>{credentialUser.nombre} {credentialUser.apellido}</p>
             </div>
           </div>
         </div>
