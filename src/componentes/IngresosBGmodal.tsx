@@ -109,7 +109,7 @@ const Modal = ({ show, handleClose }) => {
               placeholder="Valor"
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              className="border border-gray-300 rounded-md px-10 py-2 w-full"
+              className="border border-gray-300 rounded-md px-2 py-2 w-full"
               required
             />
           </div>
