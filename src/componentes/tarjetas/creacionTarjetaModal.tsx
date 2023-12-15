@@ -2,20 +2,76 @@ import { useState } from 'react';
 import { MdOutlineAddCard } from "react-icons/md";
 
 const Modal = ({ show, handleClose, handleAccept }) => {
-    const [amount, setAmount] = useState('');
 
+    const [formData, setFormData] = useState({
+        tarj_nombre: '',
+        tarj_descripcion: '',
+        tarj_cupo: '',
+        tarj_fecha_corte: '',
+        tarj_fecha_vencimiento: '',
+        saldo: ''
+    });
 
-    const [cardType, setCardType] = useState('');
     const handleInputChange = (e) => {
-        setAmount(e.target.value);
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
     };
 
-    function handleChange(e) {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Aquí puedes enviar formData a tu backend o realizar otras acciones necesarias
+        console.log('Datos enviados:', formData);
+        // Limpiar los campos después de enviar los datos
+        setFormData({
+            tarj_nombre: '',
+            tarj_descripcion: '',
+            tarj_cupo: '',
+            tarj_fecha_corte: '',
+            tarj_fecha_vencimiento: '',
+            saldo: ''
+        });
+    };
+
+    const [cardType, setCardType] = useState('');
+
+    const handleChange = (e) => {
         setCardType(e.target.value);
         setShowCreditLimit(e.target.value === 'Credito');
+        console.log('Card Type:', e.target.value);
     }
 
     const [showCreditLimit, setShowCreditLimit] = useState(false);
+    const [saldo, setSaldo] = useState('');
+    const [tarj_cupo, setCupo] = useState('');
+
+    const handleSaldoChange = (e) => {
+        const inputValue = e.target.value;
+        // Validar que la entrada sea un número con un máximo de 10 dígitos y 2 decimales
+        const regex = /^\d{0,10}(\.\d{0,2})?$/;
+        if (regex.test(inputValue) || inputValue === '') {
+            setSaldo(inputValue);
+
+            setFormData({
+                ...formData,
+                saldo: inputValue,
+            });
+        }
+    };
+    const handleCupoChange = (e) => {
+        const inputValue = e.target.value;
+        // Validar que la entrada sea un número con un máximo de 10 dígitos y 2 decimales
+        const regex = /^\d{0,10}(\.\d{0,2})?$/;
+        if (regex.test(inputValue) || inputValue === '') {
+            setCupo(inputValue);
+            setFormData({
+                ...formData,
+                tarj_cupo: inputValue
+            });
+        }
+    };
 
 
     return (
@@ -32,21 +88,32 @@ const Modal = ({ show, handleClose, handleAccept }) => {
                         </svg>
                     </button>
                 </div>
-                <form className="p-4 md:p-5">
+                <form className="p-4 md:p-5" onSubmit={handleSubmit}>
                     <div className="grid gap-4 mb-4 grid-cols-2">
                         <div className="col-span-2">
-                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de Banco</label>
-                            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
-                                placeholder="Banco" type="Nombre" />
+                            <label className='block mb-2 text-sm font-medium text-gray-900'>Nombre de Banco</label>
+                            <input className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5'
+                                name='tarj_nombre'
+                                value={formData.tarj_nombre}
+                                onChange={handleInputChange}
+                                placeholder="Banco" type="text" />
                         </div>
                         <div className="col-span-2">
-                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Saldo Disponible</label>
-                            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
-                                placeholder="saldo" type="saldo" />
+                            <label className="block mb-2 text-sm font-medium text-gray-900">Saldo Disponible</label>
+                            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                placeholder="saldo" 
+                                type='number'
+                                name='saldo'
+                                id='saldo'
+                                value={saldo}
+                                onChange={handleSaldoChange}
+                            />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
-                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Tarjeta</label>
-                            <select value={cardType} onChange={handleChange} id="opciones" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <label className="block mb-2 text-sm font-medium text-gray-900 ">Tipo de Tarjeta</label>
+                            <select value={cardType} onChange={handleChange} id="opciones"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 
+                                focus:border-primary-500 block w-full p-2.5 ">
                                 <option >Selecciona un Tipo</option>
                                 <option value="Debito">Débito</option>
                                 <option value="Credito">Crédito</option>
@@ -56,27 +123,47 @@ const Modal = ({ show, handleClose, handleAccept }) => {
                         {showCreditLimit && (
                             <div >
                                 <div className="col-span-2 sm:col-span-1">
-                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de Corte</label>
-                                    <input type="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" />
+                                    <label className="block mb-2 text-sm font-medium text-gray-900 ">Fecha de Corte</label>
+                                    <input
+                                        type='date'
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                        name='tarj_fecha_corte'
+                                        value={formData.tarj_fecha_corte}
+                                        onChange={handleInputChange}
+                                    />
+
                                 </div>
                                 <div className="col-span-2 sm:col-span-1 mt-2">
-                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cupo</label>
-                                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
-                                        type="number" />
+                                    <label className="block mb-2 text-sm font-medium text-gray-900">Cupo</label>
+                                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
+                                        id='tarj_cupo'
+                                        name='tarj_cupo'
+                                        value={tarj_cupo}
+                                        onChange={handleCupoChange}
+                                        type='number' />
                                 </div>
                             </div>
                         )}
 
                         <div className="col-span-2 sm:col-span-1">
-                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de Vencimiento</label>
-                            <input type="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" />
+                            <label className="block mb-2 text-sm font-medium text-gray-900">Fecha de Vencimiento</label>
+                            <input type="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                name='tarj_fecha_vencimiento'
+                                value={formData.tarj_fecha_vencimiento}
+                                onChange={handleInputChange}
+
+                            />
                         </div>
 
 
                         <div className="col-span-2">
-                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripcion de la Tarjeta</label>
-                            <textarea id="description"
-                                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            <label className="block mb-2 text-sm font-medium text-gray-900">Descripcion de la Tarjeta</label>
+                            <textarea
+                                id='tarj_descripcion'
+                                name='tarj_descripcion'
+                                value={formData.tarj_descripcion}
+                                onChange={handleInputChange}
+                                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
                                 placeholder="Ejemplo:Tarjeta para comida,viajes,etc."></textarea>
                         </div>
                     </div>

@@ -1,8 +1,11 @@
 import { useState } from 'react';
 
 const Modal = ({ show, handleClose, handleAccept }) => {
-
     const [meta, setMeta] = useState('');
+
+    const [formData, setFormData] = useState({
+        amount: '',
+    });
 
     const handleMetaChange = (e) => {
         const inputValue = e.target.value;
@@ -12,7 +15,32 @@ const Modal = ({ show, handleClose, handleAccept }) => {
 
         if (regex.test(inputValue) || inputValue === '') {
             setMeta(inputValue);
+            setFormData({
+                ...formData,
+                amount: inputValue
+            });
         }
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Aquí puedes enviar meta a tu backend o realizar otras acciones necesarias
+        console.log('Datos enviados:', meta);
+
+        // Limpiar los campos después de enviar los datos
+        setMeta('');
+        setFormData({
+            amount: '',
+        });
     };
 
     return (
@@ -32,7 +60,7 @@ const Modal = ({ show, handleClose, handleAccept }) => {
                         </svg>
                     </button>
                 </div>
-                <form className=" md:p-5">
+                <form className=" md:p-5 " onSubmit={handleSubmit}>
                     <div className="grid gap-4 mb-4 grid-cols-2">
 
                         <div className="col-span-2">
@@ -41,11 +69,14 @@ const Modal = ({ show, handleClose, handleAccept }) => {
                                     Ingresa el Valor
                                 </label>
                                 <input
-                                    type="text" // Cambiado a tipo texto para permitir el uso de la expresión regular
+                                    type="text"
                                     id="input"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="100000000.00"
+                                    value={meta}  // <-- Cambiado de formData.amount a meta
+                                    onChange={handleMetaChange}  // <-- Aquí está el cambio
                                 />
+
                             </div>
                         </div>
                     </div>
@@ -55,10 +86,12 @@ const Modal = ({ show, handleClose, handleAccept }) => {
                         </svg>
                         Guardar
                     </button>
+
                 </form>
             </div>
         </div>
-    );};
+    );
+};
 
 const ModalIngresoAhorro = () => {
     const [showModal, setShowModal] = useState(false);

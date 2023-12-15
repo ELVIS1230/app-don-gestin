@@ -12,7 +12,7 @@ function Tarjetas() {
         <div className="mb-4 bg-gray-200 p-4 rounded-2xl">
           <div className="flex flex-col md:flex-row items-center">
             <div className="flex-grow ">
-              <h1 className='text-xl font-bold'>Tus Tarjetas</h1>
+              <h1 className='font-black text-5xl py-4'>Tus Tarjetas</h1>
               <p className="text-gray-700 pt-4">
                 Tarjetas disponibles y detalles
               </p>
@@ -28,7 +28,7 @@ function Tarjetas() {
           }}
         >
           <div className="flex">
-            <p className='static font-bold mt-3 mr-auto'>Movimiento de las Tarjetas</p>
+            <p className='static font-bold mt-3 mr-auto text-xl py-4'>Movimiento de las Tarjetas</p>
             <ModalTarjeta></ModalTarjeta>
           </div>
 
@@ -43,7 +43,7 @@ function Tarjetas() {
             }}>
               <div className="flex-grow text-center">
                 <p className='font-bold text-lg' >Tipo</p>
-                <p>Debito</p>
+                <p>Crédito</p>
               </div>
               <div className="flex-grow text-center">
                 <p className='font-bold text-lg'>Banco</p>
@@ -60,7 +60,7 @@ function Tarjetas() {
               </div>
 
               <div className="flex-grow text-center">
-              <p>Total</p>
+              <p className='font-bold text-lg'>Total</p>
               <p>$1000.00</p>
             </div>
             </div>
@@ -86,7 +86,33 @@ function Tarjetas() {
                 <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
               </div>
               <div className="flex-grow text-center">
-              <p>Total</p>
+              <p className='font-bold text-lg'>Total</p>
+              <p>$1000.00</p>
+            </div>
+            </div>
+
+            {/* Div de cada plan creado */}
+            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
+              paddingTop: "20px",
+              marginTop: "20px"
+            }}>
+              <div className="flex-grow text-center">
+                <p className='font-bold text-lg' >Tipo</p>
+                <p>Crédito</p>
+              </div>
+              <div className="flex-grow text-center">
+                <p className='font-bold text-lg'>Banco</p>
+                <p>Pichincha</p>
+              </div>
+              <div className="flex-grow text-center">
+                <p className='font-bold text-lg'>Fecha</p>
+                <p>01/02/2023</p>
+              </div>
+              <div className="flex-grow text-center items-center">
+                <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
+              </div>
+              <div className="flex-grow text-center">
+              <p className='font-bold text-lg'>Total</p>
               <p>$1000.00</p>
             </div>
             </div>
@@ -112,8 +138,8 @@ function Tarjetas() {
                 <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
               </div>
               <div className="flex-grow text-center">
-              <p>Total</p>
-              <p>$1000.00</p>
+              <p className='font-bold text-lg'>Total</p>
+              <p >$1000.00</p>
             </div>
             </div>
 
@@ -138,33 +164,7 @@ function Tarjetas() {
                 <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
               </div>
               <div className="flex-grow text-center">
-              <p>Total</p>
-              <p>$1000.00</p>
-            </div>
-            </div>
-
-            {/* Div de cada plan creado */}
-            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-              paddingTop: "20px",
-              marginTop: "20px"
-            }}>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg' >Tipo</p>
-                <p>Debito</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Banco</p>
-                <p>Pichincha</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Fecha</p>
-                <p>01/02/2023</p>
-              </div>
-              <div className="flex-grow text-center items-center">
-                <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
-              </div>
-              <div className="flex-grow text-center">
-              <p>Total</p>
+              <p className='font-bold text-lg'>Total</p>
               <p>$1000.00</p>
             </div>
               
@@ -188,11 +188,11 @@ function Tarjetas() {
                 <p>01/02/2023</p>
               </div>
               <div className="flex-grow text-center items-center">
-                <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
+                <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg " >$800.00</p>
               </div>
 
               <div className="flex-grow text-center">
-              <p>Total</p>
+              <p className='font-bold text-lg'>Total</p>
               <p>$1000.00</p>
             </div>
 
@@ -222,8 +222,8 @@ function Tarjetas() {
               </div>
 
               <div className="flex-grow text-center">
-              <p>Total</p>
-              <p>$1000.00</p>
+              <p className='font-bold text-lg'>Total</p>
+              <p >$1000.00</p>
             </div>
 
             </div>
@@ -233,27 +233,27 @@ function Tarjetas() {
         <div className="w-2/5 p-4 justify-center ">
           <div className="p-4">
             <div className="py-4 bg-gray-200 rounded-2xl shadow-lg">
-              <div className="border-b-4 border-gray-500">
+              <div className="border-b-4 border-white ">
                 <div className="font-bold text-xl mb-2 text-center">Tarjeta de Crédito</div>
               </div>
               <div className="text-gray-700 text-base mx-6 mt-2">
-                <div>Banco: Pichincha</div>
-                <div>Saldo Disponible: $20.00,09</div>
-                <div>Fecha de Corte: 01-12-2023</div>
-                <div>Fecha de Vencimiento: 15-12-2023</div>
+                <div className='font-bold text-lg'>Banco: Pichincha</div>
+                <div className='font-bold text-lg'>Saldo Disponible: $20.00,09</div>
+                <div className='font-bold text-lg'>Fecha de Corte: 01-12-2023</div>
+                <div className='font-bold text-lg'>Fecha de Vencimiento: 15-12-2023</div>
               </div>
             </div>
           </div>
 
           <div className="p-4">
             <div className="py-4 bg-gray-200 rounded-2xl shadow-lg">
-              <div className="border-b-4 border-gray-500">
+              <div className="border-b-4 border-white">
                 <div className="font-bold text-xl mb-2 text-center">Tarjeta de Débito</div>
               </div>
               <div className="text-gray-700 text-base mx-6 mt-2">
-                <div>Banco: Pichincha</div>
-                <div>Saldo Disponible: $20.00,09</div>
-                <div>Fecha de Caducidad: 15-12-2023</div>
+                <div className='font-bold text-lg'>Banco: Pichincha</div>
+                <div className='font-bold text-lg'>Saldo Disponible: $20.00,09</div>
+                <div className='font-bold text-lg'>Fecha de Caducidad: 15-12-2023</div>
               </div>
             </div>
           </div>
