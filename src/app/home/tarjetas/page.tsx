@@ -1,10 +1,33 @@
 "use client";
 
 import ModalTarjeta from '@/componentes/tarjetas/creacionTarjetaModal';
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { FaCcMastercard } from "react-icons/fa";
 
+
 function Tarjetas() {
+  
+  const [data, setData] = useState(null);
+  const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
+
+
+  useEffect(() => {
+    // Función asíncrona para realizar la petición GET
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:3000/api/transactions/${credentialUser.cuenta}`) 
+        setData(response.data); // Guarda los datos en el estado
+    
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    };
+
+    // Llama a la función para realizar la petición cuando el componente se monta
+    fetchData();
+  }, []); 
+  console.log(data)
 
   return (
     <div className='flex'>
@@ -29,7 +52,7 @@ function Tarjetas() {
         >
           <div className="flex">
             <p className='static font-bold mt-3 mr-auto text-xl py-4'>Movimiento de las Tarjetas</p>
-            <ModalTarjeta></ModalTarjeta>
+            <ModalTarjeta credentialUser={credentialUser} />
           </div>
 
           <div >
