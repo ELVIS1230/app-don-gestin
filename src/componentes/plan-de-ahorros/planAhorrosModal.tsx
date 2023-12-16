@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
+import axios from 'axios';
+import { MdOutlineAddCard } from 'react-icons/md';
 
-
-const Modal = ({ show, handleClose, handleAccept }) => {
+const Modal = ({ show, handleClose, credentialUser }: any) => {
     const [formData, setFormData] = useState({
         aho_nombre: '',
         aho_descripcion: '',
@@ -19,24 +20,23 @@ const Modal = ({ show, handleClose, handleAccept }) => {
 
     const handleDuracionChange = (e) => {
         const duracionValue = e.target.value;
-        setDuracion(duracionValue)
+        setDuracion(duracionValue);
         setFormData({
             ...formData,
-            duracion: duracionValue
+            duracion: duracionValue,
         });
-    }
+    };
 
     useEffect(() => {
-        // Obtener la fecha actual del sistema
         const fechaActual = DateTime.local().toFormat('yyyy-MM-dd');
         setFechaInicio(fechaActual);
-    }, []); // El [] asegura que el efecto se ejecute solo una vez al montar el componente
+    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: value
+            [name]: value,
         });
     };
 
@@ -48,8 +48,6 @@ const Modal = ({ show, handleClose, handleAccept }) => {
         } else {
             setError('');
             setFechaCulminacion(nuevaFechaCulminacion);
-
-            // Calcular la duración automáticamente al cambiar la fecha de culminación
             calcularDuracion(nuevaFechaCulminacion);
         }
     };
@@ -78,55 +76,56 @@ const Modal = ({ show, handleClose, handleAccept }) => {
         setDuracion(duracionMensaje);
         setFormData({
             ...formData,
-            duracion: duracionMensaje
+            duracion: duracionMensaje,
         });
     };
-
 
     const handleMetaChange = (e) => {
         const inputValue = e.target.value;
 
-        // Validar que la entrada sea un número con un máximo de 10 dígitos y 2 decimales
         const regex = /^\d{1,10}(\.\d{0,2})?$/;
 
         if (regex.test(inputValue) || inputValue === '') {
             setMeta(inputValue);
             setFormData({
                 ...formData,
-                aho_meta_cantidad: inputValue
+                aho_meta_cantidad: inputValue,
             });
         }
     };
 
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aquí puedes enviar formData a tu backend o realizar otras acciones necesarias
-        console.log('Datos enviados:', formData);
 
-        // Limpiar los campos después de enviar los datos
-        setFormData({
-            aho_nombre: '',
-            aho_descripcion: '',
-            aho_meta_cantidad: '',
-            aho_cantidad_total: '',
-            duracion: '',
-        });
+        const data = {
+            aho_nombre: formData.aho_nombre,
+            aho_descripcion: formData.aho_descripcion,
+            aho_meta_cantidad: formData.aho_meta_cantidad,
+            aho_cantidad_total: formData.aho_cantidad_total,  // Assuming this should be a number, adjust if needed
+            cuenta_id_fk: { cuenta_id: credentialUser.credentialUser.cuenta },
+            ttrac_id_fk: { ttrac_id_fk: 3 },
+            aho_duracion:formData.duracion
+        };
+
+        try {
+            const response = await axios.post('http://localhost:3000/api/savings', data);
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error en la solicitud:', error);
+        }
+
+        console.log(data);
+        handleClose();
     };
-    
+
     return (
-
         <div className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center ${show ? 'block' : 'hidden'}`}>
-
             <div className="bg-white p-4 rounded-lg shadow-md">
-
-                <div className="flex items-center justify-between  md:p-5 border-b rounded-t">
+                <div className="flex items-center justify-between md:p-5 border-b rounded-t">
                     <h3 className="text-lg font-semibold text-gray-900">
                         Crear Nuevo Plan de Ahorro
                     </h3>
-                    <button onClick={handleClose} type="button" className="text-gray-400 bg-transparent 
-                hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 
-                ms-auto inline-flex justify-center items-center" data-modal-toggle="crud-modal">
+                    <button onClick={handleClose} type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="crud-modal">
                         <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
@@ -134,7 +133,6 @@ const Modal = ({ show, handleClose, handleAccept }) => {
                 </div>
                 <form className="p-4 md:p-5" onSubmit={handleSubmit}>
                     <div className="grid gap-4 mb-4 grid-cols-2">
-
                         <div className="col-span-2 sm:col-span-1">
                             <label className="block mb-2 text-sm font-medium text-gray-900">Nombre del Plan</label>
                             <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
@@ -142,6 +140,7 @@ const Modal = ({ show, handleClose, handleAccept }) => {
                                 type="text"
                                 required
                                 name="aho_nombre"
+                                id='aho_nombre'
                                 value={formData.aho_nombre}
                                 onChange={handleInputChange} />
                         </div>
@@ -153,29 +152,42 @@ const Modal = ({ show, handleClose, handleAccept }) => {
                                 <input
                                     type="text"
                                     id="meta"
-                                    name="aho_meta_cantidad"
-                                    value={meta}
+                                    name="meta"
+                                    value={formData.aho_meta_cantidad}
                                     onChange={handleMetaChange}
-
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                                    placeholder="100000000.00"
+                                />
+                            </div>
+                        </div>
+                        <div className="col-span-2 sm:col-span-1">
+                            <div>
+                                <label className="block mb-2 text-sm font-medium text-gray-900">
+                                    Monto a Ahorrar
+                                </label>
+                                <input
+                                    type="text"
+                                    id="aho_cantidad_total"
+                                    name="aho_cantidad_total"
+                                    value={formData.aho_cantidad_total}
+                                    onChange={handleInputChange}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="100000000.00"
                                 />
                             </div>
                         </div>
                         <div className="col-span-2">
-
                             <div className="flex gap-4">
                                 <div className="">
                                     <label className="block mb-2 text-sm font-medium text-gray-900">Fecha de Inicio</label>
                                     <input
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block  p-2.5"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                                         placeholder="Fecha de Inicio"
                                         type="date"
                                         value={fechaInicio}
                                         readOnly
                                     />
                                 </div>
-
                                 <div className="flex-1">
                                     <label className="block mb-2 text-sm font-medium text-gray-900">Fecha de Culminación</label>
                                     <input
@@ -188,7 +200,6 @@ const Modal = ({ show, handleClose, handleAccept }) => {
                                     />
                                     {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
                                 </div>
-
                                 <div className="flex-1">
                                     <label className="block mb-2 text-sm font-medium text-gray-900">Duración</label>
                                     <input
@@ -201,16 +212,16 @@ const Modal = ({ show, handleClose, handleAccept }) => {
                                     />
                                 </div>
                             </div>
-
                         </div>
                         <div className="col-span-2">
                             <label className="block text-sm font-medium text-gray-900">Descripcion</label>
-                            <textarea id="descripcion"
+                            <textarea
                                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
                                 placeholder="Ejemplo:Plan de ahorros para casa nueva, carro, viajes, etc."
                                 required
                                 name="aho_descripcion"
                                 value={formData.aho_descripcion}
+                                id="aho_descripcion"
                                 onChange={handleInputChange}
                             ></textarea>
                         </div>
@@ -227,9 +238,7 @@ const Modal = ({ show, handleClose, handleAccept }) => {
     );
 };
 
-
-const ModalAhorro = () => {
-
+export default function ModalPlanAhorro(credentialUser: any) {
     const [showModal, setShowModal] = useState(false);
 
     const openModal = () => {
@@ -240,19 +249,15 @@ const ModalAhorro = () => {
         setShowModal(false);
     };
 
-    const handleAccept = () => {
-        closeModal();
-    };
-
     return (
-        <div className="">
-            <div className="flex justify-center">
-                <button onClick={openModal} className=" bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg" >Crea plan</button>
-            </div>
-            <Modal show={showModal} handleClose={closeModal} handleAccept={handleAccept} />
-
+        <div className="flex justify-center">
+            <button
+                onClick={openModal}
+                className="bg-black hover:bg-gray-800 text-white py-2 px-4 mr-1 rounded-lg ml-auto"
+            >
+                <MdOutlineAddCard size={25} />
+            </button>
+            <Modal show={showModal} credentialUser={credentialUser} handleClose={closeModal} />
         </div>
     );
 };
-
-export default ModalAhorro;

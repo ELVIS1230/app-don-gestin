@@ -1,7 +1,7 @@
 "use client";
 import ModalAhorro from '@/componentes/plan-de-ahorros/planAhorrosModal';
 import ModalIngresoAhorro from '@/componentes/plan-de-ahorros/ingresoPlanAhorro';
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from "axios";
 import { useState } from "react"
 import { useRouter } from "next/navigation";
@@ -15,6 +15,30 @@ import { MdFastfood } from "react-icons/md";
 import { FaRegChartBar } from "react-icons/fa";
 
 const PlanAhorros = () => {
+  
+  const [data, setData] = useState(null);
+  const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
+
+
+  useEffect(() => {
+    // Función asíncrona para realizar la petición GET
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/savings/${credentialUser.cuenta}`)
+        setData(response.data); // Guarda los datos en el estado
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    };
+
+    // Llama a la función para realizar la petición cuando el componente se monta
+    fetchData();
+  }, []);
+  console.log(data)
+
+
+
+
   return (
     <div className='flex'>
       <div className="w-3/5 p-4">
@@ -274,7 +298,7 @@ const PlanAhorros = () => {
               <p className='font-bold'>Descripcion:</p></div>
 
             <div className="flex justify-center">
-              <ModalAhorro></ModalAhorro>
+              <ModalAhorro credentialUser={credentialUser} />
             </div>
 
           </div>
