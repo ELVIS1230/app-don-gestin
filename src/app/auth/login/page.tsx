@@ -3,21 +3,20 @@ import axios from "axios";
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation";
-
 export default function Login() {
   const [user, setUser ] = useState({
     email:'',
     password: ''
   })
   const router = useRouter()
-
+  
    const handleSubmit = async (e:any)=>{
     e.preventDefault();
     try{
-      console.log(user)
-      
+        console.log(user)
+    
       const response = await axios.post('http://127.0.0.1:3000/api/users/login', user) 
-      
+  
 
       sessionStorage.setItem('usuario', JSON.stringify({
         cedula: response.data.u_cedula,
@@ -33,9 +32,9 @@ export default function Login() {
       console.log(error)
     }
   }
-
+  
   const handleChange = (e:any) => setUser({...user, [e.target.name]: e.target.value})
-    return (
+  return (
       <div className="flex justify-center overflow-hidden rounded-lg " style={{ margin: "10px" }}>
      
         <div className="flex flex-col md:flex-row justify-center shadow-inner border-4 border-black "
@@ -56,6 +55,7 @@ export default function Login() {
   
             <form 
             onSubmit={handleSubmit}
+
             className="max-w-md bg-white p-8 rounded shadow-md">
               <h2 className="text-center text-gray-900 text-lg font-bold mb-2">Ingresa a tu Cuenta</h2>
               <div className="mb-4">
@@ -96,6 +96,7 @@ export default function Login() {
                 >
                   Iniciar Sesión
                 </button>
+                 {/* <LoginButton /> */}
                  </div>
                  <div className="flex justify-center">
   
@@ -113,3 +114,5 @@ export default function Login() {
       </div>
     )
   }
+
+
