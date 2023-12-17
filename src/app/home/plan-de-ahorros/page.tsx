@@ -4,14 +4,7 @@ import ModalIngresoAhorro from '@/componentes/plan-de-ahorros/ingresoPlanAhorro'
 import React, { useEffect } from 'react'
 import axios from "axios";
 import { useState } from "react"
-import { useRouter } from "next/navigation";
-import { FaCar } from "react-icons/fa6";
-import { IoHome } from "react-icons/io5";
 import { MdOutlineSavings } from "react-icons/md";
-import { TfiBarChart } from "react-icons/tfi";
-import { MdHealthAndSafety } from "react-icons/md";
-import { IoLogoGameControllerB } from "react-icons/io";
-import { MdFastfood } from "react-icons/md";
 import { FaRegChartBar } from "react-icons/fa";
 import { MdSavings } from "react-icons/md";
 
