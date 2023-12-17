@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
 import axios from 'axios';
-import { MdOutlineAddCard } from 'react-icons/md';
+import { MdOutlineSavings } from "react-icons/md";
+import { TbNewSection } from "react-icons/tb";
+
 
 const Modal = ({ show, handleClose, credentialUser }: any) => {
     const [formData, setFormData] = useState({
@@ -18,7 +20,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
     const [error, setError] = useState('');
     const [meta, setMeta] = useState('');
 
-    const handleDuracionChange = (e) => {
+    const handleDuracionChange = (e: { target: { value: any; }; }) => {
         const duracionValue = e.target.value;
         setDuracion(duracionValue);
         setFormData({
@@ -32,7 +34,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         setFechaInicio(fechaActual);
     }, []);
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
@@ -40,7 +42,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         });
     };
 
-    const handleFechaCulminacionChange = (event) => {
+    const handleFechaCulminacionChange = (event: { target: { value: any; }; }) => {
         const nuevaFechaCulminacion = event.target.value;
 
         if (nuevaFechaCulminacion < fechaInicio) {
@@ -52,7 +54,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         }
     };
 
-    const calcularDuracion = (nuevaFechaCulminacion) => {
+    const calcularDuracion = (nuevaFechaCulminacion: string) => {
         const fechaInicioParsed = DateTime.fromFormat(fechaInicio, 'yyyy-MM-dd');
         const fechaCulminacionParsed = DateTime.fromFormat(nuevaFechaCulminacion, 'yyyy-MM-dd');
         const diferencia = fechaCulminacionParsed.diff(fechaInicioParsed, ['years', 'months', 'days']);
@@ -80,9 +82,8 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         });
     };
 
-    const handleMetaChange = (e) => {
+    const handleMetaChange = (e: { target: { value: any; }; }) => {
         const inputValue = e.target.value;
-
         const regex = /^\d{1,10}(\.\d{0,2})?$/;
 
         if (regex.test(inputValue) || inputValue === '') {
@@ -94,28 +95,31 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         }
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
         const data = {
             aho_nombre: formData.aho_nombre,
             aho_descripcion: formData.aho_descripcion,
             aho_meta_cantidad: formData.aho_meta_cantidad,
-            aho_cantidad_total: formData.aho_cantidad_total,  // Assuming this should be a number, adjust if needed
+            aho_cantidad_total: formData.aho_cantidad_total,
             cuenta_id_fk: { cuenta_id: credentialUser.credentialUser.cuenta },
             ttrac_id_fk: { ttrac_id_fk: 3 },
-            aho_duracion:formData.duracion
+            aho_duracion: formData.duracion
         };
 
         try {
             const response = await axios.post('http://localhost:3000/api/savings', data);
             console.log(response.data);
+
         } catch (error) {
             console.error('Error en la solicitud:', error);
         }
 
+
         console.log(data);
         handleClose();
+
     };
 
     return (
@@ -150,6 +154,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                     Meta
                                 </label>
                                 <input
+                                    required
                                     type="text"
                                     id="meta"
                                     name="meta"
@@ -166,6 +171,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                     Monto a Ahorrar
                                 </label>
                                 <input
+                                    required
                                     type="text"
                                     id="aho_cantidad_total"
                                     name="aho_cantidad_total"
@@ -196,6 +202,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                         placeholder="Fecha de Culminación"
                                         type="date"
                                         value={fechaCulminacion}
+                                        required
                                         onChange={handleFechaCulminacionChange}
                                     />
                                     {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
@@ -223,6 +230,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                 value={formData.aho_descripcion}
                                 id="aho_descripcion"
                                 onChange={handleInputChange}
+                                
                             ></textarea>
                         </div>
                     </div>
@@ -255,7 +263,7 @@ export default function ModalPlanAhorro(credentialUser: any) {
                 onClick={openModal}
                 className="bg-black hover:bg-gray-800 text-white py-2 px-4 mr-1 rounded-lg ml-auto"
             >
-                <MdOutlineAddCard size={25} />
+                <TbNewSection size={30} />
             </button>
             <Modal show={showModal} credentialUser={credentialUser} handleClose={closeModal} />
         </div>

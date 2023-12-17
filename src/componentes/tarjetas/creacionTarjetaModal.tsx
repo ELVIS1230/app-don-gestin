@@ -9,6 +9,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         tarj_cupo: '',
         tarj_fecha_corte: '',
         tarj_fecha_vencimiento: '',
+        mtarj_id: '',
         saldo: '',
     });
 
@@ -63,6 +64,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
             tarj_fecha_corte: formData.tarj_fecha_corte,
             tarj_fecha_vencimiento: formData.tarj_fecha_vencimiento,
             saldo: formData.saldo,
+
             mtarj_id_fk: { mtarjIdFk: 1 },
             tiptarj_id_fk: tiptarj_id,
             cuenta_id_fk: { cuenta_id: credentialUser.credentialUser.cuenta },
@@ -124,6 +126,17 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                 <option >Selecciona un Tipo</option>
                                 <option value="1">Débito</option>
                                 <option value="2">Crédito</option>
+                            </select>
+                        </div>
+                        <div className="col-span-2 sm:col-span-1">
+                            <label className="block mb-2 text-sm font-medium text-gray-900 ">Modelo de Tarjeta</label>
+                            <select id="opciones"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 
+                                focus:border-primary-500 block w-full p-2.5 ">
+                                <option >Selecciona un Modelo</option>
+                                <option >MasterCard</option>
+                                <option >Visa</option>
+                                <option >Dinners Club</option>
                             </select>
                         </div>
 
