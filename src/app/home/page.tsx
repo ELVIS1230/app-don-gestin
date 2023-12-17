@@ -1,35 +1,46 @@
 'use client'
 import axios from "axios"
-import { GetAllCards } from "../lib/data"
 import { useEffect, useState } from "react"
-// import ApexChart from "@/componentes/dashboard/ComparacionesChart";
 import dynamic from "next/dynamic";
-import { IoIosAdd } from "react-icons/io";
-// import DonutChart from "@/componentes/dashboard/DonutChart";
+import { IoIosAdd, IoIosRemove } from "react-icons/io";
 
 const ChartLineDash = dynamic(() => import('@/componentes/dashboard/ComparacionesChart'), { ssr: false })
 const DonutChart = dynamic(() => import('@/componentes/dashboard/DonutChart'), { ssr: false })
+
+
 export default function Home() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
+  const [dataIncomes, setDataIncomes] = useState([]);
+  const [dataExpenses, setDataExpenses] = useState([]);
+  const [dataTrasanctions, setDataTrasanctions] = useState();
+  const [dataCards, setDataCards] = useState();
+
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string)
+
+
   useEffect(() => {
-    // Función asíncrona para realizar la petición GET
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:3000/api/reminders/${credentialUser.cedula}`)
-        setData(response.data); // Guarda los datos en el estado
+        const response = await axios.get(`http://localhost:3000/api/transactions/dash/${credentialUser.cuenta}`)
+
+        const dataLineChartIncomes:any = Object.values(response.data.comparaciones).map((mes:any) => mes["1"]);
+        const dataLineChartExpenses:any = Object.values(response.data.comparaciones).map((mes:any) => mes["2"]);
+        const dataTableTransactions:any = response.data.trasacciones
+        // const dataTableCards:any = 
+        setDataIncomes(dataLineChartIncomes)
+        setDataExpenses(dataLineChartExpenses)
+        setDataTrasanctions(dataTableTransactions)
+        setDataCards(response.data.tarjetas)
+        
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }
     };
-
-    // Llama a la función para realizar la petición cuando el componente se monta
     fetchData();
   }, []);
-  // console.log('Wenas',credentialUser)
-  console.log(data)
-  // const data = await GetAllCards()
-  // console.log(data)
+  console.log(dataCards)
+
+  
   return (
     <div className='flex'>
       <div className="w-full p-4">
@@ -62,7 +73,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <ChartLineDash />
+            <ChartLineDash ingresos={dataIncomes} gastos={dataExpenses} />
           </div>
           <div className="w-1/3 bg-gray-200 rounded-2xl  h-80 shadow-xl">
             <h1 className='font-bold text-2xl p-4'>Ahorros </h1>
@@ -74,17 +85,22 @@ export default function Home() {
           <div className="w-1/3 h-full p-4 bg-gray-200 rounded-2xl shadow-xl">
             <h1 className='font-bold text-2xl p-1'>Trasacciones billetera </h1>
             <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
-              <li className="py-3 sm:py-4">
+              {dataTrasanctions && dataTrasanctions.map((item)=>(
+                <li key={item.trasac_id} className="py-3 sm:py-4">
                 <div className="flex items-center space-x-4">
                   <div className="flex-shrink-0">
-                    <IoIosAdd size={35} className="mr-2 text-white bg-[#808080] rounded-xl" />
+                    {item.ttrac_id_fk.ttrac_id === 1 
+                    ? <IoIosAdd size={35} className="mr-2 text-white bg-black rounded-xl" />
+                    :<IoIosRemove size={35} className="mr-2 text-white bg-[#808080] rounded-lg" />
+                  }
+                    
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
-                      Neil Sims
+                      {item.trasac_nombre}
                     </p>
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                      email@windster.com
+                      {item.trasac_descripcion}
                     </p>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -92,7 +108,7 @@ export default function Home() {
                       Cantidad
                     </p>
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                      $55
+                      {item.trasac_cantidad}
                     </p>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -100,28 +116,34 @@ export default function Home() {
                       Total
                     </p>
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                      $55
+                      {item.trasac_saldo}
                     </p>
                   </div>
 
                 </div>
               </li>
+              ))}
             </ul>
           </div>
           <div className="w-1/3 h-full p-4 bg-gray-200 rounded-2xl shadow-xl">
             <h1 className='font-bold text-2xl p-1'>Trasacciones tarjetas </h1>
             <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
-              <li className="py-3 sm:py-4">
+            {dataCards && dataCards.map((item)=>(
+                <li key={item.trasac_id} className="py-3 sm:py-4">
                 <div className="flex items-center space-x-4">
                   <div className="flex-shrink-0">
-                    <IoIosAdd size={35} className="mr-2 text-white bg-black rounded-xl" />
+                    {item.ttrac_id_fk.ttrac_id === 1 
+                    ? <IoIosAdd size={35} className="mr-2 text-white bg-black rounded-xl" />
+                    :<IoIosRemove size={35} className="mr-2 text-white bg-[#808080] rounded-lg" />
+                  }
+                    
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
-                      Neil Sims
+                      {item.trasac_nombre}
                     </p>
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                      email@windster.com
+                      {item.trasac_descripcion}
                     </p>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -129,7 +151,7 @@ export default function Home() {
                       Cantidad
                     </p>
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                      $55
+                      {item.trasac_cantidad}
                     </p>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -137,12 +159,13 @@ export default function Home() {
                       Total
                     </p>
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                      $55
+                      {item.trasac_saldo}
                     </p>
                   </div>
 
                 </div>
               </li>
+              ))}
             </ul>
           </div>
           <div className="w-1/3 h-full p-4 bg-gray-200 rounded-2xl shadow-2xl">
