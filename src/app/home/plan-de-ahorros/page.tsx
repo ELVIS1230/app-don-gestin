@@ -4,21 +4,20 @@ import ModalIngresoAhorro from '@/componentes/plan-de-ahorros/ingresoPlanAhorro'
 import React, { useEffect } from 'react'
 import axios from "axios";
 import { useState } from "react"
-import { useRouter } from "next/navigation";
-import { FaCar } from "react-icons/fa6";
-import { IoHome } from "react-icons/io5";
 import { MdOutlineSavings } from "react-icons/md";
-import { TfiBarChart } from "react-icons/tfi";
-import { MdHealthAndSafety } from "react-icons/md";
-import { IoLogoGameControllerB } from "react-icons/io";
-import { MdFastfood } from "react-icons/md";
 import { FaRegChartBar } from "react-icons/fa";
+import { MdSavings } from "react-icons/md";
 
 const PlanAhorros = () => {
-  
-  const [data, setData] = useState(null);
+
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
 
+
+  const [data, setData] = useState(null);
+
+
+  // Verificar si hay datos y ordenar por fecha
+  const dataORD = data && [...data].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
   useEffect(() => {
     // Función asíncrona para realizar la petición GET
@@ -26,6 +25,7 @@ const PlanAhorros = () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/savings/${credentialUser.cuenta}`)
         setData(response.data); // Guarda los datos en el estado
+
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }
@@ -35,9 +35,6 @@ const PlanAhorros = () => {
     fetchData();
   }, []);
   console.log(data)
-
-
-
 
   return (
     <div className='flex'>
@@ -68,174 +65,64 @@ const PlanAhorros = () => {
           <div className='max-h-[450px] overflow-auto scrollbar-thumb:!rounded scroll-container'>
 
             {/* Div de cada plan creado */}
-            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-              paddingTop: "20px",
-              marginTop: "20px"
-            }}>
-              <div className="bg-white rounded-lg p-2 flex items-center">
-                <FaCar size={30} className="mr-2" />
-                <div className='flex-grow'>
-                  <h1>Auto</h1>
-                  <h1>Nuevo</h1>
+            {dataORD && dataORD.map((item) => {
+
+              const metaCantidad = parseFloat(item.aho_meta_cantidad) || 0;
+              const cantidadAhorrada = parseFloat(item.aho_cantidad_total) || 0;
+
+              return (
+                <div key={item.aho_id} className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
+                  height: "6rem",
+                  paddingTop: "20px",
+                  marginTop: "20px",
+                }}>
+                  <div className="bg-white rounded-lg p-2 flex items-center">
+                    <MdSavings size={30} className="mr-2" />
+                    <div className='flex-grow'>
+                      {/* Reemplazar la línea original con la nueva estructura */}
+                      <h1>{item.aho_nombre.split(' ').map((word, index) => <React.Fragment key={index}>{word}<br /></React.Fragment>)}</h1>
+                    </div>
+                  </div>
+                  <div className="flex-grow text-center">
+                    <p className='font-bold'>Ahorrado</p>
+                    <p>${item.aho_cantidad_total}</p>
+                  </div>
+                  <div className="flex-grow text-center">
+                    <p className='font-bold '>Por Ahorrar</p>
+                    {/* Calcular la diferencia entre lo ahorrado y la meta */}
+                    <p>${metaCantidad - cantidadAhorrada}</p>
+                  </div>
+                  <div className="flex-grow text-center">
+                    <p className='font-bold'>Meta</p>
+                    <p>${item.aho_meta_cantidad}</p>
+                  </div>
+                  <div className='flex items-center'>
+                    <div className="flex-grow text-left">
+                      <p className='font-bold text-center'>Duración</p>
+
+                      {item.aho_duracion && item.aho_duracion.split(',').map((parte, index) => (
+                        <React.Fragment key={index} >
+                          {parte.trim()} {/* Elimina espacios adicionales alrededor de cada parte */}
+                          <br />
+                        </React.Fragment>
+                      ))}
+                    </div>
+
+                  </div>
+
+                  <div className="flex-grow text-center">
+                  <ModalIngresoAhorro credentialUser={credentialUser} selectedAhorroId={item.aho_id} />
+
+                  </div>
                 </div>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Ahorrado</p>
-                <p>$200.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold '>Por Ahorrar</p>
-                <p>$800.00</p>
-              </div>
+              );
+            })}
 
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Meta</p>
-                <p>$1000.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Duración</p>
-                <p>1 año</p>
-              </div>
-              <ModalIngresoAhorro></ModalIngresoAhorro>
-            </div>
-
-            {/* Div de cada plan creado */}
-            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-              paddingTop: "20px",
-              marginTop: "20px"
-            }}>
-              <div className="bg-white rounded-lg p-2 flex items-center">
-                <MdHealthAndSafety size={30} className="mr-2" />
-                <div className='flex-grow'>
-                  <h1>Gastos</h1>
-                  <h1>Médicos</h1>
-                </div>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Ahorrado</p>
-                <p>$200.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold '>Por Ahorrar</p>
-                <p>$800.00</p>
-              </div>
-
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Meta</p>
-                <p>$1000.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Duración</p>
-                <p>1 año</p>
-              </div>
-              <ModalIngresoAhorro></ModalIngresoAhorro>
-            </div>
-
-            {/* Div de cada plan creado */}
-            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-              paddingTop: "20px",
-              marginTop: "20px"
-            }}>
-              <div className="bg-white rounded-lg p-2 flex items-center">
-                <IoLogoGameControllerB size={30} className="mr-2" />
-                <div className='flex-grow'>
-                  <h1>Consola</h1>
-                  <h1>Nueva</h1>
-                </div>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Ahorrado</p>
-                <p>$200.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold '>Por Ahorrar</p>
-                <p>$800.00</p>
-              </div>
-
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Meta</p>
-                <p>$1000.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Duración</p>
-                <p>1 año</p>
-              </div>
-              <ModalIngresoAhorro></ModalIngresoAhorro>
-            </div>
-
-
-            {/* Div de cada plan creado */}
-            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-              paddingTop: "20px",
-              marginTop: "20px"
-            }}>
-
-              <div className="bg-white rounded-lg p-2 flex items-center">
-                <IoHome size={30} className="mr-2" />
-                <div className='flex-grow font-medium'>
-
-                  <h3>Casa</h3>
-                  <h3>Nueva</h3>
-
-                </div>
-              </div>
-
-              <div className="flex-grow text-center">
-                <p className='font-bold '>Ahorrado</p>
-                <p>$200.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Por Ahorrar</p>
-                <p>$800.00</p>
-              </div>
-
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Meta</p>
-                <p>$1000.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Duración</p>
-                <p>1 año</p>
-              </div>
-
-              <ModalIngresoAhorro></ModalIngresoAhorro>
-            </div>
-
-            {/* Div de cada plan creado */}
-            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-              paddingTop: "20px",
-              marginTop: "20px"
-            }}>
-              <div className="bg-white rounded-lg p-2 flex items-center">
-                <IoLogoGameControllerB size={30} className="mr-2" />
-                <div className='flex-grow'>
-                  <h1>Comida</h1>
-                </div>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Ahorrado</p>
-                <p>$200.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold '>Por Ahorrar</p>
-                <p>$800.00</p>
-              </div>
-
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Meta</p>
-                <p>$1000.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold'>Duración</p>
-                <p>1 año</p>
-              </div>
-              <ModalIngresoAhorro></ModalIngresoAhorro>
-            </div>
 
           </div>
         </div>
-
       </div>
+
       <div className='w-2/5 p-4'>
 
         <div className='bg-neutral-100 p-4 rounded-2xl shadow-xl'
