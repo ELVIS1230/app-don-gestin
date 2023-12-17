@@ -19,6 +19,7 @@ export function BilleteraG() {
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
   const [data, setData] = useState(null);
   const [saldo, setAccount] = useState({});
+  const [reloadData, setReloadData] = useState(false);
 
 
   // Verificar si hay datos y ordenar por fecha
@@ -37,7 +38,7 @@ export function BilleteraG() {
         const account = await axios.get(`http://localhost:3000/api/users/account/${credentialUser.cuenta}`)
         setAccount(account.data); // Guarda los datos en el estado
 
-
+        setReloadData(true); // Resetea el modal usado
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }
@@ -45,7 +46,11 @@ export function BilleteraG() {
 
     // Llama a la función para realizar la petición cuando el componente se monta
     fetchData();
-  }, []);
+  }, [reloadData]);;
+
+
+
+  
   console.log({dataORD})
 
 
@@ -76,7 +81,7 @@ export function BilleteraG() {
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
             .map((item:any) => (
               <div key={item.trasac_id} className="grid grid-cols-11 gap-2 pb-7 min-h-[85px] max-h-[85px]">
-                <div className="flex items-center bg-white rounded-xl min-h-[60px] max-h-[60px] ">
+                <div className="flex items-center bg-white rounded-2xl min-h-[60px] max-h-[60px] ">
                   <div className='ml-4'>
                     {item.ttrac_id_fk.ttrac_id === 1 ? (
                       <IoMdAdd style={{ color: 'green' }} size={25} />
@@ -124,7 +129,7 @@ export function BilleteraG() {
 
 
       <div className="w-1/3 p-4 h-full">
-        <div className="mb-6 bg-neutral-100 p-2 rounded-2xl shadow-xl">
+        <div className="mb-6 bg-zinc-200 p-2 rounded-2xl shadow-xl">
 
           <div className="flex ">
 
@@ -150,7 +155,7 @@ export function BilleteraG() {
           </div>
 
         </div>
-        <div className="mb-6 bg-neutral-100 p-4 rounded-2xl shadow-xl">
+        <div className="mb-6 bg-zinc-200 p-4 rounded-2xl shadow-xl">
           <h2 className="text-lg font-semibold mb-4">Agregar a tu Billetera</h2>
           <div className="">
             <div >
@@ -162,7 +167,7 @@ export function BilleteraG() {
 
         </div>
 
-        <div className="bg-neutral-100 p-4 rounded-2xl shadow-xl">
+        <div className="bg-zinc-200 p-4 rounded-2xl shadow-xl">
           <ImageCarousel></ImageCarousel>
         </div>
       </div>

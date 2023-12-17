@@ -20,7 +20,7 @@ const ImageCarousel = () => {
         <div key={index}>
           <Image src={images(imageKey).default} 
           alt={`Imagen ${index}`} 
-          className="object-contain w-64 h-64"
+          className="object-contain w-64 h-64 rounded-md"
           />
         </div>
       ))}

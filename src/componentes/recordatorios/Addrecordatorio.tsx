@@ -20,9 +20,13 @@ export function Modal ({ show, handleClose,credentialUser}:any) {
 
     if (!value.trim()) {
       error = 'Este campo es obligatorio';
-    } else if ((fieldName === 'title' || fieldName === 'description') && value.length > 35) {
+    } else if ((fieldName === 'title') && value.length > 35) {
       error = 'El máximo de caracteres es 35';
-    } else if (fieldName === 'date') {
+    } 
+      else if ((fieldName === 'description') && value.length > 85) {
+      error = 'El máximo de caracteres es 85';
+    } 
+    else if (fieldName === 'date') {
       error = '';
     // } else if (fieldName === 'selectedCard') {
     //   error = '';
@@ -57,7 +61,7 @@ export function Modal ({ show, handleClose,credentialUser}:any) {
         record_descripcion:description,
         record_fecha:date,
         u_cedula_fk: { u_cedula :credentialUser.credentialUser.cedula}
-        // selectedCard,
+        
       };
       try {
         const response = await axios.post('http://localhost:3000/api/reminders',data);
@@ -156,7 +160,7 @@ export function Modal ({ show, handleClose,credentialUser}:any) {
         </div> */}
 
         <div className='flex justify-center'>
-          <button onClick={handleCancelClick} type="button" className="bg-neutral-500 hover:bg-stone-900 hover:text-white font-bold w-full py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline mr-4 mt-4 lg:mt-0">
+          <button onClick={handleCancelClick} type="button" className="bg-neutral-500 hover:bg-red-800 hover:text-white font-bold w-full py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline mr-4 mt-4 lg:mt-0">
             Cancelar</button>
           <button onClick={handleCreateClick} type="button" className="bg-neutral-500 hover:bg-stone-900 hover:text-white font-bold w-full py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline mt-4 lg:mt-0">
             Crear recordatorio</button>

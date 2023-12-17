@@ -125,9 +125,10 @@ export function Modal ({ show, handleClose,credentialUser}:any){
         {valueVisible && (
           <div className="flex mb-4">
             {getIcon()}
+            <span className='font-bold text-xl text-center pt-3 pr-2'>$</span>
             <input
               type="number"
-              placeholder="Valor"
+              placeholder="Valor $000.00"
               value={value}
               onChange={(e) => setValue(e.target.value)}
               className="border border-gray-300 rounded-md px-2 py-2 w-full"
