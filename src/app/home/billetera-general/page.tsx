@@ -22,7 +22,9 @@ export function BilleteraG() {
 
 
   // Verificar si hay datos y ordenar por fecha
-  const dataORD = data && [...data].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  const dataORD = data && [...data].sort((a, b) => {
+    return new Date(a.createdAt) - new Date(b.createdAt);
+  });
 
 
   useEffect(() => {
@@ -44,7 +46,7 @@ export function BilleteraG() {
     // Llama a la función para realizar la petición cuando el componente se monta
     fetchData();
   }, []);
-  console.log(data)
+  console.log({dataORD})
 
 
   return (
@@ -69,7 +71,10 @@ export function BilleteraG() {
           <div><h1 className='font-bold text-xl py-5 pb-6'>Movimientos</h1></div>
           <div className='min-h-[450px] max-h-[450px] overflow-auto scrollbar-thumb:!roudend'>
 
-            {dataORD && dataORD.map((item) => (
+            {dataORD && dataORD
+            .slice() // Copia el array para evitar mutaciones inesperadas
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            .map((item:any) => (
               <div key={item.trasac_id} className="grid grid-cols-11 gap-2 pb-7 min-h-[85px] max-h-[85px]">
                 <div className="flex items-center bg-white rounded-xl min-h-[60px] max-h-[60px] ">
                   <div className='ml-4'>
@@ -105,6 +110,7 @@ export function BilleteraG() {
                 <div className="font-bold col-span-2 grid text-center">
                   <p className='text-base'>Total</p>
                   <p className='text-lg'>${item.trasac_saldo}</p>
+                  
                 </div>
               </div>
             ))}

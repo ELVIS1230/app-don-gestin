@@ -4,8 +4,10 @@ import { useState } from 'react';
 
 export function Modal ({ show, handleClose,credentialUser}:any){
   const [value, setValue] = useState('');
+  const [cantidad, setCantidad] = useState(0);
   const [valueError, setValueError] = useState('');
   const [movementType, setMovementType] = useState('');
+  const [typetrac, setTypetrac] = useState(0);
   const [cardType, setCardType] = useState('');
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState('');
@@ -49,12 +51,18 @@ export function Modal ({ show, handleClose,credentialUser}:any){
       movementType &&
       (['2', '1'].includes(movementType) && name && description)
     ) {
+      const cantidad = parseFloat(value);
+      const ttrac = parseFloat(movementType);
+      setCantidad(cantidad);
+      setTypetrac(ttrac);
+      console.log(cantidad);
+      console.log(ttrac);
       const data = {
-        trasac_nombre: name,
-        trasac_descripcion: description,
-        trasac_cantidad: value,
-        ttrac_id_fk: { ttrac_id: movementType },
-        cuenta_id_fk: { cuenta_id :credentialUser.credentialUser.cuenta}
+        trasac_nombre:name,
+        trasac_descripcion:description,
+        trasac_cantidad:cantidad,
+        ttrac_id_fk:{ttrac_id:ttrac},
+        cuenta_id_fk:{cuenta_id:credentialUser.credentialUser.cuenta}
         
       };
 
