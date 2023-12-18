@@ -141,14 +141,8 @@ export default function Recordatorios() {
 
 
         </div>
-        <div className="mb-6 bg-neutral-500 p-4 rounded-2xl">
-          {/* <div className='bg-light mx-auto border border-black' style={{width:"450px", height:"250px"}}>
-            <div style={{width:"100%", height:"100%", padding:"10px 0"}}>
-              <PieChart></PieChart>
-              </div>
-          </div> */}
-        </div>
-        <div className="bg-neutral-500 p-4 rounded-2xl">Fila 3 - Columna 2</div>
+        {/*  */}
+        
       </div>
     </div>
   )

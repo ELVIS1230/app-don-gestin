@@ -133,13 +133,13 @@ export function BilleteraG() {
 
           <div className="flex ">
 
-            <div className="flex flex-col justify-center items-center w-1/2">
+            <div className="flex flex-col justify-center items-center w-full">
               <h1 className="text-3xl font-black">Saldo Total</h1>
               <p className="text-4xl font-semibold">$ {saldo.cuenta_saldo}</p>
             </div>
 
 
-            <div className="flex flex-col w-1/2 gap-4 py-3">
+            {/* <div className="flex flex-col w-1/2 gap-4 py-3">
 
               <div className="flex flex-col justify-center items-center h-1/2">
                 <h1 className="text-base font-bold">Saldo Tarjetas</h1>
@@ -151,7 +151,7 @@ export function BilleteraG() {
                 <h1 className="text-lg font-bold">Saldo Ahorros</h1>
                 <p className="text-3xl">$ 700.00</p>
               </div>
-            </div>
+            </div> */}
           </div>
 
         </div>
