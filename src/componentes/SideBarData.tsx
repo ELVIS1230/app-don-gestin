@@ -101,7 +101,7 @@ export default function SideBarData({ toggle }:{toggle:any})  {
             } sidebar last:absolute left-4 bottom-4`} 
             >
                 <div className="mr-8 text-[1-7rem]
-                text-brown"><PiSignOutDuotone style={{ color: 'white' }} size={35}/></div>
+                text-brown transform rotate-180"><PiSignOutDuotone style={{ color: 'white' }} size={35}/></div>
                 <div 
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
