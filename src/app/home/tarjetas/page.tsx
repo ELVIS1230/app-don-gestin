@@ -14,6 +14,8 @@ function Tarjetas() {
   const [transactionsCards, setTransactionsCard] = useState([]);
 
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
+  
+
   // Verificar si hay datos y ordenar por fecha
   const dataORD = data && [...data].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
@@ -27,6 +29,7 @@ function Tarjetas() {
 
         const transactionsWithCards = await axios.get(`http://localhost:3000/api/transactions/cards/${credentialUser.cuenta}`)
         setTransactionsCard(transactionsWithCards.data); // Guarda los datos en el estado
+
 
       } catch (error) {
         console.error('Error al obtener los datos:', error);

@@ -7,7 +7,7 @@ import { BiWallet } from "react-icons/bi";
 import { TbCalendarStats, TbHome2 } from "react-icons/tb";
 import { PiSignOutDuotone } from "react-icons/pi";
 
-const SideBarData = ({ toggle }:any) => {
+export default function SideBarData({ toggle }:{toggle:any})  {
     return (
 
         <div>
@@ -116,4 +116,3 @@ const SideBarData = ({ toggle }:any) => {
     )
 }
 
-export default SideBarData

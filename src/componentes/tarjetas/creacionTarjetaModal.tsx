@@ -88,6 +88,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         try {
             const response = await axios.post('http://localhost:3000/api/cards', data);
             console.log(response.data);
+
         } catch (error) {
             console.error(error);
         }
