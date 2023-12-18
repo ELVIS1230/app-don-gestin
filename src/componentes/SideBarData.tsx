@@ -6,7 +6,8 @@ import { IoCardOutline } from "react-icons/io5";
 import { BiWallet } from "react-icons/bi";
 import { TbCalendarStats, TbHome2 } from "react-icons/tb";
 
-const SideBarData = ({ toggle }) => {
+export default function SideBarData({ toggle }:{toggle:any})  {
+
     return (
 
         <div>
@@ -115,4 +116,3 @@ const SideBarData = ({ toggle }) => {
     )
 }
 
-export default SideBarData
