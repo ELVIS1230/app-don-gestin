@@ -11,7 +11,7 @@ import { FaCcMastercard } from "react-icons/fa";
 function Tarjetas() {
 
   const [data, setData] = useState(null);
-  const [saldo, setAccount] = useState({});
+  const [transactionsCards, setTransactionsCard] = useState([]);
 
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
   // Verificar si hay datos y ordenar por fecha
@@ -25,19 +25,21 @@ function Tarjetas() {
         const response = await axios.get(`http://localhost:3000/api/cards/${credentialUser.cuenta}`)
         setData(response.data); // Guarda los datos en el estado
 
-        const account = await axios.get(`http://localhost:3000/api/users/account/${credentialUser.cuenta}`)
-        setAccount(account.data); // Guarda los datos en el estado
+        const transactionsWithCards = await axios.get(`http://localhost:3000/api/transactions/cards/${credentialUser.cuenta}`)
+        setTransactionsCard(transactionsWithCards.data); // Guarda los datos en el estado
 
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }
     };
-
+    
     // Llama a la función para realizar la petición cuando el componente se monta
     fetchData();
   }, []);
+  console.log(transactionsCards)
 
-  console.log(data)
+  // console.log(data)
+  // console.log(saldo)
 
   return (
     <div className='flex'>
@@ -71,155 +73,22 @@ function Tarjetas() {
             {/* Div de cada plan creado */}
 
 
-            {/* Div de cada plan creado */}
-            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-              paddingTop: "20px",
-              marginTop: "20px"
-            }}>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg' >Tipo</p>
-                <p>Debito</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Banco</p>
-                <p>Pichincha</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Fecha</p>
-                <p>01/02/2023</p>
-              </div>
-              <div className="flex-grow text-center items-center">
-                <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Total</p>
-                <p>$1000.00</p>
-              </div>
-            </div>
+        
 
-            {/* Div de cada plan creado */}
-            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-              paddingTop: "20px",
-              marginTop: "20px"
-            }}>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg' >Tipo</p>
-                <p>Crédito</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Banco</p>
-                <p>Pichincha</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Fecha</p>
-                <p>01/02/2023</p>
-              </div>
-              <div className="flex-grow text-center items-center">
-                <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Total</p>
-                <p>$1000.00</p>
-              </div>
-            </div>
-
-            {/* Div de cada plan creado */}
-            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-              paddingTop: "20px",
-              marginTop: "20px"
-            }}>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg' >Tipo</p>
-                <p>Debito</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Banco</p>
-                <p>Pichincha</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Fecha</p>
-                <p>01/02/2023</p>
-              </div>
-              <div className="flex-grow text-center items-center">
-                <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Total</p>
-                <p >$1000.00</p>
-              </div>
-            </div>
-
-            {/* Div de cada plan creado */}
-            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-              paddingTop: "20px",
-              marginTop: "20px"
-            }}>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg' >Tipo</p>
-                <p>Debito</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Banco</p>
-                <p>Pichincha</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Fecha</p>
-                <p>01/02/2023</p>
-              </div>
-              <div className="flex-grow text-center items-center">
-                <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg mt-2" >$800.00</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Total</p>
-                <p>$1000.00</p>
-              </div>
-
-            </div>
-
-            {/* Div de cada plan creado */}
-            <div className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-              paddingTop: "20px",
-              marginTop: "20px"
-            }}>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg' >Tipo</p>
-                <p>Debito</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Banco</p>
-                <p>Pichincha</p>
-              </div>
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Fecha</p>
-                <p>01/02/2023</p>
-              </div>
-              <div className="flex-grow text-center items-center">
-                <p id='Ingresos' className="text-green-500  justify-center font-bold text-lg " >$800.00</p>
-              </div>
-
-              <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Total</p>
-                <p>$1000.00</p>
-              </div>
-
-            </div>
-
-            {/* Div de cada plan creado */}
-
-            {dataORD && dataORD.map((item) => {
+            {transactionsCards && transactionsCards.map((item) => {
               return (
                 <div key={item.tarj_id} className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
                   paddingTop: "20px",
                   marginTop: "20px"
                 }}>
                   <div className="flex-grow text-center">
-                    <p className='font-bold text-lg' >Tipo</p>
-                    <p>{item.tiptarj_id}</p>
+                    <p className='font-bold text-lg' >Tarjeta</p>
+                    <p>{item.tarj_id_fk.tarj_nombre}</p>
                   </div>
 
                   <div className="flex-grow text-center">
-                    <p className='font-bold text-lg'>Banco</p>
-                    <p>{item.tarj_nombre}</p>
+                    <p className='font-bold text-lg'>Movimiento</p>
+                    <p>{item.trasac_nombre}</p>
                   </div>
 
                   <div className="flex-grow text-center">
@@ -229,7 +98,11 @@ function Tarjetas() {
 
                   <div className="flex-grow text-center">
                     <p></p>
-                    <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >$1000.00</p>
+                    {
+                      item.ttrac_id_fk.ttrac_id === 1 
+                    ? <p id='Gastos' className="text-green-500 font-bold text-lg mt-2" >${item.trasac_cantidad}</p>
+                    : <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >${item.trasac_cantidad}</p>
+                    }
                   </div>
 
 
@@ -250,11 +123,11 @@ function Tarjetas() {
                   <div className="py-4 bg-gray-200 rounded-2xl shadow-lg">
                     <div className="border-b-4 border-white">
                       <div className="font-bold text-xl mb-2 text-center">
-                        Tarjeta de {item.tiptarj_id}
+                      <div className='text-lg'>Banco: {item.tarj_nombre}</div>
                       </div>
                     </div>
                     <div className="text-gray-700 text-base mx-6 mt-2">
-                      <div className='text-lg'>Banco: {item.tarj_nombre}</div>
+                        Tarjeta de {item.tiptarj_id_fk.tiptarj_tipo}
                       <div className='text-lg'>Saldo Disponible: {item.tarj_saldo_total}</div>
                       <div className='text-lg'>Fecha de Vencimiento: {item.tarj_fecha_vencimiento}</div>
                     </div>

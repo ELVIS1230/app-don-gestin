@@ -14,9 +14,10 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
     });
 
     const [cardType, setCardType] = useState('');
+    const [cardBrand, setCardBrand] = useState('');
     const [showCreditLimit, setShowCreditLimit] = useState(false);
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: any) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
@@ -24,14 +25,18 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         });
     };
 
-    const handleChange = (e) => {
-
+    const handleChangeType = (e: any) => {
         setCardType(e.target.value);
         setShowCreditLimit(e.target.value === '1');
 
     };
+    const handleChangeBrand = (e: any) => {
+        setCardBrand(e.target.value);
+        // setShowCreditLimit(e.target.value === '1');
 
-    const handleSaldoChange = (e) => {
+    };
+
+    const handleSaldoChange = (e: any) => {
         const inputValue = e.target.value;
         const regex = /^\d{0,10}(\.\d{0,2})?$/;
         if (regex.test(inputValue) || inputValue === '') {
@@ -42,7 +47,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         }
     };
 
-    const handleCupoChange = (e) => {
+    const handleCupoChange = (e: any) => {
         const inputValue = e.target.value;
         const regex = /^\d{0,10}(\.\d{0,2})?$/;
         if (regex.test(inputValue) || inputValue === '') {
@@ -53,21 +58,32 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         }
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         const tiptarj_id = cardType === '1' ? 1 : 2
-
-        const data = {
-            tarj_nombre: formData.tarj_nombre,
-            tarj_descripcion: formData.tarj_descripcion,
-            tarj_cupo: formData.tarj_cupo,
-            tarj_saldo_total: formData.saldo,
-            tarj_fecha_corte: formData.tarj_fecha_corte,
-            tarj_fecha_vencimiento: formData.tarj_fecha_vencimiento,
-            tiptarj_id_fk:{tiptarj_id_fk: tiptarj_id},
-            mtarj_id_fk: { mtarjIdFk: 1 },
-            cuenta_id_fk: { cuenta_id: credentialUser.credentialUser.cuenta },
-        };
+        const mtarj_id = cardBrand === '1' ? 1 : 2
+        let data = {}
+        if(tiptarj_id === 1){
+             data = {
+                tarj_nombre: formData.tarj_nombre,
+                tarj_descripcion: formData.tarj_descripcion,
+                tarj_cupo: parseFloat(formData.tarj_cupo),
+                // tarj_saldo_total: formData.saldo,
+                tarj_fecha_corte: formData.tarj_fecha_corte,
+                tarj_fecha_vencimiento: formData.tarj_fecha_vencimiento,
+                tiptarj_id_fk: { tiptarj_id: tiptarj_id },
+                mtarj_id_fk: { mtarj_id: mtarj_id },
+                cuenta_id_fk: { cuenta_id: credentialUser.credentialUser.cuenta },
+            };
+        }else if(tiptarj_id ===2){
+            data = {
+                tarj_nombre: formData.tarj_nombre,
+                tarj_descripcion: formData.tarj_descripcion,
+                tiptarj_id_fk: { tiptarj_id: tiptarj_id },
+                mtarj_id_fk: { mtarj_id: mtarj_id },
+                cuenta_id_fk: { cuenta_id: credentialUser.credentialUser.cuenta },
+            };
+        }
 
         try {
             const response = await axios.post('http://localhost:3000/api/cards', data);
@@ -76,7 +92,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
             console.error(error);
         }
 
-        console.log(data);
+        // console.log(data);
         handleClose();
     };
 
@@ -106,7 +122,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                 onChange={handleInputChange}
                                 placeholder="Banco" type="text" />
                         </div>
-                        <div className="col-span-2">
+                        {/* <div className="col-span-2">
                             <label className="block mb-2 text-sm font-medium text-gray-900">Saldo Disponible</label>
                             <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                 placeholder="saldo"
@@ -116,10 +132,10 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                 value={formData.saldo}
                                 onChange={handleSaldoChange}
                             />
-                        </div>
+                        </div> */}
                         <div className="col-span-2 sm:col-span-1">
                             <label className="block mb-2 text-sm font-medium text-gray-900 ">Tipo de Tarjeta</label>
-                            <select value={cardType} onChange={handleChange} id="cardType"
+                            <select value={cardType} onChange={handleChangeType} id="cardType"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 
                                 focus:border-primary-500 block w-full p-2.5 ">
                                 <option >Selecciona un Tipo</option>
@@ -129,19 +145,29 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                         </div>
                         <div className="col-span-2 sm:col-span-1">
                             <label className="block mb-2 text-sm font-medium text-gray-900 ">Modelo de Tarjeta</label>
-                            <select id="opciones"
+                            <select id="opciones" value={cardBrand} onChange={handleChangeBrand}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 
                                 focus:border-primary-500 block w-full p-2.5 ">
                                 <option >Selecciona un Modelo</option>
-                                <option >MasterCard</option>
-                                <option >Visa</option>
-                                <option >Dinners Club</option>
+                                <option value={1}>Visa</option>
+                                <option value={2}>MasterCard</option>
+                                <option value={3}>Dinners Club</option>
                             </select>
                         </div>
 
-                        {showCreditLimit && (
+                        {showCreditLimit  && (
                             <div >
-                                <div className="col-span-2 sm:col-span-1">
+                                <div className="col-span-2 sm:col-span-1 mt-2">
+                                    <label className="block mb-2 text-sm font-medium text-gray-900">Cupo</label>
+                                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
+                                        id='tarj_cupo'
+                                        name='tarj_cupo'
+                                        value={formData.tarj_cupo}
+                                        onChange={handleCupoChange}
+                                        type='number' />
+                                </div>
+
+                                <div className="col-span-2 sm:col-span-1 mt-2">
                                     <label className="block mb-2 text-sm font-medium text-gray-900 ">Fecha de Corte</label>
                                     <input
                                         type='date'
@@ -152,27 +178,19 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                     />
 
                                 </div>
+
                                 <div className="col-span-2 sm:col-span-1 mt-2">
-                                    <label className="block mb-2 text-sm font-medium text-gray-900">Cupo</label>
-                                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
-                                        id='tarj_cupo'
-                                        name='tarj_cupo'
-                                        value={formData.tarj_cupo}
-                                        onChange={handleCupoChange}
-                                        type='number' />
+                                    <label className="block mb-2 text-sm font-medium text-gray-900">Fecha de Vencimiento</label>
+                                    <input type="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                        name='tarj_fecha_vencimiento'
+                                        value={formData.tarj_fecha_vencimiento}
+                                        onChange={handleInputChange}
+
+                                    />
                                 </div>
-                            </div>
+                                </div>
                         )}
 
-                        <div className="col-span-2 sm:col-span-1">
-                            <label className="block mb-2 text-sm font-medium text-gray-900">Fecha de Vencimiento</label>
-                            <input type="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                name='tarj_fecha_vencimiento'
-                                value={formData.tarj_fecha_vencimiento}
-                                onChange={handleInputChange}
-
-                            />
-                        </div>
 
 
                         <div className="col-span-2">
