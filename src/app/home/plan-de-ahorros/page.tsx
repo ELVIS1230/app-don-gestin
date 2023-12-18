@@ -7,6 +7,7 @@ import { useState } from "react"
 import { MdOutlineSavings } from "react-icons/md";
 import { FaRegChartBar } from "react-icons/fa";
 import { MdSavings } from "react-icons/md";
+import { HiOutlineTrash } from "react-icons/hi";
 
 const PlanAhorros = () => {
 
@@ -111,8 +112,20 @@ const PlanAhorros = () => {
                   </div>
 
                   <div className="flex-grow text-center">
-                  <ModalIngresoAhorro credentialUser={credentialUser} selectedAhorroId={item.aho_id} />
+                    <ModalIngresoAhorro credentialUser={credentialUser} selectedAhorroId={item.aho_id} />
 
+                  </div>
+
+                  <div className="">
+                    <div className="">
+                      <span
+                        className="bg-black text-white py-2 px-4 mr-1 rounded-lg ml-auto hover:bg-red-600 inline-flex items-center cursor-pointer"
+                        role="button"
+                        onClick={(item.aho_id)}
+                      >
+                        <HiOutlineTrash style={{ color: 'white',  }} size={25} />
+                      </span>
+                    </div>
                   </div>
                 </div>
               );
