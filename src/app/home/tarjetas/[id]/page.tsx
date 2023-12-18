@@ -15,7 +15,7 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
 
   const { id } = params
   const [transactionsCard, setTransactionsCard] = useState([]);
-  const [card, setCard] = useState()
+  const [card, setCard] = useState({})
 
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
 
@@ -48,11 +48,32 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
           <div className="flex flex-col md:flex-row items-center">
             <div className="flex-grow ">
               <h1 className='text-xl font-bold'>Tu Tarjeta</h1>
-              <p className="text-gray-700 pt-4">
+              <p className="font-bold text-lg text-gray-700 pt-4">
                 Detalles de tu Tarjeta
               </p>
+              <div className='py-2'>
+                
+                <div className='flex flex-col'>
+                  <div className='font-bold'>Saldo Total:</div>
+                  <div>$ {card.tarj_saldo_total}</div>
+                </div>
+                <div className='flex gap-5'>
+                <div className='flex flex-col'>
+                  <div className='font-bold'>Vencimiento:</div>
+                  <div>{card.tarj_fecha_vencimiento}</div>
+                </div>
+                <div className='flex flex-col'>
+                <div className='font-bold'>Corte:</div>
+                  <div>{card.tarj_fecha_corte}</div>
+                </div>
+                </div>
+              </div>
             </div>
+            
             <div className="ml-auto ">
+            <p className='text-2xl text-center font-bold'>
+                  {card.tarj_nombre}
+                </p>
               <FaCcMastercard size={150} className="text-black-500" />
             </div>
           </div>
