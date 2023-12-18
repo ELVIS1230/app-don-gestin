@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import landscape from "../assets/landscape.jpg";
 
-
 export default function Inicio() {
 
   return (
@@ -24,7 +23,7 @@ export default function Inicio() {
         <div className="container mx-auto text-center">
           <h1 className="text-6xl font-bold py-2">Don Gestin</h1>
           <h2 className="text-4xl font-bold mb-4">Administra tus Finanzas con Facilidad</h2>
-          <p className="text-lg text-gray-700">Obtén control total sobre tus gastos e ingresos de manera simple y efectiva.</p>
+          <p className="text-lg font-bold text-black">Obtén control total sobre tus gastos e ingresos de manera simple y efectiva.</p>
           <div className="bg-neutral-700 hover:bg-neutral-900 text-white font-bold py-2 px-6 mt-6 inline-block rounded-full">
           <Link href="/auth/login">Comenzar Ahora</Link> </div>
         </div>
