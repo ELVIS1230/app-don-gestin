@@ -1,15 +1,18 @@
 "use client";
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const Registro = () => {
   const [formData, setFormData] = useState({
+    cedula: '',
     firstName: '',
     lastName: '',
     email: '',
     password: ''
   });
-
-  const handleInputChange = (e) => {
+  const router = useRouter()
+  const handleInputChange = (e:any) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -17,13 +20,27 @@ const Registro = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async  (e:any) => {
     e.preventDefault();
-    // Aquí puedes enviar formData a tu backend o realizar otras acciones necesarias
     console.log('Datos enviados:', formData);
-
-    // Limpiar los campos después de enviar los datos
+    const data = {
+      u_cedula: formData.cedula,
+      u_nombre: formData.firstName,
+      u_apellido: formData.lastName,
+      u_correo: formData.email,
+      u_contraseña: formData.password
+    }
+    // console.log(data)
+    try {
+        const response = await axios.post('http://localhost:3000/api/users', data);
+        console.log(response.data);
+      
+      } catch (error) {
+          console.log(error)
+        }
+        router.push('/auth/login')
     setFormData({
+      cedula: '',
       firstName: '',
       lastName: '',
       email: '',
@@ -36,6 +53,21 @@ const Registro = () => {
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-bold mb-4 text-center">Registro</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+              Cedula
+            </label>
+            <input
+              id="cedula"
+              name="cedula"
+              type="text"
+              autoComplete="given-name"
+              required
+              value={formData.cedula}
+              onChange={handleInputChange}
+              className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2 mb-4 w-full"
+            />
+          </div>
           <div>
             <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
               Nombre

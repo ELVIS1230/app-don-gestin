@@ -8,6 +8,7 @@ import { IoIosCard } from "react-icons/io";
 import { MdOutlineAddCard } from "react-icons/md";
 import { usePathname } from 'next/navigation';
 import { format } from 'date-fns';
+import TransactionCard from '@/componentes/tarjetas/TransaccionTarjeta';
 
 
 export default function DetalleTarjeta({ params }: { params: { id: string } }) {
@@ -65,7 +66,7 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
       >
         <div className="flex">
           <p className='static font-bold mt-3 mr-auto'>Movimientos de la Tarjeta</p>
-        <TransactionModal></TransactionModal>
+        <TransactionCard></TransactionCard>
         </div>
 
         {transactionsCard && transactionsCard.map((item) => {
