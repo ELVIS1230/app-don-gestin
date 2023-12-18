@@ -18,6 +18,7 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
 
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
 
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -97,14 +98,11 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
                     }
           </div>
           
-
         </div>
  )
           })}
        
       </div>
-
-
     </div>
   )
 }
