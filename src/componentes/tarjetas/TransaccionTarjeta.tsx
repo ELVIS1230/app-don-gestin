@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 
 
-export function Modal ({ show, handleClose,credentialUser}:any){
+export function Modal ({ show, handleClose,cardID}:any){
   const [value, setValue] = useState('');
   const [cantidad, setCantidad] = useState(0);
   const [valueError, setValueError] = useState('');
@@ -62,17 +62,17 @@ export function Modal ({ show, handleClose,credentialUser}:any){
         trasac_descripcion:description,
         trasac_cantidad:cantidad,
         ttrac_id_fk:{ttrac_id:ttrac},
-        tarj_id_fk: {tarj_id:"22VOTARC5"}
+        tarj_id_fk: {tarj_id: cardID}
 }
         
 
       console.log(data);
-    //   try {
-    //     const response = await axios.post('http://localhost:3000/api/transactions',data);
+      try {
+        const response = await axios.post('http://localhost:3000/api/transactions/cards',data);
 
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
+      } catch (error) {
+        console.error(error);
+      }
 
 
       handleClose();
@@ -194,7 +194,7 @@ export function Modal ({ show, handleClose,credentialUser}:any){
   );
 };
 
-export default function TransactionCard(credentialUser:any){
+export default function TransactionCard({cardID}:{cardID:string}){
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -207,13 +207,10 @@ export default function TransactionCard(credentialUser:any){
 
   return (
     <div className="flex justify-center">
-      <button
-        onClick={openModal}
-        className="bg-neutral-700 hover:bg-neutral-900 text-white font-bold py-2 px-4 rounded"
-      >
-        Ingresar Dinero
+    <button onClick={openModal} className="bg-black hover:bg-gray-800 text-white py-2 px-4 mr-1 rounded-lg ml-auto">
+        Nueva Transaccion
       </button>
-      <Modal show={showModal} credentialUser={credentialUser} handleClose={closeModal} />
+      <Modal show={showModal} cardID={cardID} handleClose={closeModal} />
     </div>
   );
 };

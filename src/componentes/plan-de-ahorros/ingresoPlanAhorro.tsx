@@ -17,17 +17,18 @@ const Modal = ({ show, handleClose, credentialUser, selectedAhorroId, }: any) =>
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-
+        // console.log(credentialUser)
         const data = {
             amount: parseFloat(amount),
-            cuenta_id_fk: { cuenta_id: credentialUser.credentialUser.cuenta },
-            ttrac_id_fk: { ttrac_id_fk:{ttrac_id: 3}},
-            ahorro_id_fk: { ahorro_id: selectedAhorroId },
+            cuenta_id_fk: { cuenta_id: credentialUser.cuenta },
+            ttrac_id_fk: { ttrac_id: 3},
+            aho_id_fk: { aho_id: selectedAhorroId },
         };
+        console.log(data)
 
         try {
             // Utiliza una solicitud PATCH para actualizar la cantidad de ahorro
-            const response = await axios.post('http://localhost:3000/api/savings/amount', data);
+            const response = await axios.patch('http://localhost:3000/api/savings/amount', data);
             console.log(response.data);
 
         } catch (error) {

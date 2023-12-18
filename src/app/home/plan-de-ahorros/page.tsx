@@ -91,7 +91,7 @@ const PlanAhorros = () => {
                   <div className="flex-grow text-center">
                     <p className='font-bold '>Por Ahorrar</p>
                     {/* Calcular la diferencia entre lo ahorrado y la meta */}
-                    <p>${metaCantidad - cantidadAhorrada}</p>
+                    <p>${ parseFloat(item.aho_meta_cantidad) - parseFloat(item.aho_cantidad_total)}</p>
                   </div>
                   <div className="flex-grow text-center">
                     <p className='font-bold'>Meta</p>

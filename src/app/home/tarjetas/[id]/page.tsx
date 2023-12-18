@@ -66,7 +66,7 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
       >
         <div className="flex">
           <p className='static font-bold mt-3 mr-auto'>Movimientos de la Tarjeta</p>
-        <TransactionCard></TransactionCard>
+        <TransactionCard cardID={id} />
         </div>
 
         {transactionsCard && transactionsCard.map((item) => {
