@@ -8,17 +8,18 @@ import { IoIosCard } from "react-icons/io";
 import { MdOutlineAddCard } from "react-icons/md";
 import { usePathname } from 'next/navigation';
 import { format } from 'date-fns';
+import TransactionCard from '@/componentes/tarjetas/TransaccionTarjeta';
 
 
 export default function DetalleTarjeta({ params }: { params: { id: string } }) {
- 
-  const {id} = params
+
+  const { id } = params
   const [transactionsCard, setTransactionsCard] = useState([]);
   const [card, setCard] = useState()
 
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
 
-  
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,43 +66,43 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
       >
         <div className="flex">
           <p className='static font-bold mt-3 mr-auto'>Movimientos de la Tarjeta</p>
-        <TransactionModal></TransactionModal>
+        <TransactionCard></TransactionCard>
         </div>
 
         {transactionsCard && transactionsCard.map((item) => {
-            return (
+          return (
 
-        <div key={item.trasac_id}  className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
-          paddingTop: "20px",
-          marginTop: "20px"
-        }}>
-          <div className="bg-white rounded-lg p-2 flex items-center">
-            <IoIosCard size={30} />
-          </div>
+            <div key={item.trasac_id} className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
+              paddingTop: "20px",
+              marginTop: "20px"
+            }}>
+              <div className="bg-white rounded-lg p-2 flex items-center">
+                <IoIosCard size={30} />
+              </div>
 
-          <div className="flex-grow text-center">
-            <p className='font-bold text-lg'>Fecha</p>
-            <p>{format(new Date(item.createdAt), 'dd/MM/yyyy')}</p>
-          </div>
+              <div className="flex-grow text-center">
+                <p className='font-bold text-lg'>Fecha</p>
+                <p>{format(new Date(item.createdAt), 'dd/MM/yyyy')}</p>
+              </div>
 
-          <div className="flex-grow text-center">
-            <p className='font-bold text-lg'>Nombre</p>
-            <p>{item.trasac_nombre}</p>
-          </div>
+              <div className="flex-grow text-center">
+                <p className='font-bold text-lg'>Nombre</p>
+                <p>{item.trasac_nombre}</p>
+              </div>
 
-          <div className="flex-grow text-center items-center">
-          <p className='font-bold text-lg'>Cantidad</p>
-          {
-                      item.ttrac_id_fk.ttrac_id === 1 
+              <div className="flex-grow text-center items-center">
+                <p className='font-bold text-lg'>Cantidad</p>
+                {
+                  item.ttrac_id_fk.ttrac_id === 1
                     ? <p id='Ingres' className="text-green-500 font-bold text-lg mt-2" >${item.trasac_cantidad}</p>
                     : <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >${item.trasac_cantidad}</p>
-                    }
-          </div>
-          
-        </div>
- )
-          })}
-       
+                }
+              </div>
+
+            </div>
+          )
+        })}
+
       </div>
     </div>
   )

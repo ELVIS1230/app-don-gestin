@@ -6,7 +6,8 @@ import { format } from 'date-fns';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { FaCcMastercard } from "react-icons/fa";
-
+import { HiOutlineTrash } from "react-icons/hi";
+import { IoClose } from "react-icons/io5";
 
 function Tarjetas() {
 
@@ -14,7 +15,7 @@ function Tarjetas() {
   const [transactionsCards, setTransactionsCard] = useState([]);
 
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
-  
+
 
   // Verificar si hay datos y ordenar por fecha
   const dataORD = data && [...data].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
@@ -35,7 +36,7 @@ function Tarjetas() {
         console.error('Error al obtener los datos:', error);
       }
     };
-    
+
     // Llama a la función para realizar la petición cuando el componente se monta
     fetchData();
   }, []);
@@ -74,10 +75,6 @@ function Tarjetas() {
           </div>
           <div className='max-h-[450px] overflow-auto scrollbar-thumb:!rounded scroll-container'>
             {/* Div de cada plan creado */}
-
-
-        
-
             {transactionsCards && transactionsCards.map((item) => {
               return (
                 <div key={item.tarj_id} className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
@@ -102,16 +99,27 @@ function Tarjetas() {
                   <div className="flex-grow text-center">
                     <p></p>
                     {
-                      item.ttrac_id_fk.ttrac_id === 1 
-                    ? <p id='Gastos' className="text-green-500 font-bold text-lg mt-2" >${item.trasac_cantidad}</p>
-                    : <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >${item.trasac_cantidad}</p>
+                      item.ttrac_id_fk.ttrac_id === 1
+                        ? <p id='Gastos' className="text-green-500 font-bold text-lg mt-2" >${item.trasac_cantidad}</p>
+                        : <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >${item.trasac_cantidad}</p>
                     }
                   </div>
 
-
-                </div>)
-
+                  <div className="">
+                    <div className="">
+                      <span
+                        className="bg-black text-white py-2 px-4 mr-1 rounded-lg ml-auto hover:bg-red-600 inline-flex items-center cursor-pointer"
+                        role="button"
+                        onClick={(item.tarj_id)}
+                      >
+                        <HiOutlineTrash style={{ color: 'white', marginRight: '2px' }} size={25} />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
             })}
+
           </div>
         </div>
       </div>
@@ -122,28 +130,38 @@ function Tarjetas() {
             console.log(item);
             return (
               <div key={item.tarj_id} className="p-4">
-                <Link href={`/home/tarjetas/${item.tarj_id}`}>
-                  <div className="py-4 bg-gray-200 rounded-2xl shadow-lg">
-                    <div className="border-b-4 border-white">
-                      <div className="font-bold text-xl mb-2 text-center">
-                      <div className='text-lg'>Banco: {item.tarj_nombre}</div>
-                      </div>
+                <div className="py-4 bg-gray-200 rounded-2xl shadow-lg">
+                  <div className="border-b-4 border-white">
+                    <div className="font-bold text-xl mb-2 flex justify-center items-center">
+                      <div className='text-lg text-center ml-6'>Banco: {item.tarj_nombre}</div>
+                      <span className='ml-auto mr-2 cursor-pointer rounded-lg'>
+                        <IoClose
+                          style={{ color: 'black', transition: 'color 0.3s ease-in-out' }}
+                          onMouseOver={(e) => e.target.style.color = 'red'}
+                          onMouseOut={(e) => e.target.style.color = 'black'}
+                        />
+                      </span>
                     </div>
+                  </div>
+                  <Link href={`/home/tarjetas/${item.tarj_id}`}>
                     <div className="text-gray-700 text-base mx-6 mt-2">
-                        Tarjeta de {item.tiptarj_id_fk.tiptarj_tipo}
+                      Tarjeta de {item.tiptarj_id_fk.tiptarj_tipo}
                       <div className='text-lg'>Saldo Disponible: {item.tarj_saldo_total}</div>
                       <div className='text-lg'>Fecha de Vencimiento: {item.tarj_fecha_vencimiento}</div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
+
               </div>
+
+
             )
           })}
         </div>
       </div>
 
 
-    </div>
+    </div >
   )
 }
 
