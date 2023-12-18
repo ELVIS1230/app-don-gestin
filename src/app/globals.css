@@ -42,7 +42,7 @@
     color: text-neutral-900
   }
   .bg-section {
-    background-image: url(../assets/landscape.jpg);
-    background-size:34%;
+    background-image: url(../assets/landscape2.jpg);
+    background-size:100%;
   }
 }

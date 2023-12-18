@@ -116,7 +116,7 @@ const PlanAhorros = () => {
 
                   </div>
 
-                  <div className="">
+                  {/* <div className="">
                     <div className="">
                       <span
                         className="bg-black text-white py-2 px-4 mr-1 rounded-lg ml-auto hover:bg-red-600 inline-flex items-center cursor-pointer"
@@ -126,7 +126,7 @@ const PlanAhorros = () => {
                         <HiOutlineTrash style={{ color: 'white',  }} size={25} />
                       </span>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               );
             })}
@@ -138,7 +138,7 @@ const PlanAhorros = () => {
 
       <div className='w-2/5 p-4'>
 
-        <div className='bg-neutral-100 p-4 rounded-2xl shadow-xl'
+        <div className='bg-zinc-200 p-4 rounded-2xl shadow-xl'
           style={{
             padding: "10px",
             borderRadius: "10px",
@@ -163,7 +163,7 @@ const PlanAhorros = () => {
         </div>
 
 
-        <div className='bg-neutral-100 p-4 rounded-2xl shadow-xl'
+        <div className='bg-zinc-200 p-4 rounded-2xl shadow-xl'
           style={{
             padding: "10px",
             borderRadius: "10px"

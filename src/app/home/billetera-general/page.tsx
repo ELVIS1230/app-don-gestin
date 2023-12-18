@@ -10,6 +10,8 @@ import { IoMdRemove } from "react-icons/io";
 import { RiSubtractFill } from "react-icons/ri";
 import { useEffect, useState } from "react"
 import { format } from 'date-fns';
+import { HiOutlineTrash } from "react-icons/hi";
+import { Handlee } from 'next/font/google';
 
 
 {/* <RiSubtractFill /> */ }
@@ -48,10 +50,26 @@ export function BilleteraG() {
     fetchData();
   }, [reloadData]);;
 
+  const eliminartransaccion = async (trasac_id: any) => {
+
+    try {
+      const response = await axios.delete(`http://127.0.0.1:3000/api/transactions/${trasac_id}`)
+      
+
+    } catch (error) {
+      console.error('Error al eliminar los datos:', error);
 
 
-  
-  console.log({dataORD})
+    }
+    console.log(trasac_id);
+
+  }
+
+  const handleDelete = async (trasac_id: any) => {
+
+    eliminartransaccion(trasac_id);
+  }
+  console.log({ dataORD })
 
 
   return (
@@ -77,48 +95,51 @@ export function BilleteraG() {
           <div className='min-h-[450px] max-h-[450px] overflow-auto scrollbar-thumb:!roudend'>
 
             {dataORD && dataORD
-            .slice() // Copia el array para evitar mutaciones inesperadas
-            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-            .map((item:any) => (
-              <div key={item.trasac_id} className="grid grid-cols-11 gap-2 pb-7 min-h-[85px] max-h-[85px]">
-                <div className="flex items-center bg-white rounded-2xl min-h-[60px] max-h-[60px] ">
-                  <div className='ml-4'>
-                    {item.ttrac_id_fk.ttrac_id === 1 ? (
-                      <IoMdAdd style={{ color: 'green' }} size={25} />
-                    ) : (
-                      <IoMdRemove style={{ color: 'red' }} size={25} />
-                    )}
+              .slice() // Copia el array para evitar mutaciones inesperadas
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .map((item: any) => (
+                <div key={item.trasac_id} className="grid grid-cols-11 gap-2 pb-7 min-h-[85px] max-h-[85px]">
+                  <div className="flex items-center bg-white rounded-2xl min-h-[60px] max-h-[60px] ">
+                    <div className='ml-4'>
+                      {item.ttrac_id_fk.ttrac_id === 1 ? (
+                        <IoMdAdd style={{ color: 'green' }} size={25} />
+                      ) : (
+                        <IoMdRemove style={{ color: 'red' }} size={25} />
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div className="col-span-4 ">
-                  <p className='font-bold text-base' >{item.trasac_nombre}</p>
-                  <p className='text-sm'>{item.trasac_descripcion}</p>
-                </div>
+                  <div className="col-span-4 ">
+                    <p className='font-bold text-base' >{item.trasac_nombre}</p>
+                    <p className='text-sm'>{item.trasac_descripcion}</p>
+                  </div>
 
-                <div className="px-3 col-span-2  grid text-center">
-                  <p className='font-bold text-base'>Fecha</p>
-                  <p className='text-sm'>{format(new Date(item.createdAt), 'dd/MM/yyyy')}</p>
-                </div>
+                  <div className="px-3 col-span-2  grid text-center">
+                    <p className='font-bold text-base'>Fecha</p>
+                    <p className='text-sm'>{format(new Date(item.createdAt), 'dd/MM/yyyy')}</p>
+                  </div>
 
-                <div className="text-xs col-span-2 grid text-center">
-                  {item.ttrac_id_fk.ttrac_id === 1 ? (
-                    <p id='Gastos' className="text-green-500 font-bold text-base mt-2" >
-                    $ {item.trasac_cantidad}</p>
-                  ) : (
-                    <p id='Gastos' className="text-red-500 font-bold text-base mt-2" >
-                    $ {item.trasac_cantidad}</p>
-                  )}
+                  <div className="text-xs col-span-2 grid text-center">
+                    {item.ttrac_id_fk.ttrac_id === 1 ? (
+                      <p id='Gastos' className="text-green-500 font-bold text-base mt-2" >
+                        $ {item.trasac_cantidad}</p>
+                    ) : (
+                      <p id='Gastos' className="text-red-500 font-bold text-base mt-2" >
+                        $ {item.trasac_cantidad}</p>
+                    )}
 
-                  
-                </div>
 
-                <div className="font-bold col-span-2 grid text-center">
-                  <p className='text-base'>Total</p>
-                  <p className='text-lg'>${item.trasac_saldo}</p>
-                  
+                  </div>
+
+                  <div className="font-bold col-span-1 grid text-center">
+                    <p className='text-base'>Total</p>
+                    <p className='text-lg'>${item.trasac_saldo}</p>
+                  </div>
+                  <div className="font-bold col-span-1 grid text-center items-center " onClick={() => handleDelete(item.trasac_id)}>
+                    <span className='bg-black p-1 rounded-lg mx-4 hover:bg-red-600'  ><HiOutlineTrash style={{ color: 'white' }} size={25} /></span>
+                  </div>
+
                 </div>
-              </div>
-            ))}
+              ))}
 
 
           </div>
@@ -133,13 +154,13 @@ export function BilleteraG() {
 
           <div className="flex ">
 
-            <div className="flex flex-col justify-center items-center w-1/2">
+            <div className="flex flex-col justify-center items-center w-full">
               <h1 className="text-3xl font-black">Saldo Total</h1>
               <p className="text-4xl font-semibold">$ {saldo.cuenta_saldo}</p>
             </div>
 
 
-            <div className="flex flex-col w-1/2 gap-4 py-3">
+            {/* <div className="flex flex-col w-1/2 gap-4 py-3">
 
               <div className="flex flex-col justify-center items-center h-1/2">
                 <h1 className="text-base font-bold">Saldo Tarjetas</h1>
@@ -151,7 +172,7 @@ export function BilleteraG() {
                 <h1 className="text-lg font-bold">Saldo Ahorros</h1>
                 <p className="text-3xl">$ 700.00</p>
               </div>
-            </div>
+            </div> */}
           </div>
 
         </div>
