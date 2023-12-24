@@ -1,10 +1,18 @@
-import type { Config } from 'tailwindcss'
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/componentes/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  safelist: [
+    'text-2xl',
+    'text-3xl',
+    {
+      pattern: /bg-(red|green|blue)-(100|200|300)/,
+      variants: ['lg', 'hover', 'focus', 'lg:hover'],
+    },
   ],
   theme: {
     extend: {
@@ -17,4 +25,4 @@ const config: Config = {
   },
   plugins: [],
 }
-export default config
+
