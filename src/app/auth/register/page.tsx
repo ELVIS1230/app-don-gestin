@@ -1,50 +1,52 @@
 "use client";
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const Registro = () => {
   const [formData, setFormData] = useState({
-    cedula: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: ''
+    cedula: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
   });
-  const router = useRouter()
-  const handleInputChange = (e:any) => {
+  const router = useRouter();
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
-  const handleSubmit = async  (e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log('Datos enviados:', formData);
+    console.log("Datos enviados:", formData);
     const data = {
       u_cedula: formData.cedula,
       u_nombre: formData.firstName,
       u_apellido: formData.lastName,
       u_correo: formData.email,
-      u_contraseña: formData.password
-    }
+      u_contraseña: formData.password,
+    };
     // console.log(data)
     try {
-        const response = await axios.post('http://localhost:3000/api/users', data);
-        console.log(response.data);
-      
-      } catch (error) {
-          console.log(error)
-        }
-        router.push('/auth/login')
+      const response = await axios.post(
+        "http://localhost:3000/api/users",
+        data
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+    router.push("/auth/login");
     setFormData({
-      cedula: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
+      cedula: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
     });
   };
 
@@ -54,7 +56,10 @@ const Registro = () => {
         <h2 className="text-2xl font-bold mb-4 text-center">Registro</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="firstName"
+              className="block text-sm font-medium text-gray-700"
+            >
               Cedula
             </label>
             <input
@@ -69,7 +74,10 @@ const Registro = () => {
             />
           </div>
           <div>
-            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="firstName"
+              className="block text-sm font-medium text-gray-700"
+            >
               Nombre
             </label>
             <input
@@ -84,7 +92,10 @@ const Registro = () => {
             />
           </div>
           <div>
-            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="lastName"
+              className="block text-sm font-medium text-gray-700"
+            >
               Apellido
             </label>
             <input
@@ -99,7 +110,10 @@ const Registro = () => {
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Correo electrónico
             </label>
             <input
@@ -114,7 +128,10 @@ const Registro = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Contraseña
             </label>
             <input
