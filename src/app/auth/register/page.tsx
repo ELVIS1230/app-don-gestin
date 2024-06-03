@@ -28,7 +28,7 @@ const Register = () => {
       u_name : formData.firstName,
       u_lastName : formData.lastName,
       u_email: formData.email,
-      u_contraseña: formData.password
+      u_password: formData.password
     }
     // console.log(data)
     try {
