@@ -1,4 +1,4 @@
-function CGastos() {
+function CExpenses() {
     return (
       <div className='flex'>
       
@@ -8,7 +8,7 @@ function CGastos() {
         <div className='p-4'>
         <div>
 
-        <h1 className='font-bold text-2xl'>Control de Gastos</h1>
+        <h1 className='font-bold text-2xl'>Expense Control</h1>
         <span>sapo
 
         </span>
@@ -31,4 +31,4 @@ function CGastos() {
     );
   }
   
-  export default CGastos;
+  export default CExpenses;

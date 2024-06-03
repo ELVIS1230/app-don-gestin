@@ -3,7 +3,7 @@ import Image from 'next/image'
 import user from '../assets/user.jpg'
 
 export default function UserPerfil({ toggle }:{toggle:any}) {
-    const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string)
+    const credentialUser = JSON.parse(sessionStorage.getItem('user') as string)
     console.log(credentialUser)
     return (
         <div className={`flex gap-5 items-center ${ toggle ? 
@@ -19,9 +19,9 @@ export default function UserPerfil({ toggle }:{toggle:any}) {
             </div>
             <div className={toggle ? "opacity-0 delay-200" : ""}
             >
-                <h3 className="text-xl">{credentialUser.nombre} {credentialUser.apellido}</h3>
+                <h3 className="text-xl">{credentialUser.name } {credentialUser.lastName }</h3>
                 {/* <span className='text-[0.75rem]
-                opacity-60'>{credentialUser.correo}</span> */}
+                opacity-60'>{credentialUser.email}</span> */}
             </div>
         </div>
     )

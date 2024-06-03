@@ -36,7 +36,7 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/home/billetera-general">Billetera General</Link>
+                <Link href="/home/billetera-general">General Wallet</Link>
                 </div>
              </div>  
             {/* <div 
@@ -64,7 +64,7 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/home/plan-de-ahorros">Plan de Ahorros</Link>
+                <Link href="/home/plan-de-ahorros">Savings Plan</Link>
                 </div>
              </div>  
             <div 
@@ -78,7 +78,7 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/home/tarjetas">Tarjetas</Link>
+                <Link href="/home/tarjetas">Cardsink>
                 </div>
              </div>  
             <div 
@@ -92,7 +92,7 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/home/recordatorios">Recordatorios</Link>
+                <Link href="/home/recordatorios">Reminders</Link>
                 </div>
              </div>  
             <div 
@@ -106,7 +106,7 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/">Salir</Link>
+                <Link href="/">Go out</Link>
                 </div>
              </div>  
             

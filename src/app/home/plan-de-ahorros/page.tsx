@@ -9,22 +9,22 @@ import { FaRegChartBar } from "react-icons/fa";
 import { MdSavings } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
 
-const PlanAhorros = () => {
+const SavingsPlan = () => {
 
-  const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
+  const credentialUser = JSON.parse(sessionStorage.getItem('user') as string);
 
 
   const [data, setData] = useState(null);
 
 
-  // Verificar si hay datos y ordenar por fecha
+  // Verificar si hay datos y ordenar por date
   const dataORD = data && [...data].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
   useEffect(() => {
     // Función asíncrona para realizar la petición GET
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/savings/${credentialUser.cuenta}`)
+        const response = await axios.get(`http://localhost:3000/api/savings/${credentialUser.account}`)
         setData(response.data); // Guarda los datos en el estado
 
       } catch (error) {
@@ -44,9 +44,9 @@ const PlanAhorros = () => {
 
           <div className="flex flex-col md:flex-row items-center">
             <div className="flex-grow ">
-              <h1 className='font-black text-5xl py-4'>Elige tu plan de ahorro</h1>
+              <h1 className='font-black text-5xl py-4'>Choose your savings plan</h1>
               <p className="text-gray-700 pt-4">
-                Usa un plan de ahorro para mejorar tu economía.
+              Use a savings plan to improve your finances.
               </p>
             </div>
             <div className="ml-auto ">
@@ -60,7 +60,7 @@ const PlanAhorros = () => {
           }}
         >
           <div className="flex">
-            <p className='static font-bold mt-3 mr-auto'>Tus Planes de Ahorro</p>
+            <p className='static font-bold mt-3 mr-auto'>Your Savings Plans</p>
           </div>
 
           <div className='max-h-[450px] overflow-auto scrollbar-thumb:!rounded scroll-container'>
@@ -68,8 +68,8 @@ const PlanAhorros = () => {
             {/* Div de cada plan creado */}
             {dataORD && dataORD.map((item) => {
 
-              const metaCantidad = parseFloat(item.aho_meta_cantidad) || 0;
-              const cantidadAhorrada = parseFloat(item.aho_cantidad_total) || 0;
+              const metaCantidad = parseFloat(item.aho_meta_quantity) || 0;
+              const cantidadAhorrada = parseFloat(item.aho_total_amount) || 0;
 
               return (
                 <div key={item.aho_id} className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
@@ -81,27 +81,27 @@ const PlanAhorros = () => {
                     <MdSavings size={30} className="mr-2" />
                     <div className='flex-grow'>
                       {/* Reemplazar la línea original con la nueva estructura */}
-                      <h1>{item.aho_nombre.split(' ').map((word, index) => <React.Fragment key={index}>{word}<br /></React.Fragment>)}</h1>
+                      <h1>{item.aho_name .split(' ').map((word, index) => <React.Fragment key={index}>{word}<br /></React.Fragment>)}</h1>
                     </div>
                   </div>
                   <div className="flex-grow text-center">
                     <p className='font-bold'>Ahorrado</p>
-                    <p>${item.aho_cantidad_total}</p>
+                    <p>${item.aho_total_amount}</p>
                   </div>
                   <div className="flex-grow text-center">
-                    <p className='font-bold '>Por Ahorrar</p>
+                    <p className='font-bold '>To save</p>
                     {/* Calcular la diferencia entre lo ahorrado y la meta */}
-                    <p>${ parseFloat(item.aho_meta_cantidad) - parseFloat(item.aho_cantidad_total)}</p>
+                    <p>${ parseFloat(item.aho_meta_quantity) - parseFloat(item.aho_total_amount)}</p>
                   </div>
                   <div className="flex-grow text-center">
-                    <p className='font-bold'>Meta</p>
-                    <p>${item.aho_meta_cantidad}</p>
+                    <p className='font-bold'>Goal</p>
+                    <p>${item.aho_meta_quantity}</p>
                   </div>
                   <div className='flex items-center'>
                     <div className="flex-grow text-left">
-                      <p className='font-bold text-center'>Duración</p>
+                      <p className='font-bold text-center'>Duration</p>
 
-                      {item.aho_duracion && item.aho_duracion.split(',').map((parte, index) => (
+                      {item.aho_duration && item.aho_duration.split(',').map((parte, index) => (
                         <React.Fragment key={index} >
                           {parte.trim()} {/* Elimina espacios adicionales alrededor de cada parte */}
                           <br />
@@ -148,7 +148,7 @@ const PlanAhorros = () => {
           <p className='text-black text-xl text-center font-bold t'
             style={{
               paddingBottom: "5px"
-            }}>Flujo de Ingresos</p>
+            }}>Income Flow</p>
 
           <div style={{
             marginLeft: "20px",
@@ -172,7 +172,7 @@ const PlanAhorros = () => {
           <p className='text-black text-center font-bold text-xl'
             style={{
               paddingBottom: "5px"
-            }}>Nuevo Plan de Ahorro</p>
+            }}>New Savings Plan</p>
 
           <div style={{
             marginLeft: "20px",
@@ -182,20 +182,20 @@ const PlanAhorros = () => {
               <div className='shadow-inner' style={{ padding: '5px', border: '1px solid black', borderRadius: "10px" }}>
 
                 <p >$ 2,000.00</p> </div>
-              <p style={{ marginLeft: '10px' }}>Para_____ </p>
+              <p style={{ marginLeft: '10px' }}>For_____ </p>
             </div>
 
             <div className='justify-between' style={{ display: 'flex' }} >
-              <p className='font-bold'>Mensualidad:</p>
+              <p className='font-bold'>Monthly payment:</p>
               <p style={{ marginLeft: '10px' }}>450.00</p>
             </div>
 
             <div className='justify-between' style={{ display: 'flex' }} >
-              <p className='font-bold'>Duración:</p>
-              <p style={{ marginLeft: '10px' }}>12 Meses</p>
+              <p className='font-bold'>Duration:</p>
+              <p style={{ marginLeft: '10px' }}>12 months</p>
             </div>
             <div>
-              <p className='font-bold'>Descripcion:</p></div>
+              <p className='font-bold'>Description:</p></div>
 
             <div className="flex justify-center">
               <ModalAhorro credentialUser={credentialUser} />
@@ -208,4 +208,4 @@ const PlanAhorros = () => {
 
   )
 }
-export default PlanAhorros
+export default SavingsPlan

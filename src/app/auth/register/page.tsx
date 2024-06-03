@@ -3,9 +3,9 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const Registro = () => {
+const Register = () => {
   const [formData, setFormData] = useState({
-    cedula: '',
+    identification : '',
     firstName: '',
     lastName: '',
     email: '',
@@ -22,12 +22,12 @@ const Registro = () => {
 
   const handleSubmit = async  (e:any) => {
     e.preventDefault();
-    console.log('Datos enviados:', formData);
+    console.log('Data sent:', formData);
     const data = {
-      u_cedula: formData.cedula,
-      u_nombre: formData.firstName,
-      u_apellido: formData.lastName,
-      u_correo: formData.email,
+      u_identification : formData.identification ,
+      u_name : formData.firstName,
+      u_lastName : formData.lastName,
+      u_email: formData.email,
       u_contraseña: formData.password
     }
     // console.log(data)
@@ -40,7 +40,7 @@ const Registro = () => {
         }
         router.push('/auth/login')
     setFormData({
-      cedula: '',
+      identification : '',
       firstName: '',
       lastName: '',
       email: '',
@@ -51,26 +51,26 @@ const Registro = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-6 bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4 text-center">Registro</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-              Cedula
+              Identification 
             </label>
             <input
-              id="cedula"
-              name="cedula"
+              id="identification "
+              name="identification "
               type="text"
               autoComplete="given-name"
               required
-              value={formData.cedula}
+              value={formData.identification }
               onChange={handleInputChange}
               className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2 mb-4 w-full"
             />
           </div>
           <div>
             <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-              Nombre
+              Name 
             </label>
             <input
               id="firstName"
@@ -85,7 +85,7 @@ const Registro = () => {
           </div>
           <div>
             <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-              Apellido
+              LastName 
             </label>
             <input
               id="lastName"
@@ -100,7 +100,7 @@ const Registro = () => {
           </div>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Correo electrónico
+              Email
             </label>
             <input
               id="email"
@@ -115,7 +115,7 @@ const Registro = () => {
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Contraseña
+            Password
             </label>
             <input
               id="password"
@@ -133,7 +133,7 @@ const Registro = () => {
               type="submit"
               className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-neutral-700 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
             >
-              Registrarse
+              Sign up
             </button>
           </div>
         </form>
@@ -142,4 +142,4 @@ const Registro = () => {
   );
 };
 
-export default Registro;
+export default Register;

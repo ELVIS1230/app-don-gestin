@@ -48,7 +48,7 @@ export default Sidebar
 //     </li>
 //     <li><Link href="/plan-de-ahorros">Plan de Ahorros</Link>
 //     </li>
-//     <li><Link href="/tarjetas">Tarjetas</Link>
+//     <li><Link href="/tarjetas">Cards</Link>
 //     </li>
 //     <li><Link href="/recordatorios">Recordatorios</Link>
 //     </li>

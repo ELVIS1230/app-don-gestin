@@ -11,13 +11,13 @@ import { format } from 'date-fns';
 import TransactionCard from '@/componentes/tarjetas/TransaccionTarjeta';
 
 
-export default function DetalleTarjeta({ params }: { params: { id: string } }) {
+export default function DetailCard({ params }: { params: { id: string } }) {
 
   const { id } = params
   const [transactionsCard, setTransactionsCard] = useState([]);
   const [card, setCard] = useState({})
 
-  const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
+  const credentialUser = JSON.parse(sessionStorage.getItem('user') as string);
 
 
 
@@ -32,7 +32,7 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
         setTransactionsCard(transactionsCard.data); // Guarda los datos en el estado
 
       } catch (error) {
-        console.error('Error al obtener los datos:', error);
+        console.error('Error getting data:', error);
       }
     };
 
@@ -47,24 +47,24 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
         <div className="mb-4 bg-gray-200 p-4 rounded-2xl w-3/5">
           <div className="flex flex-col md:flex-row items-center">
             <div className="flex-grow ">
-              <h1 className='text-xl font-bold'>Tu Tarjeta</h1>
+              <h1 className='text-xl font-bold'>Your Card</h1>
               <p className="font-bold text-lg text-gray-700 pt-4">
-                Detalles de tu Tarjeta
+              Details of your Card
               </p>
               <div className='py-2'>
                 
                 <div className='flex flex-col'>
-                  <div className='font-bold'>Saldo Total:</div>
-                  <div>$ {card.tarj_saldo_total}</div>
+                  <div className='font-bold'>Total balance:</div>
+                  <div>$ {card.tarj_balance_total}</div>
                 </div>
                 <div className='flex gap-5'>
                 <div className='flex flex-col'>
-                  <div className='font-bold'>Vencimiento:</div>
-                  <div>{card.tarj_fecha_vencimiento}</div>
+                  <div className='font-bold'>Expiration:</div>
+                  <div>{card.tarj_date_vencimiento}</div>
                 </div>
                 <div className='flex flex-col'>
-                <div className='font-bold'>Corte:</div>
-                  <div>{card.tarj_fecha_corte}</div>
+                <div className='font-bold'>Court:</div>
+                  <div>{card.tarj_date_corte}</div>
                 </div>
                 </div>
               </div>
@@ -72,7 +72,7 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
             
             <div className="ml-auto ">
             <p className='text-2xl text-center font-bold'>
-                  {card.tarj_nombre}
+                  {card.card_name }
                 </p>
               <FaCcMastercard size={150} className="text-black-500" />
             </div>
@@ -86,7 +86,7 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
         }}
       >
         <div className="flex">
-          <p className='static font-bold mt-3 mr-auto'>Movimientos de la Tarjeta</p>
+          <p className='static font-bold mt-3 mr-auto'>Card Movements</p>
         <TransactionCard cardID={id} />
         </div>
 
@@ -102,21 +102,21 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
               </div>
 
               <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Fecha</p>
+                <p className='font-bold text-lg'>Date</p>
                 <p>{format(new Date(item.createdAt), 'dd/MM/yyyy')}</p>
               </div>
 
               <div className="flex-grow text-center">
-                <p className='font-bold text-lg'>Nombre</p>
-                <p>{item.trasac_nombre}</p>
+                <p className='font-bold text-lg'>Name </p>
+                <p>{item.trasac_name }</p>
               </div>
 
               <div className="flex-grow text-center items-center">
-                <p className='font-bold text-lg'>Cantidad</p>
+                <p className='font-bold text-lg'>Amountvv</p>
                 {
                   item.ttrac_id_fk.ttrac_id === 1
-                    ? <p id='Ingres' className="text-green-500 font-bold text-lg mt-2" >${item.trasac_cantidad}</p>
-                    : <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >${item.trasac_cantidad}</p>
+                    ? <p id='Ingres' className="text-green-500 font-bold text-lg mt-2" >${item.transfer_quantity}</p>
+                    : <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >${item.transfer_quantity}</p>
                 }
               </div>
 

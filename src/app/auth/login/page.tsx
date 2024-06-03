@@ -18,11 +18,11 @@ export default function Login() {
       const response = await axios.post('http://127.0.0.1:3000/api/users/login', user) 
   
 
-      sessionStorage.setItem('usuario', JSON.stringify({
-        cedula: response.data.u_cedula,
-        nombre: response.data.u_nombre, 
-        apellido: response.data.u_apellido,
-        cuenta: response.data.cuenta_id_fk.cuenta_id 
+      sessionStorage.setItem('user', JSON.stringify({
+        identification : response.data.u_identification ,
+        name : response.data.u_name , 
+        lastName : response.data.u_lastName ,
+        account: response.data.account_id_fk.account_id 
       }));
       console.log(response.data)
       
@@ -47,7 +47,7 @@ export default function Login() {
           {/* Div izquierdo */}
           <div className="container mx-auto p-4 flex flex-col justify-center " >
             <h1 className="text-3xl font-bold"><Link href="/">Don Gestín</Link></h1>
-            <p>Facilita la gestión de tus finanzas</p>
+            <p>Make it easier to manage your finances</p>
           </div>
   
           {/* Div derecho con el formulario */}
@@ -57,10 +57,10 @@ export default function Login() {
             onSubmit={handleSubmit}
 
             className="max-w-md bg-white p-8 rounded shadow-md">
-              <h2 className="text-center text-gray-900 text-lg font-bold mb-2">Ingresa a tu Cuenta</h2>
+              <h2 className="text-center text-gray-900 text-lg font-bold mb-2">Enter your Account</h2>
               <div className="mb-4">
                 <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
-                  Correo Electrónico:
+                  Email:
                 </label>
                 <input
                   type="email"
@@ -69,13 +69,13 @@ export default function Login() {
                   value= {user.email}
                   onChange={handleChange}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Ingrese su correo electrónico"
+                  placeholder="Enter your Email"
                 />
               </div>
   
               <div className="mb-4">
                 <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
-                  Contraseña:
+                Password:
                 </label>
                 <input type="password"
                   name="password"
@@ -83,7 +83,7 @@ export default function Login() {
                   onChange={handleChange}
                   value= {user.password}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Contraseña"
+                  placeholder="Password"
                   />
   
               </div>
@@ -94,7 +94,7 @@ export default function Login() {
                 type="submit"
                   className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
                 >
-                  Iniciar Sesión
+                  Log in
                 </button>
                  {/* <LoginButton /> */}
                  </div>
@@ -105,7 +105,7 @@ export default function Login() {
                   style={{marginTop:"10px",
                 background:"#4b5563"}}
                 >
-                  <Link href="/auth/register">¿No tienes una Cuenta?</Link>
+                  <Link href="/auth/register">Do not have an Account?</Link>
                 </button>
              </div>
             </form>

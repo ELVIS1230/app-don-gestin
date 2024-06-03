@@ -19,19 +19,19 @@ export function Modal ({ show, handleClose,credentialUser}:any) {
     let error = '';
 
     if (!value.trim()) {
-      error = 'Este campo es obligatorio';
+      error = 'This field is required';
     } else if ((fieldName === 'title') && value.length > 35) {
-      error = 'El máximo de caracteres es 35';
+      error = 'The maximum number of characters is 35';
     } 
       else if ((fieldName === 'description') && value.length > 85) {
-      error = 'El máximo de caracteres es 85';
+      error = 'The maximum number of characters is 85';
     } 
     else if (fieldName === 'date') {
       error = '';
     // } else if (fieldName === 'selectedCard') {
     //   error = '';
     } else if (fieldName === 'value' && !/^\d{1,10}(\.\d{0,2})?$/.test(value)) {
-      error = 'Por favor, ingrese un valor numérico válido';
+      error = 'Please enter a valid numeric value';
     }
 
     setErrors({ ...errors, [fieldName]: error });
@@ -60,7 +60,7 @@ export function Modal ({ show, handleClose,credentialUser}:any) {
         record_nombre:title,
         record_descripcion:description,
         record_fecha:date,
-        u_cedula_fk: { u_cedula :credentialUser.credentialUser.cedula}
+        u_identification_fk: { u_identification  :credentialUser.credentialUser.identification }
         
       };
       try {
@@ -97,10 +97,10 @@ export function Modal ({ show, handleClose,credentialUser}:any) {
   return (
     <div className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center ${show ? 'block' : 'hidden'}`}>
       <div className="mb-6 bg-white w-2/6 p-6 rounded-lg shadow-md">
-        <h2 className="text-lg font-bold mb-4 text-center">Agregar Recordatorio</h2>
+        <h2 className="text-lg font-bold mb-4 text-center">Add Reminder</h2>
 
         <div className="mb-1">
-          <label htmlFor="title" className="block text-neutral-900 text-sm font-bold mb-2">Nombre</label>
+          <label htmlFor="title" className="block text-neutral-900 text-sm font-bold mb-2">Name</label>
           <input
             type="text"
             id="title"
@@ -115,7 +115,7 @@ export function Modal ({ show, handleClose,credentialUser}:any) {
 
         <div>
           <div className="">
-            <label htmlFor="date" className="block text-neutral-900 text-sm font-bold mb-2">Fecha</label>
+            <label htmlFor="date" className="block text-neutral-900 text-sm font-bold mb-2">Date</label>
             <input
               type="date"
               id="date"
@@ -130,7 +130,7 @@ export function Modal ({ show, handleClose,credentialUser}:any) {
         </div>
 
         <div className="">
-          <label htmlFor="description" className="block text-neutral-900 text-sm font-bold mb-2">Descripción</label>
+          <label htmlFor="description" className="block text-neutral-900 text-sm font-bold mb-2">Description</label>
           <textarea
             id="description"
             name="description"
@@ -151,7 +151,7 @@ export function Modal ({ show, handleClose,credentialUser}:any) {
             onChange={(e) => handleInputChange('selectedCard', e.target.value)}
             className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
           >
-            <option value="">Tarjetas</option>
+            <option value="">Cards</option>
             <option value="card1">Tarjeta 1</option>
             <option value="card2">Tarjeta 2</option>
             <option value="card3">Tarjeta 3</option>
@@ -161,9 +161,9 @@ export function Modal ({ show, handleClose,credentialUser}:any) {
 
         <div className='flex justify-center'>
           <button onClick={handleCancelClick} type="button" className="bg-neutral-500 hover:bg-red-800 hover:text-white font-bold w-full py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline mr-4 mt-4 lg:mt-0">
-            Cancelar</button>
+            Cancel</button>
           <button onClick={handleCreateClick} type="button" className="bg-neutral-500 hover:bg-stone-900 hover:text-white font-bold w-full py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline mt-4 lg:mt-0">
-            Crear recordatorio</button>
+          Create reminder</button>
         </div>
 
       </div>
@@ -181,7 +181,7 @@ export default function ModalRecordatorio (credentialUser:any) {
   return (
     <div>
       <button onClick={() => setShowModal(true)} className="bg-neutral-500 hover:bg-stone-900 hover:text-white font-bold w-full py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline mt-4 lg:mt-0">
-        Nuevo recordatorio
+      New reminder
       </button>
       <Modal show={showModal} credentialUser={credentialUser} handleClose={handleClose} />
     </div>

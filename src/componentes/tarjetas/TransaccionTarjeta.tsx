@@ -21,7 +21,7 @@ export function Modal ({ show, handleClose,cardID}:any){
     // Validaciones para el campo de valor numérico
     const regex = /^\d{1,10}(\.\d{0,2})?$/;
     if (!regex.test(value)) {
-      setValueError('Por favor ingrese un valor numérico válido.');
+      setValueError('Please enter a valid numerical value.');
       isValid = false;
     } else {
       setValueError('');
@@ -30,14 +30,14 @@ export function Modal ({ show, handleClose,cardID}:any){
     // Validaciones para los campos de texto
     if (['2', '1'].includes(movementType)) {
       if (name.length > 35) {
-        setNameError('El nombre debe tener menos de 35 caracteres.');
+        setNameError('The name must be less than 35 characters.');
         isValid = false;
       } else {
         setNameError('');
       }
 
       if (description.length > 35) {
-        setDescriptionError('La descripción debe tener menos de 35 caracteres.');
+        setDescriptionError('Description must be less than 35 characters.');
         isValid = false;
       } else {
         setDescriptionError('');
@@ -58,11 +58,11 @@ export function Modal ({ show, handleClose,cardID}:any){
     //   console.log(cantidad);
     //   console.log(ttrac);
       const data = {
-        trasac_nombre:name,
-        trasac_descripcion:description,
-        trasac_cantidad:cantidad,
+        trasac_name :name,
+        transfer_description:description,
+        transfer_quantity:cantidad,
         ttrac_id_fk:{ttrac_id:ttrac},
-        tarj_id_fk: {tarj_id: cardID}
+        card_id_fk: {card_id: cardID}
 }
         
 
@@ -144,16 +144,16 @@ export function Modal ({ show, handleClose,cardID}:any){
           className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
           required
         >
-          <option value="">Seleccionar tipo de movimiento</option>
-          <option value={2}>Gasto</option>
-          <option value={1}>Ingreso</option>
+          <option value="">Select movement type</option>
+          <option value={2}>Spent</option>
+          <option value={1}>Income</option>
         </select>
 
         {['2', '1'].includes(movementType) && (
           <>
             <input
               type="text"
-              placeholder="Nombre"
+              placeholder="Name "
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
@@ -180,13 +180,13 @@ export function Modal ({ show, handleClose,cardID}:any){
             }}
             className="bg-neutral-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2"
           >
-            Cancelar
+            Cancel
           </button>
           <button
             onClick={handleAcceptClick}
             className="bg-neutral-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
           >
-            Ingresar
+            Get into
           </button>
         </div>
       </div>
@@ -208,7 +208,7 @@ export default function TransactionCard({cardID}:{cardID:string}){
   return (
     <div className="flex justify-center">
     <button onClick={openModal} className="bg-black hover:bg-gray-800 text-white py-2 px-4 mr-1 rounded-lg ml-auto">
-        Nueva Transaccion
+    New Transaction
       </button>
       <Modal show={showModal} cardID={cardID} handleClose={closeModal} />
     </div>

@@ -20,23 +20,23 @@ export default function Home() {
     valuesSavings: []
   })
 
-  const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string)
+  const credentialUser = JSON.parse(sessionStorage.getItem('user') as string)
   const handleDownload = async () => {
-    window.open(`http://localhost:3000/api/transactions/reports/${credentialUser.cedula}`, '_blank');
+    window.open(`http://localhost:3000/api/transactions/reports/${credentialUser.identification }`, '_blank');
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/transactions/dash/${credentialUser.cuenta}`)
-        const responseSavings = await axios.get(`http://127.0.0.1:3000/api/savings/${credentialUser.cuenta}`)
-        const responseReminders = await axios.get(`http://localhost:3000/api/reminders/${credentialUser.cedula}`)
+        const response = await axios.get(`http://localhost:3000/api/transactions/dash/${credentialUser.account}`)
+        const responseSavings = await axios.get(`http://127.0.0.1:3000/api/savings/${credentialUser.account}`)
+        const responseReminders = await axios.get(`http://localhost:3000/api/reminders/${credentialUser.identification }`)
 
-        const dataLineChartIncomes: any = Object.values(response.data.comparaciones).map((mes: any) => mes["1"]);
-        const dataLineChartExpenses: any = Object.values(response.data.comparaciones).map((mes: any) => mes["2"]);
+        const dataLineChartIncomes: any = Object.values(response.data.comparaciones).map((month: any) => month["1"]);
+        const dataLineChartExpenses: any = Object.values(response.data.comparaciones).map((month: any) => month["2"]);
         const dataTableTransactions: any = response.data.trasacciones
-        const labelsSavings: any = Object.values(responseSavings.data).map((nombre: any) => nombre['aho_nombre']);
-        const valuesSavings: any = Object.values(responseSavings.data).map((nombre: any) => parseFloat(nombre['aho_cantidad_total']));
+        const labelsSavings: any = Object.values(responseSavings.data).map((name : any) => name ['aho_name ']);
+        const valuesSavings: any = Object.values(responseSavings.data).map((name : any) => parseFloat(name ['aho_total_amount']));
         const dataReminders = responseReminders.data.slice(0, 2)
 
         // console.log(valuesSavings)
@@ -45,7 +45,7 @@ export default function Home() {
         setDataIncomes(dataLineChartIncomes)
         setDataExpenses(dataLineChartExpenses)
         setDataTrasanctions(dataTableTransactions)
-        setDataCards(response.data.tarjetas)
+        setDataCards(response.data.cards)
         setDataReminders(dataReminders)
 
       } catch (error) {
@@ -64,12 +64,12 @@ export default function Home() {
           <div className='p-4'>
             <div className="flex justify-between items-center">
               <div>
-                <h1 className='font-bold text-3xl'>Bienvenido de nuevo, {credentialUser.nombre}</h1>
-                <p>El reporte de todas tus estadisticas esta al dia</p>
+                <h1 className='font-bold text-3xl'>Welcome back, {credentialUser.name }</h1>
+                <p>The report of all your statistics is up to date</p>
               </div>
               <button onClick={handleDownload} 
               className="bg-black hover:bg-[#808080] text-white font-bold py-2 px-4 h-12 rounded">
-                Crear reporte
+                Create report
               </button>
             </div>
           </div>
@@ -78,29 +78,29 @@ export default function Home() {
 
           <div className="w-2/3 bg-gray-200 rounded-2xl  h-80 shadow-xl ">
             <div className=" flex justify-between mr-8">
-              <h1 className='font-bold text-2xl p-4'>Comparaciones</h1>
+              <h1 className='font-bold text-2xl p-4'>Comparisons</h1>
               <div className="border-2  flex items-center gap-6">
                 <div className="flex items-center gap-2">
                   <div className="w-5 h-5 bg-black rounded-full "></div>
-                  <p className="text-xl font-semibold">Ingresos</p>
+                  <p className="text-xl font-semibold">Income</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-5 h-5 bg-[#808080] rounded-full "></div>
-                  <p className="text-xl font-semibold">Gastos</p>
+                  <p className="text-xl font-semibold">Bills</p>
                 </div>
               </div>
             </div>
             <ChartLineDash ingresos={dataIncomes} gastos={dataExpenses} />
           </div>
           <div className="w-1/3 bg-gray-200 rounded-2xl  h-80 shadow-xl">
-            <h1 className='font-bold text-2xl p-4'>Ahorros </h1>
+            <h1 className='font-bold text-2xl p-4'>Savings </h1>
 
             <DonutChart dataSavings={dataSavings} />
           </div>
         </div>
         <div className="w-full h-56  rounded-2xl flex gap-4 ">
           <div className="w-1/3 h-full p-4 bg-gray-200 rounded-2xl shadow-xl">
-            <h1 className='font-bold text-2xl p-1'>Trasacciones billetera </h1>
+            <h1 className='font-bold text-2xl p-1'>Wallet transactions </h1>
             <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
               {dataTrasanctions && dataTrasanctions.map((item) => (
                 <li key={item.trasac_id} className="py-3 sm:py-4">
@@ -114,18 +114,18 @@ export default function Home() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
-                        {item.trasac_nombre}
+                        {item.trasac_name }
                       </p>
                       <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.trasac_descripcion}
+                        {item.transfer_description}
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
-                        Cantidad
+                      Amount
                       </p>
                       <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.trasac_cantidad}
+                        {item.transfer_quantity}
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -133,7 +133,7 @@ export default function Home() {
                         Total
                       </p>
                       <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.trasac_saldo}
+                        {item.trasac_balance}
                       </p>
                     </div>
 
@@ -143,7 +143,7 @@ export default function Home() {
             </ul>
           </div>
           <div className="w-1/3 h-full p-4 bg-gray-200 rounded-2xl shadow-xl">
-            <h1 className='font-bold text-2xl p-1'>Trasacciones tarjetas </h1>
+            <h1 className='font-bold text-2xl p-1'>Card transactions </h1>
             <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
               {dataCards && dataCards.map((item) => (
                 <li key={item.trasac_id} className="py-3 sm:py-4">
@@ -157,18 +157,18 @@ export default function Home() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
-                        {item.trasac_nombre}
+                        {item.trasac_name }
                       </p>
                       <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.trasac_descripcion}
+                        {item.transfer_description}
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
-                        Cantidad
+                      Amount
                       </p>
                       <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.trasac_cantidad}
+                        {item.transfer_quantity}
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -176,7 +176,7 @@ export default function Home() {
                         Total
                       </p>
                       <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.trasac_saldo}
+                        {item.trasac_balance}
                       </p>
                     </div>
 
@@ -186,20 +186,20 @@ export default function Home() {
             </ul>
           </div>
           <div className="w-1/3 h-full p-4 bg-gray-200 rounded-2xl shadow-2xl">
-            <h1 className='font-bold text-2xl p-1'>Recordatorios </h1>
+            <h1 className='font-bold text-2xl p-1'>Reminders </h1>
             <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
               {dataReminders && dataReminders.map((item) => (
                 <li key={item.record_id} className="py-2 px-4 sm:py-3 border-4 border-black rounded-2xl">
                   <div className="flex justify-between items-center  ">
                     <p className="text-xl font-extrabold text-gray-900 truncate dark:text-white">
-                      {item.record_nombre}
+                      {item.record_name }
                     </p>
                     <div className=" min-w-0">
                       <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
-                        Fecha
+                        Date
                       </p>
                       <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.record_fecha}
+                        {item.record_date}
                       </p>
                     </div>
                   </div>

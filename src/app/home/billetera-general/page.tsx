@@ -16,15 +16,15 @@ import { Handlee } from 'next/font/google';
 
 {/* <RiSubtractFill /> */ }
 
-export function BilleteraG() {
+export function WalletG() {
 
-  const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
+  const credentialUser = JSON.parse(sessionStorage.getItem('user') as string);
   const [data, setData] = useState(null);
-  const [saldo, setAccount] = useState({});
+  const [balance, setAccount] = useState({});
   const [reloadData, setReloadData] = useState(false);
 
 
-  // Verificar si hay datos y ordenar por fecha
+  // Verificar si hay datos y ordenar por date
   const dataORD = data && [...data].sort((a, b) => {
     return new Date(a.createdAt) - new Date(b.createdAt);
   });
@@ -34,10 +34,10 @@ export function BilleteraG() {
     // Función asíncrona para realizar la petición GET
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:3000/api/transactions/${credentialUser.cuenta}`)
+        const response = await axios.get(`http://127.0.0.1:3000/api/transactions/${credentialUser.account}`)
         setData(response.data); // Guarda los datos en el estado
 
-        const account = await axios.get(`http://localhost:3000/api/users/account/${credentialUser.cuenta}`)
+        const account = await axios.get(`http://localhost:3000/api/users/account/${credentialUser.account}`)
         setAccount(account.data); // Guarda los datos en el estado
 
         setReloadData(true); // Resetea el modal usado
@@ -50,14 +50,14 @@ export function BilleteraG() {
     fetchData();
   }, [reloadData]);;
 
-  const eliminartransaccion = async (trasac_id: any) => {
+  const deletetransaction = async (trasac_id: any) => {
 
     try {
       const response = await axios.delete(`http://127.0.0.1:3000/api/transactions/${trasac_id}`)
       
 
     } catch (error) {
-      console.error('Error al eliminar los datos:', error);
+      console.error('Error deleting data:', error);
 
 
     }
@@ -67,7 +67,7 @@ export function BilleteraG() {
 
   const handleDelete = async (trasac_id: any) => {
 
-    eliminartransaccion(trasac_id);
+    deletetransaction(trasac_id);
   }
   console.log({ dataORD })
 
@@ -81,8 +81,8 @@ export function BilleteraG() {
           <div className='p-4'>
             <div className='flex justify-between'>
               <div className='item-center'>
-                <h1 className='font-black text-5xl py-4'>Tu Billetera</h1>
-                <p>Inicia tu gestión financiera ingresando los valores que vas a controlar.</p>
+                <h1 className='font-black text-5xl py-4'>Your Wallet</h1>
+                <p>Start your financial management by entering the values ​​that you are going to control.</p>
 
               </div>
               <span className=''><BiWallet size={95} /></span>
@@ -109,22 +109,22 @@ export function BilleteraG() {
                     </div>
                   </div>
                   <div className="col-span-4 ">
-                    <p className='font-bold text-base' >{item.trasac_nombre}</p>
-                    <p className='text-sm'>{item.trasac_descripcion}</p>
+                    <p className='font-bold text-base' >{item.trasac_name }</p>
+                    <p className='text-sm'>{item.transfer_description}</p>
                   </div>
 
                   <div className="px-3 col-span-2  grid text-center">
-                    <p className='font-bold text-base'>Fecha</p>
+                    <p className='font-bold text-base'>Date</p>
                     <p className='text-sm'>{format(new Date(item.createdAt), 'dd/MM/yyyy')}</p>
                   </div>
 
                   <div className="text-xs col-span-2 grid text-center">
                     {item.ttrac_id_fk.ttrac_id === 1 ? (
                       <p id='Gastos' className="text-green-500 font-bold text-base mt-2" >
-                        $ {item.trasac_cantidad}</p>
+                        $ {item.transfer_quantity}</p>
                     ) : (
                       <p id='Gastos' className="text-red-500 font-bold text-base mt-2" >
-                        $ {item.trasac_cantidad}</p>
+                        $ {item.transfer_quantity}</p>
                     )}
 
 
@@ -132,7 +132,7 @@ export function BilleteraG() {
 
                   <div className="font-bold col-span-1 grid text-center">
                     <p className='text-base'>Total</p>
-                    <p className='text-lg'>${item.trasac_saldo}</p>
+                    <p className='text-lg'>${item.trasac_balance}</p>
                   </div>
                   <div className="font-bold col-span-1 grid text-center items-center " onClick={() => handleDelete(item.trasac_id)}>
                     <span className='bg-black p-1 rounded-lg mx-4 hover:bg-red-600'  ><HiOutlineTrash style={{ color: 'white' }} size={25} /></span>
@@ -155,21 +155,21 @@ export function BilleteraG() {
           <div className="flex ">
 
             <div className="flex flex-col justify-center items-center w-full">
-              <h1 className="text-3xl font-black">Saldo Total</h1>
-              <p className="text-4xl font-semibold">$ {saldo.cuenta_saldo}</p>
+              <h1 className="text-3xl font-black">Total Balance</h1>
+              <p className="text-4xl font-semibold">$ {balance.account_balance}</p>
             </div>
 
 
             {/* <div className="flex flex-col w-1/2 gap-4 py-3">
 
               <div className="flex flex-col justify-center items-center h-1/2">
-                <h1 className="text-base font-bold">Saldo Tarjetas</h1>
+                <h1 className="text-base font-bold">balance cards</h1>
                 <p className="text-3xl">$ 800.00</p>
               </div>
 
 
               <div className="flex flex-col justify-center items-center h-1/2">
-                <h1 className="text-lg font-bold">Saldo Ahorros</h1>
+                <h1 className="text-lg font-bold">balance Ahorros</h1>
                 <p className="text-3xl">$ 700.00</p>
               </div>
             </div> */}
@@ -177,7 +177,7 @@ export function BilleteraG() {
 
         </div>
         <div className="mb-6 bg-zinc-200 p-4 rounded-2xl shadow-xl">
-          <h2 className="text-lg font-semibold mb-4">Agregar a tu Billetera</h2>
+          <h2 className="text-lg font-semibold mb-4">Add to your Wallet</h2>
           <div className="">
             <div >
               <ModalBGIngreso credentialUser={credentialUser} />
@@ -196,4 +196,4 @@ export function BilleteraG() {
   )
 }
 
-export default BilleteraG
+export default WalletG

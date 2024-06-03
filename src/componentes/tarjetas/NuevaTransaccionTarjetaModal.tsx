@@ -31,9 +31,9 @@ const Modal = ({ show, handleClose, handleAccept }: any) => {
     const amount = parseFloat(value);
     const ttrac = parseFloat(movementType);
     const data = {
-      trasac_nombre: name,
-      trasac_descripcion: description,
-      trasac_cantidad: amount,
+      trasac_name : name,
+      transfer_description: description,
+      transfer_quantity: amount,
       ttrac_id_fk: ttrac,
     };
 console.log(amount)
@@ -73,7 +73,7 @@ console.log(amount)
         <form className="p-4 md:p-5" onSubmit={handleSubmit}>
           <div className="flex items-center justify-between border-b rounded-t mb-2">
             <h3 className="text-lg font-semibold text-gray-900 ">
-              Realizar Nueva Transacción
+            Make New Transaction
             </h3>
             <button onClick={handleClose} type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="crud-modal">
               <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -83,7 +83,7 @@ console.log(amount)
           </div>
 
           <div className="col-span-1 sm:col-span-2 mt-3">
-            <label className="block my-2 text-sm font-medium text-gray-900">Tipo de Transacción</label>
+            <label className="block my-2 text-sm font-medium text-gray-900">Transaction Type</label>
 
             <select
               value={movementType}
@@ -91,16 +91,16 @@ console.log(amount)
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 mb-4"
               required
             >
-              <option value="">Seleccionar tipo de movimiento</option>
-              <option value="1">Ingreso</option>
-              <option value="2">Gasto</option>
+              <option value="">Select movement type</option>
+              <option value="1">Income</option>
+              <option value="2">Spent</option>
               
             </select>
           </div>
           <div>
             {valueVisible && (
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-900">Ingrese Valor</label>
+                <label className="block mb-2 text-sm font-medium text-gray-900">Enter Value</label>
                 <div className="flex items-center">
                   {getIcon()}
                   <span className='font-bold text-xl text-center pt-3 pr-2'>$</span>
@@ -116,7 +116,7 @@ console.log(amount)
             )}
           </div>
           <button type="submit" className="mx-auto block text-white items-center bg-black hover:bg-gray-800 font-medium rounded-lg text-sm px-5 mt-4 py-2.5">
-            Enviar
+          Send
           </button>
         </form>
       </div>
@@ -144,7 +144,7 @@ const ModalTarjeta = () => {
   return (
     <div className="">
       <button onClick={openModal} className="bg-black hover:bg-gray-800 text-white py-2 px-4 mr-1 rounded-lg ml-auto">
-        Nueva Transaccion
+      New Transaction
       </button>
       <Modal show={showModal} handleClose={closeModal} handleAccept={handleAccept} />
     </div>

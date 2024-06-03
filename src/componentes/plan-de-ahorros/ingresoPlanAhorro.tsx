@@ -20,7 +20,7 @@ const Modal = ({ show, handleClose, credentialUser, selectedAhorroId, }: any) =>
         // console.log(credentialUser)
         const data = {
             amount: parseFloat(amount),
-            cuenta_id_fk: { cuenta_id: credentialUser.cuenta },
+            account_id_fk: { account_id: credentialUser.account },
             ttrac_id_fk: { ttrac_id: 3},
             aho_id_fk: { aho_id: selectedAhorroId },
         };
@@ -46,7 +46,7 @@ const Modal = ({ show, handleClose, credentialUser, selectedAhorroId, }: any) =>
 
                 <div className="flex items-center justify-between  md:p-5 border-b rounded-t">
                     <h3 className="text-lg font-semibold text-gray-900">
-                        Ahorrar
+                    Save
                     </h3>
                     <button onClick={handleClose} type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="crud-modal">
                         <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -60,7 +60,7 @@ const Modal = ({ show, handleClose, credentialUser, selectedAhorroId, }: any) =>
                         <div className="col-span-2">
                             <div>
                                 <label className="block font-medium text-gray-900 text-base mb-2">
-                                    Ingresa el Monto que quieres ahorrar
+                                Enter the amount you want to save
                                 </label>
                                 <input
                                     type="text"
@@ -76,7 +76,7 @@ const Modal = ({ show, handleClose, credentialUser, selectedAhorroId, }: any) =>
                         </div>
                     </div>
                     <button type="submit" className="text-white inline-flex items-center bg-black hover:bg-gray-800 font-medium rounded-lg text-base px-5 py-2.5 text-center">
-                        Actualizar
+                    Update
                     </button>
 
                 </form>
@@ -102,7 +102,7 @@ export default function ModalIngresoAhorro({ credentialUser, selectedAhorroId }:
     return (
         <div className="flex justify-center">
             <div className="flex justify-center">
-                <button onClick={openModal} className="bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Ahorrar</button>
+                <button onClick={openModal} className="bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Save</button>
             </div>
 
             <Modal show={showModal} credentialUser={credentialUser} selectedAhorroId={selectedAhorroId} handleClose={closeModal} />

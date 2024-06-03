@@ -30,7 +30,7 @@ export function Modal ({ show, handleClose,credentialUser}:any){
     // Validaciones para los campos de texto
     if (['2', '1'].includes(movementType)) {
       if (name.length > 35) {
-        setNameError('El nombre debe tener menos de 35 caracteres.');
+        setNameError('El name  debe tener menos de 35 caracteres.');
         isValid = false;
       } else {
         setNameError('');
@@ -58,11 +58,11 @@ export function Modal ({ show, handleClose,credentialUser}:any){
       console.log(cantidad);
       console.log(ttrac);
       const data = {
-        trasac_nombre:name,
-        trasac_descripcion:description,
-        trasac_cantidad:cantidad,
+        trasac_name :name,
+        transfer_description:description,
+        transfer_quantity:cantidad,
         ttrac_id_fk:{ttrac_id:ttrac},
-        cuenta_id_fk:{cuenta_id:credentialUser.credentialUser.cuenta}
+        account_id_fk:{account_id:credentialUser.credentialUser.account}
         
       };
 
@@ -120,7 +120,7 @@ export function Modal ({ show, handleClose,credentialUser}:any){
       }`}
     >
       <div className="bg-white p-6 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4 text-center">Ingresar Movimiento</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Enter Movement</h2>
 
         {valueVisible && (
           <div className="flex mb-4">
@@ -144,16 +144,16 @@ export function Modal ({ show, handleClose,credentialUser}:any){
           className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
           required
         >
-          <option value="">Seleccionar tipo de movimiento</option>
-          <option value={2}>Gasto</option>
-          <option value={1}>Ingreso</option>
+          <option value="">Select movement type</option>
+          <option value={2}>Spent</option>
+          <option value={1}>Income</option>
         </select>
 
         {['2', '1'].includes(movementType) && (
           <>
             <input
               type="text"
-              placeholder="Nombre"
+              placeholder="Name "
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
@@ -180,13 +180,13 @@ export function Modal ({ show, handleClose,credentialUser}:any){
             }}
             className="bg-neutral-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2"
           >
-            Cancelar
+            Cancel
           </button>
           <button
             onClick={handleAcceptClick}
             className="bg-neutral-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
           >
-            Ingresar
+            Get into
           </button>
         </div>
       </div>
@@ -211,7 +211,7 @@ export default function ModalBGIngreso(credentialUser:any){
         onClick={openModal}
         className="bg-neutral-700 hover:bg-neutral-900 text-white font-bold py-2 px-4 rounded"
       >
-        Ingresar Dinero
+        Deposit money
       </button>
       <Modal show={showModal} credentialUser={credentialUser} handleClose={closeModal} />
     </div>

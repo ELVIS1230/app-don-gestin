@@ -9,21 +9,21 @@ import { format } from 'date-fns';
 import { HiOutlineTrash } from 'react-icons/hi';
 
 export default function Recordatorios() {
-  const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
+  const credentialUser = JSON.parse(sessionStorage.getItem('user') as string);
   const [data, setData] = useState(null);
 
   const dataORD = data && [...data].sort((a, b) => {
-    return new Date(a.record_fecha) - new Date(b.record_fecha);
+    return new Date(a.record_date) - new Date(b.record_date);
   });
 
   useEffect(() => {
     // Función asíncrona para realizar la petición GET
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:3000/api/reminders/${credentialUser.cedula}`)
+        const response = await axios.get(`http://127.0.0.1:3000/api/reminders/${credentialUser.identification }`)
         setData(response.data); // Guarda los datos en el estado
 
-        // const account = await axios.get(`http://localhost:3000/api/users/account/${credentialUser.cuenta}`)
+        // const account = await axios.get(`http://localhost:3000/api/users/account/${credentialUser.account}`)
         // setAccount(account.data); // Guarda los datos en el estado
 
 
@@ -37,7 +37,7 @@ export default function Recordatorios() {
   }, []);
   console.log({ dataORD })
 
-  const eliminartransaccion = async (record_id: any) => {
+  const deletetransaction = async (record_id: any) => {
 
     try {
       const response = await axios.delete(`http://127.0.0.1:3000/api/reminders/${record_id}`)
@@ -50,7 +50,7 @@ export default function Recordatorios() {
 
   const handleDelete = async (record_id: any) => {
 
-    eliminartransaccion(record_id);
+    deletetransaction(record_id);
   }
 
   return (
@@ -62,8 +62,8 @@ export default function Recordatorios() {
           <div className='p-4'>
             <div className='flex justify-between'>
               <div className='item-center'>
-                <h1 className='font-black text-5xl py-4'>Recordatorios</h1>
-                <p>Tu sitio para revisar todos tus pendientes económicos</p>
+                <h1 className='font-black text-5xl py-4'>Reminders</h1>
+                <p>Your place to review all your economic pending items</p>
 
               </div>
               <span className=''><TbCalendarStats size={95} /></span>
@@ -72,22 +72,22 @@ export default function Recordatorios() {
         </div>
 
         <div className="mb-6 bg-zinc-200 px-4 rounded-2xl shadow-xl">
-          <div><h1 className='font-bold text-xl py-5'>Pagos Consumo</h1></div>
+          <div><h1 className='font-bold text-xl py-5'>Consumer Payments</h1></div>
           <div className="grid grid-cols-8 gap-3 pb-3">
-            <div className="font-bold col-span-2 text-xl">Nombre</div>
-            <div className="font-bold col-span-2 text-xl text-center">Fecha</div>
-            <div className="font-bold col-span-4 text-xl">Descripción</div>
+            <div className="font-bold col-span-2 text-xl">Name </div>
+            <div className="font-bold col-span-2 text-xl text-center">Date</div>
+            <div className="font-bold col-span-4 text-xl">Description</div>
           </div>
 
           <div className='min-h-[450px] max-h-[450px] overflow-auto scrollbar-thumb:!roudend'>
 
             {dataORD && dataORD
-              .sort((a, b) => new Date(b.record_fecha) - new Date(a.record_fecha))
+              .sort((a, b) => new Date(b.record_date) - new Date(a.record_date))
               .map((item: any) => (
 
                 <div key={item.trasac_id} className="grid grid-cols-8 gap-3 pb-7 min-h-[45px] max-h-[45px]">
-                  <div className="font-bold text-base col-span-2 gap-5 truncate">{item.record_nombre}</div>
-                  <div className="font-bold text-base col-span-2 text-center">{item.record_fecha}</div>
+                  <div className="font-bold text-base col-span-2 gap-5 truncate">{item.record_name }</div>
+                  <div className="font-bold text-base col-span-2 text-center">{item.record_date}</div>
                   <div className="font-bold text-xs col-span-3 truncate">{item.record_descripcion}</div>
                   {/* <div className="font-bold text-xs col-span-1 text-center">
                     <span className='bg-black p-1 rounded-lg mx-4 hover:bg-red-600'><HiOutlineTrash style={{ color: 'white' }} size={25} /></span>
@@ -110,7 +110,7 @@ export default function Recordatorios() {
 
       <div className="w-1/3 p-4 h-full">
         <div className="mb-6 bg-zinc-200 p-4 rounded-2xl shadow-xl">
-          <h2 className="text-lg font-semibold mb-4">Agregar Recordatorio</h2>
+          <h2 className="text-lg font-semibold mb-4">Add Reminder</h2>
           <div className="">
             <ModalRecordatorio credentialUser={credentialUser} />
           </div>

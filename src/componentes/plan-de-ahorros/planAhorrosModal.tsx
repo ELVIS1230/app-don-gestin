@@ -7,31 +7,31 @@ import { TbNewSection } from "react-icons/tb";
 
 const Modal = ({ show, handleClose, credentialUser }: any) => {
     const [formData, setFormData] = useState({
-        aho_nombre: '',
-        aho_descripcion: '',
-        aho_meta_cantidad: '',
-        aho_cantidad_total: '',
-        duracion: '',
+        aho_name: '',
+        aho_description: '',
+        aho_meta_quantity: '',
+        aho_total_amount: '',
+        duration: '',
     });
 
-    const [fechaInicio, setFechaInicio] = useState('');
-    const [fechaCulminacion, setFechaCulminacion] = useState('');
-    const [duracion, setDuracion] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [dateCompletion, setDateCompletion] = useState('');
+    const [duration, setDuration] = useState('');
     const [error, setError] = useState('');
     const [meta, setMeta] = useState('');
 
-    const handleDuracionChange = (e: { target: { value: any; }; }) => {
-        const duracionValue = e.target.value;
-        setDuracion(duracionValue);
+    const handleDurationChange = (e: { target: { value: any; }; }) => {
+        const durationValue = e.target.value;
+        setDuration(durationValue);
         setFormData({
             ...formData,
-            duracion: duracionValue,
+            duration: durationValue,
         });
     };
 
     useEffect(() => {
-        const fechaActual = DateTime.local().toFormat('yyyy-MM-dd');
-        setFechaInicio(fechaActual);
+        const currentDate = DateTime.local().toFormat('yyyy-MM-dd');
+        setStartDate(currentDate);
     }, []);
 
     const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
@@ -42,43 +42,43 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         });
     };
 
-    const handleFechaCulminacionChange = (event: { target: { value: any; }; }) => {
-        const nuevaFechaCulminacion = event.target.value;
+    const handleDateCompletionChange = (event: { target: { value: any; }; }) => {
+        const nuevaDateCompletion = event.target.value;
 
-        if (nuevaFechaCulminacion < fechaInicio) {
-            setError('La "Fecha de Culminación" no puede ser anterior a la "Fecha de Inicio".');
+        if (nuevaDateCompletion < startDate) {
+            setError('The "Completion Date" cannot be earlier than the "Start Date."".');
         } else {
             setError('');
-            setFechaCulminacion(nuevaFechaCulminacion);
-            calcularDuracion(nuevaFechaCulminacion);
+            setDateCompletion(nuevaDateCompletion);
+            calcularDuration(nuevaDateCompletion);
         }
     };
 
-    const calcularDuracion = (nuevaFechaCulminacion: string) => {
-        const fechaInicioParsed = DateTime.fromFormat(fechaInicio, 'yyyy-MM-dd');
-        const fechaCulminacionParsed = DateTime.fromFormat(nuevaFechaCulminacion, 'yyyy-MM-dd');
-        const diferencia = fechaCulminacionParsed.diff(fechaInicioParsed, ['years', 'months', 'days']);
+    const calcularDuration = (nuevaDateCompletion: string) => {
+        const startDateParsed = DateTime.fromFormat(startDate, 'yyyy-MM-dd');
+        const dateCompletionParsed = DateTime.fromFormat(nuevaDateCompletion, 'yyyy-MM-dd');
+        const diferencia = dateCompletionParsed.diff(startDateParsed, ['years', 'months', 'days']);
         const anos = diferencia.years;
-        const meses = diferencia.months;
+        const months = diferencia.months;
         const dias = diferencia.days;
 
-        let duracionMensaje = '';
+        let durationMensaje = '';
         if (anos > 0) {
-            duracionMensaje += `${anos} ${anos === 1 ? 'año' : 'años'}`;
+            durationMensaje += `${anos} ${anos === 1 ? 'year' : 'years'}`;
         }
 
-        if (meses > 0) {
-            duracionMensaje += `${duracionMensaje.length > 0 ? ', ' : ''}${meses} ${meses === 1 ? 'mes' : 'meses'}`;
+        if (months > 0) {
+            durationMensaje += `${durationMensaje.length > 0 ? ', ' : ''}${months} ${months === 1 ? 'month' : 'months'}`;
         }
 
         if (dias > 0) {
-            duracionMensaje += `${duracionMensaje.length > 0 ? ', ' : ''}${dias} ${dias === 1 ? 'día' : 'días'}`;
+            durationMensaje += `${durationMensaje.length > 0 ? ', ' : ''}${dias} ${dias === 1 ? 'day' : 'dayss'}`;
         }
 
-        setDuracion(duracionMensaje);
+        setDuration(durationMensaje);
         setFormData({
             ...formData,
-            duracion: duracionMensaje,
+            duration: durationMensaje,
         });
     };
 
@@ -90,7 +90,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
             setMeta(inputValue);
             setFormData({
                 ...formData,
-                aho_meta_cantidad: inputValue,
+                aho_meta_quantity: inputValue,
             });
         }
     };
@@ -99,13 +99,13 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         e.preventDefault();
 
         const data = {
-            aho_nombre: formData.aho_nombre,
-            aho_descripcion: formData.aho_descripcion,
-            aho_meta_cantidad: formData.aho_meta_cantidad,
-            aho_cantidad_total: formData.aho_cantidad_total,
+            aho_name: formData.aho_name,
+            aho_description: formData.aho_description,
+            aho_meta_quantity: formData.aho_meta_quantity,
+            aho_total_amount: formData.aho_total_amount,
             cuenta_id_fk: { cuenta_id: credentialUser.credentialUser.cuenta },
             ttrac_id_fk: { ttrac_id_fk: 3 },
-            aho_duracion: formData.duracion
+            aho_duration: formData.duration
         };
 
         try {
@@ -127,7 +127,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
             <div className="bg-white p-4 rounded-lg shadow-md">
                 <div className="flex items-center justify-between md:p-5 border-b rounded-t">
                     <h3 className="text-lg font-semibold text-gray-900">
-                        Crear Nuevo Plan de Ahorro
+                    Create New Savings Plan
                     </h3>
                     <button onClick={handleClose} type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="crud-modal">
                         <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -143,22 +143,22 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                 placeholder="Nombre"
                                 type="text"
                                 required
-                                name="aho_nombre"
-                                id='aho_nombre'
-                                value={formData.aho_nombre}
+                                name="aho_name"
+                                id='aho_name'
+                                value={formData.aho_name}
                                 onChange={handleInputChange} />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
                             <div>
                                 <label className="block mb-2 text-sm font-medium text-gray-900">
-                                    Meta
+                                    Goal
                                 </label>
                                 <input
                                     required
                                     type="text"
                                     id="meta"
                                     name="meta"
-                                    value={formData.aho_meta_cantidad}
+                                    value={formData.aho_meta_quantity}
                                     onChange={handleMetaChange}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="100000000.00"
@@ -168,14 +168,14 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                         <div className="col-span-2 sm:col-span-1">
                             <div>
                                 <label className="block mb-2 text-sm font-medium text-gray-900">
-                                    Monto a Ahorrar
+                                Amount to Save
                                 </label>
                                 <input
                                     required
                                     type="text"
-                                    id="aho_cantidad_total"
-                                    name="aho_cantidad_total"
-                                    value={formData.aho_cantidad_total}
+                                    id="aho_total_amount"
+                                    name="aho_total_amount"
+                                    value={formData.aho_total_amount}
                                     onChange={handleInputChange}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="100000000.00"
@@ -185,52 +185,52 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                         <div className="col-span-2">
                             <div className="flex gap-4">
                                 <div className="">
-                                    <label className="block mb-2 text-sm font-medium text-gray-900">Fecha de Inicio</label>
+                                    <label className="block mb-2 text-sm font-medium text-gray-900">Start date</label>
                                     <input
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                                         placeholder="Fecha de Inicio"
                                         type="date"
-                                        value={fechaInicio}
+                                        value={startDate}
                                         readOnly
                                     />
                                 </div>
                                 <div className="flex-1">
-                                    <label className="block mb-2 text-sm font-medium text-gray-900">Fecha de Culminación</label>
+                                    <label className="block mb-2 text-sm font-medium text-gray-900">Due date</label>
                                     <input
                                         className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 ${error ? 'border-red-500' : ''
                                             }`}
                                         placeholder="Fecha de Culminación"
                                         type="date"
-                                        value={fechaCulminacion}
+                                        value={dateCompletion}
                                         required
-                                        onChange={handleFechaCulminacionChange}
+                                        onChange={handleDateCompletionChange}
                                     />
                                     {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
                                 </div>
                                 <div className="flex-1">
-                                    <label className="block mb-2 text-sm font-medium text-gray-900">Duración</label>
+                                    <label className="block mb-2 text-sm font-medium text-gray-900">Duration</label>
                                     <input
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                                         type="text"
-                                        id="duracion"
-                                        value={duracion}
-                                        onChange={handleDuracionChange}
+                                        id="duration"
+                                        value={duration}
+                                        onChange={handleDurationChange}
                                         readOnly
                                     />
                                 </div>
                             </div>
                         </div>
                         <div className="col-span-2">
-                            <label className="block text-sm font-medium text-gray-900">Descripcion</label>
+                            <label className="block text-sm font-medium text-gray-900">Description</label>
                             <textarea
                                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
                                 placeholder="Ejemplo:Plan de ahorros para casa nueva, carro, viajes, etc."
                                 required
-                                name="aho_descripcion"
-                                value={formData.aho_descripcion}
-                                id="aho_descripcion"
+                                name="aho_description"
+                                value={formData.aho_description}
+                                id="aho_description"
                                 onChange={handleInputChange}
-                                
+
                             ></textarea>
                         </div>
                     </div>
@@ -238,7 +238,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                         <svg className="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                         </svg>
-                        Agregar Plan
+                        Add Planvvvv
                     </button>
                 </form>
             </div>
