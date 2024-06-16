@@ -20,9 +20,9 @@ export default function Login() {
 
       sessionStorage.setItem('usuario', JSON.stringify({
         cedula: response.data.u_cedula,
-        nombre: response.data.u_nombre, 
-        apellido: response.data.u_apellido,
-        cuenta: response.data.cuenta_id_fk.cuenta_id 
+        nombre: response.data.u_name, 
+        apellido: response.data.u_lastname,
+        cuenta: response.data.account_id_fk.account_id 
       }));
       console.log(response.data)
       

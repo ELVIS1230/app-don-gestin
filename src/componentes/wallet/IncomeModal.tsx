@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 
 
-export function Modal ({ show, handleClose,cardID}:any){
+export function Modal ({ show, handleClose,credentialUser}:any){
   const [value, setValue] = useState('');
   const [cantidad, setCantidad] = useState(0);
   const [valueError, setValueError] = useState('');
@@ -55,26 +55,26 @@ export function Modal ({ show, handleClose,cardID}:any){
       const ttrac = parseFloat(movementType);
       setCantidad(cantidad);
       setTypetrac(ttrac);
-    //   console.log(cantidad);
-    //   console.log(ttrac);
+      console.log(cantidad);
+      console.log(ttrac);
       const data = {
-        trasac_nombre:name,
-        trasac_descripcion:description,
-        trasac_cantidad:cantidad,
+        trasac_name:name,
+        trasac_description:description,
+        trasac_quantity:cantidad,
         ttrac_id_fk:{ttrac_id:ttrac},
-        tarj_id_fk: {tarj_id: cardID}
-}
+        account_id_fk:{account_id:credentialUser.credentialUser.cuenta}
         
+      };
 
-      console.log(data);
       try {
-        const response = await axios.post('http://localhost:3000/api/transactions/cards',data);
+        const response = await axios.post('http://localhost:3000/api/transactions',data);
 
       } catch (error) {
         console.error(error);
       }
 
 
+      console.log(data);
       handleClose();
       handleResetFields();
     }
@@ -194,7 +194,7 @@ export function Modal ({ show, handleClose,cardID}:any){
   );
 };
 
-export default function TransactionCard({cardID}:{cardID:string}){
+export default function ModalIncome(credentialUser:any){
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -207,10 +207,13 @@ export default function TransactionCard({cardID}:{cardID:string}){
 
   return (
     <div className="flex justify-center">
-    <button onClick={openModal} className="bg-black hover:bg-gray-800 text-white py-2 px-4 mr-1 rounded-lg ml-auto">
-        Nueva Transaccion
+      <button
+        onClick={openModal}
+        className="bg-neutral-700 hover:bg-neutral-900 text-white font-bold py-2 px-4 rounded"
+      >
+        Ingresar Dinero
       </button>
-      <Modal show={showModal} cardID={cardID} handleClose={closeModal} />
+      <Modal show={showModal} credentialUser={credentialUser} handleClose={closeModal} />
     </div>
   );
 };

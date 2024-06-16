@@ -11,7 +11,8 @@ export default function SideBarData({ toggle }:{toggle:any})  {
     return (
 
         <div>
-            <div 
+            <Link
+            href="/home"
             className={`${
                 toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"
             } sidebar last:absolute left-4 bottom-4`} 
@@ -22,10 +23,11 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/home">Home</Link>
+                Home
                 </div>
-             </div>  
-            <div 
+             </Link>  
+            <Link
+            href="/home/wallet"
             className={`${
                 toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"
             } sidebar last:absolute left-4 bottom-4`} 
@@ -36,9 +38,9 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/home/billetera-general">Billetera General</Link>
+                Billetera General
                 </div>
-             </div>  
+             </Link>  
             {/* <div 
             className={`${
                 toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"
@@ -53,7 +55,8 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 <Link href="/home/control-de-gastos">Control de Gastos</Link>
                 </div>
              </div>   */}
-            <div 
+            <Link
+            href="/home/savings-plan"
             className={`${
                 toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"
             } sidebar last:absolute left-4 bottom-4`} 
@@ -64,12 +67,13 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/home/plan-de-ahorros">Plan de Ahorros</Link>
+                Plan de Ahorros
                 </div>
-             </div>  
-            <div 
+             </Link>  
+            <Link
+            href="/home/cards"
             className={`${
-                toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"
+              toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"
             } sidebar last:absolute left-4 bottom-4`} 
             >
                 <div className="mr-8 text-[1-7rem]
@@ -78,10 +82,11 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/home/tarjetas">Tarjetas</Link>
+                Tarjetas
                 </div>
-             </div>  
-            <div 
+             </Link>  
+            <Link
+            href="/home/reminders"
             className={`${
                 toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"
             } sidebar last:absolute left-4 bottom-4`} 
@@ -92,10 +97,11 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/home/recordatorios">Recordatorios</Link>
+                Recordatorios
                 </div>
-             </div>  
-            <div 
+             </Link>  
+            <Link
+            href="/login"
             className={`${
                 toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"
             } sidebar last:absolute left-4 bottom-4`} 
@@ -106,9 +112,9 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 className={`${
                     toggle ? "opacity-0 delay-200" : ""
                 } text-[1rem] text-white whitespace-pre text-`}>
-                <Link href="/">Salir</Link>
+                Salir
                 </div>
-             </div>  
+             </Link>  
             
             
         </div>

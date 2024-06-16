@@ -1,6 +1,6 @@
 "use client";
-import ModalAhorro from '@/componentes/plan-de-ahorros/planAhorrosModal';
-import ModalIngresoAhorro from '@/componentes/plan-de-ahorros/ingresoPlanAhorro';
+import ModalSaving from '@/componentes/savings-plan/SavingsPlanModal';
+import ModalIncomesSavings from '@/componentes/savings-plan/IncomeSavings';
 import React, { useEffect } from 'react'
 import axios from "axios";
 import { useState } from "react"
@@ -9,7 +9,7 @@ import { FaRegChartBar } from "react-icons/fa";
 import { MdSavings } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
 
-const PlanAhorros = () => {
+const SavingsPlan = () => {
 
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
 
@@ -68,11 +68,11 @@ const PlanAhorros = () => {
             {/* Div de cada plan creado */}
             {dataORD && dataORD.map((item) => {
 
-              const metaCantidad = parseFloat(item.aho_meta_cantidad) || 0;
-              const cantidadAhorrada = parseFloat(item.aho_cantidad_total) || 0;
+              const metaCantidad = parseFloat(item.saving_goal_quantity) || 0;
+              const cantidadAhorrada = parseFloat(item.saving_quantity_total) || 0;
 
               return (
-                <div key={item.aho_id} className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
+                <div key={item.saving_id} className='flex flex-col md:flex-row items-start border-t border-gray-300' style={{
                   height: "6rem",
                   paddingTop: "20px",
                   marginTop: "20px",
@@ -81,27 +81,27 @@ const PlanAhorros = () => {
                     <MdSavings size={30} className="mr-2" />
                     <div className='flex-grow'>
                       {/* Reemplazar la línea original con la nueva estructura */}
-                      <h1>{item.aho_nombre.split(' ').map((word, index) => <React.Fragment key={index}>{word}<br /></React.Fragment>)}</h1>
+                      <h1>{item.saving_name.split(' ').map((word, index) => <React.Fragment key={index}>{word}<br /></React.Fragment>)}</h1>
                     </div>
                   </div>
                   <div className="flex-grow text-center">
                     <p className='font-bold'>Ahorrado</p>
-                    <p>${item.aho_cantidad_total}</p>
+                    <p>${item.saving_quantity_total}</p>
                   </div>
                   <div className="flex-grow text-center">
                     <p className='font-bold '>Por Ahorrar</p>
                     {/* Calcular la diferencia entre lo ahorrado y la meta */}
-                    <p>${ parseFloat(item.aho_meta_cantidad) - parseFloat(item.aho_cantidad_total)}</p>
+                    <p>${ parseFloat(item.saving_goal_quantity) - parseFloat(item.saving_quantity_total)}</p>
                   </div>
                   <div className="flex-grow text-center">
                     <p className='font-bold'>Meta</p>
-                    <p>${item.aho_meta_cantidad}</p>
+                    <p>${item.saving_goal_quantity}</p>
                   </div>
                   <div className='flex items-center'>
                     <div className="flex-grow text-left">
                       <p className='font-bold text-center'>Duración</p>
 
-                      {item.aho_duracion && item.aho_duracion.split(',').map((parte, index) => (
+                      {item.saving_duration && item.saving_duration.split(',').map((parte, index) => (
                         <React.Fragment key={index} >
                           {parte.trim()} {/* Elimina espacios adicionales alrededor de cada parte */}
                           <br />
@@ -112,7 +112,7 @@ const PlanAhorros = () => {
                   </div>
 
                   <div className="flex-grow text-center">
-                    <ModalIngresoAhorro credentialUser={credentialUser} selectedAhorroId={item.aho_id} />
+                    <ModalIncomesSavings credentialUser={credentialUser} selectedAhorroId={item.saving_id} />
 
                   </div>
 
@@ -121,7 +121,7 @@ const PlanAhorros = () => {
                       <span
                         className="bg-black text-white py-2 px-4 mr-1 rounded-lg ml-auto hover:bg-red-600 inline-flex items-center cursor-pointer"
                         role="button"
-                        onClick={(item.aho_id)}
+                        onClick={(item.saving_id)}
                       >
                         <HiOutlineTrash style={{ color: 'white',  }} size={25} />
                       </span>
@@ -198,7 +198,7 @@ const PlanAhorros = () => {
               <p className='font-bold'>Descripcion:</p></div>
 
             <div className="flex justify-center">
-              <ModalAhorro credentialUser={credentialUser} />
+              <ModalSaving credentialUser={credentialUser}/>
             </div>
 
           </div>
@@ -208,4 +208,4 @@ const PlanAhorros = () => {
 
   )
 }
-export default PlanAhorros
+export default SavingsPlan

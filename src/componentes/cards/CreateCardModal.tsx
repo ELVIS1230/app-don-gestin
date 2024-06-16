@@ -4,12 +4,12 @@ import { MdOutlineAddCard } from 'react-icons/md';
 
 const Modal = ({ show, handleClose, credentialUser }: any) => {
     const [formData, setFormData] = useState({
-        tarj_nombre: '',
-        tarj_descripcion: '',
-        tarj_cupo: '',
-        tarj_fecha_corte: '',
-        tarj_fecha_vencimiento: '',
-        mtarj_id: '',
+        card_name: '',
+        card_description: '',
+        card_quota: '',
+        card_date_cutoff: '',
+        card_date_due: '',
+        bcard_id: '',
         saldo: '',
     });
 
@@ -53,35 +53,35 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         if (regex.test(inputValue) || inputValue === '') {
             setFormData({
                 ...formData,
-                tarj_cupo: inputValue,
+                card_quota: inputValue,
             });
         }
     };
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        const tiptarj_id = cardType === '1' ? 1 : 2
-        const mtarj_id = cardBrand === '1' ? 1 : 2
+        const typecard_id = cardType === '1' ? 1 : 2
+        const bcard_id = cardBrand === '1' ? 1 : 2
         let data = {}
-        if(tiptarj_id === 1){
+        if(typecard_id === 1){
              data = {
-                tarj_nombre: formData.tarj_nombre,
-                tarj_descripcion: formData.tarj_descripcion,
-                tarj_cupo: parseFloat(formData.tarj_cupo),
-                // tarj_saldo_total: formData.saldo,
-                tarj_fecha_corte: formData.tarj_fecha_corte,
-                tarj_fecha_vencimiento: formData.tarj_fecha_vencimiento,
-                tiptarj_id_fk: { tiptarj_id: tiptarj_id },
-                mtarj_id_fk: { mtarj_id: mtarj_id },
-                cuenta_id_fk: { cuenta_id: credentialUser.credentialUser.cuenta },
+                card_name: formData.card_name,
+                card_description: formData.card_description,
+                card_quota: parseFloat(formData.card_quota),
+                // card_balance_total: formData.saldo,
+                card_date_cutoff: formData.card_date_cutoff,
+                card_date_due: formData.card_date_due,
+                typecard_id_fk: { typecard_id: typecard_id },
+                bcard_id_fk: { bcard_id: bcard_id },
+                account_id_fk: { account_id: credentialUser.credentialUser.cuenta },
             };
-        }else if(tiptarj_id ===2){
+        }else if(typecard_id ===2){
             data = {
-                tarj_nombre: formData.tarj_nombre,
-                tarj_descripcion: formData.tarj_descripcion,
-                tiptarj_id_fk: { tiptarj_id: tiptarj_id },
-                mtarj_id_fk: { mtarj_id: mtarj_id },
-                cuenta_id_fk: { cuenta_id: credentialUser.credentialUser.cuenta },
+                card_name: formData.card_name,
+                card_description: formData.card_description,
+                typecard_id_fk: { typecard_id: typecard_id },
+                bcard_id_fk: { bcard_id: bcard_id },
+                account_id_fk: { account_id: credentialUser.credentialUser.cuenta },
             };
         }
 
@@ -117,9 +117,9 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                         <div className="col-span-2">
                             <label className='block mb-2 text-sm font-medium text-gray-900'>Nombre de Banco</label>
                             <input className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5'
-                                name='tarj_nombre'
-                                id='tarj_nombre'
-                                value={formData.tarj_nombre}
+                                name='card_name'
+                                id='card_name'
+                                value={formData.card_name}
                                 onChange={handleInputChange}
                                 placeholder="Banco" type="text" />
                         </div>
@@ -161,9 +161,9 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                 <div className="col-span-2 sm:col-span-1 mt-2">
                                     <label className="block mb-2 text-sm font-medium text-gray-900">Cupo</label>
                                     <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
-                                        id='tarj_cupo'
-                                        name='tarj_cupo'
-                                        value={formData.tarj_cupo}
+                                        id='card_quota'
+                                        name='card_quota'
+                                        value={formData.card_quota}
                                         onChange={handleCupoChange}
                                         type='number' />
                                 </div>
@@ -173,8 +173,8 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                     <input
                                         type='date'
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                        name='tarj_fecha_corte'
-                                        value={formData.tarj_fecha_corte}
+                                        name='card_date_cutoff'
+                                        value={formData.card_date_cutoff}
                                         onChange={handleInputChange}
                                     />
 
@@ -183,8 +183,8 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                 <div className="col-span-2 sm:col-span-1 mt-2">
                                     <label className="block mb-2 text-sm font-medium text-gray-900">Fecha de Vencimiento</label>
                                     <input type="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                        name='tarj_fecha_vencimiento'
-                                        value={formData.tarj_fecha_vencimiento}
+                                        name='card_date_due'
+                                        value={formData.card_date_due}
                                         onChange={handleInputChange}
 
                                     />
@@ -197,9 +197,9 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                         <div className="col-span-2">
                             <label className="block mb-2 text-sm font-medium text-gray-900">Descripcion de la Tarjeta</label>
                             <textarea
-                                id='tarj_descripcion'
-                                name='tarj_descripcion'
-                                value={formData.tarj_descripcion}
+                                id='card_description'
+                                name='card_description'
+                                value={formData.card_description}
                                 onChange={handleInputChange}
                                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
                                 placeholder="Ejemplo:Tarjeta para comida,viajes,etc."></textarea>

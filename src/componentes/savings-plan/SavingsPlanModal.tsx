@@ -7,16 +7,16 @@ import { TbNewSection } from "react-icons/tb";
 
 const Modal = ({ show, handleClose, credentialUser }: any) => {
     const [formData, setFormData] = useState({
-        aho_nombre: '',
-        aho_descripcion: '',
-        aho_meta_cantidad: '',
-        aho_cantidad_total: '',
-        duracion: '',
+        saving_name: '',
+        saving_description: '',
+        saving_goal_quantity: '',
+        saving_quantity_total: '',
+        saving_duration: '',
     });
 
     const [fechaInicio, setFechaInicio] = useState('');
     const [fechaCulminacion, setFechaCulminacion] = useState('');
-    const [duracion, setDuracion] = useState('');
+    const [saving_duration, setDuracion] = useState('');
     const [error, setError] = useState('');
     const [meta, setMeta] = useState('');
 
@@ -25,7 +25,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         setDuracion(duracionValue);
         setFormData({
             ...formData,
-            duracion: duracionValue,
+            saving_duration: duracionValue,
         });
     };
 
@@ -78,7 +78,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         setDuracion(duracionMensaje);
         setFormData({
             ...formData,
-            duracion: duracionMensaje,
+            saving_duration: duracionMensaje,
         });
     };
 
@@ -90,7 +90,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
             setMeta(inputValue);
             setFormData({
                 ...formData,
-                aho_meta_cantidad: inputValue,
+                saving_goal_quantity: inputValue,
             });
         }
     };
@@ -99,13 +99,13 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
         e.preventDefault();
 
         const data = {
-            aho_nombre: formData.aho_nombre,
-            aho_descripcion: formData.aho_descripcion,
-            aho_meta_cantidad: formData.aho_meta_cantidad,
-            aho_cantidad_total: formData.aho_cantidad_total,
-            cuenta_id_fk: { cuenta_id: credentialUser.credentialUser.cuenta },
+            saving_name: formData.saving_name,
+            saving_description: formData.saving_description,
+            saving_goal_quantity: formData.saving_goal_quantity,
+            saving_quantity_total: formData.saving_quantity_total,
+            account_id_fk: { account_id: credentialUser.credentialUser.cuenta },
             ttrac_id_fk: { ttrac_id_fk: 3 },
-            aho_duracion: formData.duracion
+            saving_duration: formData.saving_duration
         };
 
         try {
@@ -143,9 +143,9 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                 placeholder="Nombre"
                                 type="text"
                                 required
-                                name="aho_nombre"
-                                id='aho_nombre'
-                                value={formData.aho_nombre}
+                                name="saving_name"
+                                id='saving_name'
+                                value={formData.saving_name}
                                 onChange={handleInputChange} />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
@@ -158,7 +158,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                     type="text"
                                     id="meta"
                                     name="meta"
-                                    value={formData.aho_meta_cantidad}
+                                    value={formData.saving_goal_quantity}
                                     onChange={handleMetaChange}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="100000000.00"
@@ -173,9 +173,9 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                 <input
                                     required
                                     type="text"
-                                    id="aho_cantidad_total"
-                                    name="aho_cantidad_total"
-                                    value={formData.aho_cantidad_total}
+                                    id="saving_quantity_total"
+                                    name="saving_quantity_total"
+                                    value={formData.saving_quantity_total}
                                     onChange={handleInputChange}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="100000000.00"
@@ -212,8 +212,8 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                     <input
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
                                         type="text"
-                                        id="duracion"
-                                        value={duracion}
+                                        id="saving_duration"
+                                        value={saving_duration}
                                         onChange={handleDuracionChange}
                                         readOnly
                                     />
@@ -226,9 +226,9 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
                                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
                                 placeholder="Ejemplo:Plan de ahorros para casa nueva, carro, viajes, etc."
                                 required
-                                name="aho_descripcion"
-                                value={formData.aho_descripcion}
-                                id="aho_descripcion"
+                                name="saving_description"
+                                value={formData.saving_description}
+                                id="saving_description"
                                 onChange={handleInputChange}
                                 
                             ></textarea>
@@ -246,7 +246,7 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
     );
 };
 
-export default function ModalPlanAhorro(credentialUser: any) {
+export default function ModalSavingPlan(credentialUser: any) {
     const [showModal, setShowModal] = useState(false);
 
     const openModal = () => {
