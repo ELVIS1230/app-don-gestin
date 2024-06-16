@@ -3,7 +3,7 @@
 import React from 'react'
 import { useState } from 'react'
 import {BiChevronLeft} from 'react-icons/bi'
-import UserPerfil from '@/componentes/UserPerfil';
+import UserPerfil from '@/componentes/UserProfile';
 import SideBarData from '@/componentes/SideBarData';
 
 const Sidebar = () => {

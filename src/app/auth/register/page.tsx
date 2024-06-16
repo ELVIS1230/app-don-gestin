@@ -25,12 +25,11 @@ const Registro = () => {
     console.log('Datos enviados:', formData);
     const data = {
       u_cedula: formData.cedula,
-      u_nombre: formData.firstName,
-      u_apellido: formData.lastName,
-      u_correo: formData.email,
-      u_contraseña: formData.password
+      u_name: formData.firstName,
+      u_lastname: formData.lastName,
+      u_email: formData.email,
+      u_password: formData.password
     }
-    // console.log(data)
     try {
         const response = await axios.post('http://localhost:3000/api/users', data);
         console.log(response.data);

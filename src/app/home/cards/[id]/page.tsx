@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import TransactionModal from '@/componentes/tarjetas/NuevaTransaccionTarjetaModal';
+import TransactionModal from '@/componentes/cards/TransactionCardModal';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { FaCcMastercard } from "react-icons/fa";
@@ -8,14 +8,15 @@ import { IoIosCard } from "react-icons/io";
 import { MdOutlineAddCard } from "react-icons/md";
 import { usePathname } from 'next/navigation';
 import { format } from 'date-fns';
-import TransactionCard from '@/componentes/tarjetas/TransaccionTarjeta';
+import TransactionCard from '@/componentes/cards/TransactionCard';
+import { CardsI, TransactionsI } from '../../../../../interfaces/Interfaces';
 
 
-export default function DetalleTarjeta({ params }: { params: { id: string } }) {
+export default function DetailCard({ params }: { params: { id: string } }) {
 
   const { id } = params
-  const [transactionsCard, setTransactionsCard] = useState([]);
-  const [card, setCard] = useState({})
+  const [transactionsCard, setTransactionsCard] = useState<TransactionsI[]>([]);
+  const [card, setCard] = useState<any>({})
 
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
 
@@ -55,16 +56,16 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
                 
                 <div className='flex flex-col'>
                   <div className='font-bold'>Saldo Total:</div>
-                  <div>$ {card.tarj_saldo_total}</div>
+                  <div>$ {card.card_balance_total}</div>
                 </div>
                 <div className='flex gap-5'>
                 <div className='flex flex-col'>
                   <div className='font-bold'>Vencimiento:</div>
-                  <div>{card.tarj_fecha_vencimiento}</div>
+                  <div>{card.card_date_due}</div>
                 </div>
                 <div className='flex flex-col'>
                 <div className='font-bold'>Corte:</div>
-                  <div>{card.tarj_fecha_corte}</div>
+                  <div>{card.card_date_cutoff}</div>
                 </div>
                 </div>
               </div>
@@ -72,7 +73,7 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
             
             <div className="ml-auto ">
             <p className='text-2xl text-center font-bold'>
-                  {card.tarj_nombre}
+                  {card.card_name}
                 </p>
               <FaCcMastercard size={150} className="text-black-500" />
             </div>
@@ -108,15 +109,15 @@ export default function DetalleTarjeta({ params }: { params: { id: string } }) {
 
               <div className="flex-grow text-center">
                 <p className='font-bold text-lg'>Nombre</p>
-                <p>{item.trasac_nombre}</p>
+                <p>{item.trasac_name}</p>
               </div>
 
               <div className="flex-grow text-center items-center">
                 <p className='font-bold text-lg'>Cantidad</p>
                 {
                   item.ttrac_id_fk.ttrac_id === 1
-                    ? <p id='Ingres' className="text-green-500 font-bold text-lg mt-2" >${item.trasac_cantidad}</p>
-                    : <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >${item.trasac_cantidad}</p>
+                    ? <p id='Ingres' className="text-green-500 font-bold text-lg mt-2" >${item.trasac_quantity}</p>
+                    : <p id='Gastos' className="text-red-500 font-bold text-lg mt-2" >${item.trasac_quantity}</p>
                 }
               </div>
 
