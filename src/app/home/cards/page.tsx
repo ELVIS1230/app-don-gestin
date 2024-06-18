@@ -106,7 +106,7 @@ function Tarjetas() {
                     }
                   </div>
 
-                  <div className="">
+                  {/* <div className="">
                     <div className="">
                       <span
                         className="bg-black text-white py-2 px-4 mr-1 rounded-lg ml-auto hover:bg-red-600 inline-flex items-center cursor-pointer"
@@ -116,7 +116,7 @@ function Tarjetas() {
                         <HiOutlineTrash style={{ color: 'white', marginRight: '2px' }} size={25} />
                       </span>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               );
             })}

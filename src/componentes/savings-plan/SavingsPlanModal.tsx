@@ -3,6 +3,8 @@ import { DateTime } from 'luxon';
 import axios from 'axios';
 import { MdOutlineSavings } from "react-icons/md";
 import { TbNewSection } from "react-icons/tb";
+import { Button, Form, FormProps, Input, InputNumber, Modal as ModalA } from "antd";
+
 
 
 const Modal = ({ show, handleClose, credentialUser }: any) => {
@@ -97,23 +99,26 @@ const Modal = ({ show, handleClose, credentialUser }: any) => {
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-
         const data = {
             saving_name: formData.saving_name,
             saving_description: formData.saving_description,
             saving_goal_quantity: formData.saving_goal_quantity,
             saving_quantity_total: formData.saving_quantity_total,
             account_id_fk: { account_id: credentialUser.credentialUser.cuenta },
-            ttrac_id_fk: { ttrac_id_fk: 3 },
+            ttrac_id_fk: { ttrac_id: 3 },
             saving_duration: formData.saving_duration
         };
-
         try {
             const response = await axios.post('http://localhost:3000/api/savings', data);
             console.log(response.data);
 
         } catch (error) {
-            console.error('Error en la solicitud:', error);
+          console.log(error)
+          const message = error.response?.data?.message
+          ModalA.error({
+            title: 'Hubo un error',
+            content: message ? message : "Ocurrio un error",
+          })
         }
 
 

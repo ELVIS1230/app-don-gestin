@@ -98,15 +98,12 @@ export function Modal({ show, handleClose, credentialUser }: any) {
         ttrac_id_fk: { ttrac_id: ttrac },
         account_id_fk: { account_id: credentialUser.credentialUser.cuenta },
       };
-      try{
-
-      }catch{
-
-      }
       const response = await axios.post(
         "http://localhost:3000/api/transactions",
         data
       );
+      handleClose();
+              handleResetFields();
       console.log(response)
       console.log(data)
     } catch (error) {
@@ -199,7 +196,7 @@ export function Modal({ show, handleClose, credentialUser }: any) {
               <span className="font-bold text-xl text-center pt-3 pr-2">$</span>
               <Form.Item
                 name="quantity"
-                rules={[Rules.required, { type: 'number', min: 1, message: 'La edad debe ser mayor que cero!' }]}
+                rules={[Rules.required, { type: 'number', min: 1, message: 'El valor debe se mayor que cero!' }]}
               >
                 <InputNumber
                   min={1}
@@ -255,12 +252,14 @@ export function Modal({ show, handleClose, credentialUser }: any) {
           >
             Cancelar
           </button>
-          <button
-            onClick={onSubmit}
-            className="bg-neutral-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Ingresar
-          </button>
+          {["2", "1"].includes(movementType) && (
+            <button
+              onClick={onSubmit}
+              className="bg-neutral-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Ingresar
+            </button>
+          )}
         </div>
       </div>
     </div>
