@@ -121,7 +121,6 @@ function Tarjetas() {
                       </span>
                     </div>
                   </div> */}
-                  
                 </div>
               );
             })}

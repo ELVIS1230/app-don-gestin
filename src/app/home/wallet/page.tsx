@@ -100,8 +100,8 @@ export function BilleteraG() {
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
               .map((item: any) => (
                 <div key={item.trasac_id} className="grid grid-cols-11 gap-2 pb-7 min-h-[85px] max-h-[85px]">
-                  <div className="flex items-center bg-white rounded-2xl min-h-[60px] max-h-[60px] ">
-                    <div className='ml-4'>
+                  <div className="flex items-center justify-center bg-white rounded-2xl h-10 w-10 ">
+                    <div className=''>
                       {item.ttrac_id_fk.ttrac_id === 1 ? (
                         <IoMdAdd style={{ color: 'green' }} size={25} />
                       ) : (
@@ -135,17 +135,7 @@ export function BilleteraG() {
                     <p className='text-base'>Total</p>
                     <p className='text-lg'>${item.trasac_balance}</p>
                   </div>
-                  <div className="font-bold col-span-2 grid text-center items-center ">
-                    <span className='bg-black p-1 rounded-lg mx-4 hover:bg-red-600'
-                    role="button"
-                    onClick={() => handleDelete(item.trasac_id)}
-                    >
-                      <HiOutlineTrash style={{ color: 'white' }} size={25} /></span>
-                  <div className='mx-4'>
-                        <UpdateNames itemID={item.trasac_id} endpoint={endpoint} />
-                        </div> 
-                  </div>
-
+                  <UpdateNames itemID={item.trasac_id} endpoint={endpoint} />
                 </div>
               ))}
 

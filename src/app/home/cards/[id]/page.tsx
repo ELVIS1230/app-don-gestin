@@ -46,9 +46,9 @@ export default function DetailCard({ params }: { params: { id: string } }) {
   // console.log(transactionsCard)
 
   return (
-    <div className='flex flex-col'>
+    <div className=''>
       <div className="flex p-4">
-        <div className="mb-4 bg-gray-200 p-4 rounded-2xl w-3/5 h-2/3">
+        <div className="mb-4 bg-gray-200 p-4 rounded-2xl w-full">
           <div className="flex flex-col md:flex-row items-center">
             <div className="flex-grow ">
               <h1 className='text-xl font-bold'>Tu Tarjeta</h1>

@@ -101,6 +101,7 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 </div>
              </Link>  
             <Link
+            onClick={() =>sessionStorage.removeItem('usuario')}
             href="/auth/login"
             className={`${
                 toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"

@@ -22,6 +22,7 @@ export default function Recordatorios() {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://127.0.0.1:3000/api/reminders/${credentialUser.cedula}`)
+        console.log(response)
         setData(response.data); // Guarda los datos en el estado
 
         // const account = await axios.get(`http://localhost:3000/api/users/account/${credentialUser.cuenta}`)
@@ -118,9 +119,6 @@ export default function Recordatorios() {
           <div className="">
             <ModalReminder credentialUser={credentialUser} />
           </div>
-
-
-
         </div>
         {/*  */}
 
