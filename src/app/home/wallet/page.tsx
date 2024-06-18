@@ -99,7 +99,7 @@ export function BilleteraG() {
               .slice() // Copia el array para evitar mutaciones inesperadas
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
               .map((item: any) => (
-                <div key={item.trasac_id} className="grid grid-cols-11 gap-2 pb-7 min-h-[85px] max-h-[85px]">
+                <div key={item.trasac_id} className="grid grid-cols-10 gap-2 pb-7 min-h-[85px] max-h-[85px]">
                   <div className="flex items-center justify-center bg-white rounded-2xl h-10 w-10 ">
                     <div className=''>
                       {item.ttrac_id_fk.ttrac_id === 1 ? (

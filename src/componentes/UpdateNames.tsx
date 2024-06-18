@@ -102,13 +102,13 @@ export function Modal({ show, handleClose, itemID, endpoint }: any) {
             placeholder="Descripción"
             value={form.description}
             onChange={handleChange}
-            className="border border-gray-300 rounded-md px-3 py-2 w-full"
+            className="border border-gray-300 rounded-md px-3 py-2 w-full mt-2"
             required
           />
           {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-4">
           <button
             onClick={() => {
               handleClose();
@@ -146,7 +146,7 @@ export default function UpdateNames({ itemID, endpoint  }: { itemID: any, endpoi
         onClick={openModal}
         className="flex items-center bg-black text-white py-2 px-4 mr-1 rounded-lg ml-auto hover:bg-amber-600 inline-flex items-center cursor-pointer"
       >
-        <FaEdit className="" size={25} />
+        <FaEdit className="" size={15} />
       </button>
       <Modal show={showModal} itemID={itemID} endpoint={endpoint}  handleClose={closeModal} />
     </div>

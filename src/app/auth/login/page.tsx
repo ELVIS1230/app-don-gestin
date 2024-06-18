@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation";
+import { Modal } from "antd";
 export default function Login() {
   const [user, setUser ] = useState({
     email:'',
@@ -16,7 +17,6 @@ export default function Login() {
         console.log(user)
     
       const response = await axios.post('http://127.0.0.1:3000/api/users/login', user) 
-  
 
       sessionStorage.setItem('usuario', JSON.stringify({
         cedula: response.data.u_cedula,
@@ -28,8 +28,11 @@ export default function Login() {
       
       router.push('/home', { scroll: false })
     }catch (error:any){
-      // throw new Error(error.response?.data || 'Error en la solicitud a la API');
-      console.log(error)
+      const message = error.response?.data?.message;
+      Modal.error({
+        title: "Hubo un error",
+        content: message ? message : "Ocurrio un error",
+      });
     }
   }
   

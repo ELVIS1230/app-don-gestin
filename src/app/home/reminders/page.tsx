@@ -86,7 +86,7 @@ export default function Recordatorios() {
               .sort((a, b) => new Date(b.remind_date) - new Date(a.remind_date))
               .map((item: any) => (
                   
-                <div key={item.trasac_id} className="flex flex-row">
+                <div key={item.trasac_id} className="flex flex-row mt-2">
 
                   <div className="font-bold content-center text-base basis-1/4 truncate">{item.remind_name}</div>
                   <div className="font-bold content-center text-base basis-1/4 text-center">{item.remind_date}</div>
@@ -97,7 +97,7 @@ export default function Recordatorios() {
                         role="button"
                         onClick={() => handleDelete(item.remind_id)}
                       >
-                        <HiOutlineTrash style={{ color: 'white',  }} size={25} />
+                        <HiOutlineTrash style={{ color: 'white',  }} size={15} />
                       </span>
                       <div className='mx-4'>
                         <UpdateNames itemID={item.remind_id} endpoint={endpoint} />

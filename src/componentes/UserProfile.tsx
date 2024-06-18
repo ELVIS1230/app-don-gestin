@@ -19,7 +19,7 @@ export default function UserPerfil({ toggle }:{toggle:any}) {
             </div>
             <div className={toggle ? "opacity-0 delay-200" : ""}
             >
-                <h3 className="text-xl">{credentialUser.nombre} {credentialUser.apellido}</h3>
+                <h3 className="text-xl">{credentialUser?.nombre} {credentialUser?.apellido}</h3>
                 {/* <span className='text-[0.75rem]
                 opacity-60'>{credentialUser.correo}</span> */}
             </div>

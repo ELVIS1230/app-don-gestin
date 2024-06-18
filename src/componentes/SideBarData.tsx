@@ -6,8 +6,14 @@ import { IoCardOutline } from "react-icons/io5";
 import { BiWallet } from "react-icons/bi";
 import { TbCalendarStats, TbHome2 } from "react-icons/tb";
 import { PiSignOutDuotone } from "react-icons/pi";
-
+import { useRouter } from 'next/navigation'
 export default function SideBarData({ toggle }:{toggle:any})  {
+const router = useRouter()
+
+  const logout= () =>{
+    router.push('/auth/login')
+    sessionStorage.removeItem('usuario')
+  }
     return (
 
         <div>
@@ -100,9 +106,8 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 Recordatorios
                 </div>
              </Link>  
-            <Link
-            href="/auth/login"
-            onClick={() =>sessionStorage.removeItem('usuario')}
+            <div
+            onClick={logout}
             className={`${
                 toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"
             } sidebar last:absolute left-4 bottom-4`} 
@@ -115,7 +120,7 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 } text-[1rem] text-white whitespace-pre text-`}>
                 Salir
                 </div>
-             </Link>  
+             </div>  
             
             
         </div>

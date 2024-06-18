@@ -2,8 +2,11 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Button, Form, FormProps, Input, InputNumber, Modal } from "antd";
+import { Rules } from "@/utils/rules-validate";
 
 const Registro = () => {
+  const [form] = Form.useForm();
   const [formData, setFormData] = useState({
     cedula: "",
     firstName: "",
@@ -22,38 +25,55 @@ const Registro = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    try {
+
+    const values = await form.validateFields();
     console.log("Datos enviados:", formData);
     const data = {
-      u_cedula: formData.cedula,
-      u_name: formData.firstName,
-      u_lastname: formData.lastName,
-      u_email: formData.email,
-      u_password: formData.password
-    }
-    try {
+      u_cedula: values.cedula,
+      u_name: values.firstName,
+      u_lastname: values.lastName,
+      u_email: values.email,
+      u_password: values.password,
+    };
       const response = await axios.post(
         "http://localhost:3000/api/users",
         data
       );
       console.log(response.data);
+      router.push("/auth/login");
+      setFormData({
+        cedula: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+      });
     } catch (error) {
-      console.log(error);
+      const message = error.response?.data?.message;
+      Modal.error({
+        title: "Hubo un error",
+        content: message ? message : "Ocurrio un error",
+      });
     }
-    router.push("/auth/login");
-    setFormData({
-      cedula: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-    });
+   
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-6 bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4 text-center">Registro</h2>
-        <form className="space-y-4" onSubmit={handleSubmit}>
+        <h2 className="text-2xl font-bold  text-center">Registro</h2>
+        <Form
+          form={form}
+          name="basic"
+          initialValues={{
+            cedula: "",
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+          }}
+        >
           <div>
             <label
               htmlFor="firstName"
@@ -61,6 +81,7 @@ const Registro = () => {
             >
               Cedula
             </label>
+            <Form.Item name="cedula" rules={[Rules.required, Rules.cedula]}>
             <input
               id="cedula"
               name="cedula"
@@ -69,8 +90,9 @@ const Registro = () => {
               required
               value={formData.cedula}
               onChange={handleInputChange}
-              className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2 mb-4 w-full"
+              className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2  w-full"
             />
+            </Form.Item>
           </div>
           <div>
             <label
@@ -79,6 +101,8 @@ const Registro = () => {
             >
               Nombre
             </label>
+            <Form.Item name="firstName" rules={[Rules.required, Rules.names]}>
+
             <input
               id="firstName"
               name="firstName"
@@ -87,8 +111,9 @@ const Registro = () => {
               required
               value={formData.firstName}
               onChange={handleInputChange}
-              className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2 mb-4 w-full"
+              className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2  w-full"
             />
+            </Form.Item>
           </div>
           <div>
             <label
@@ -97,6 +122,8 @@ const Registro = () => {
             >
               Apellido
             </label>
+            <Form.Item name="lastName" rules={[Rules.required, Rules.names]}>
+
             <input
               id="lastName"
               name="lastName"
@@ -105,8 +132,9 @@ const Registro = () => {
               required
               value={formData.lastName}
               onChange={handleInputChange}
-              className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2 mb-4 w-full"
+              className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2  w-full"
             />
+          </Form.Item>
           </div>
           <div>
             <label
@@ -115,6 +143,8 @@ const Registro = () => {
             >
               Correo electrónico
             </label>
+            <Form.Item name="email" rules={[Rules.required, Rules.email]}>
+
             <input
               id="email"
               name="email"
@@ -123,8 +153,9 @@ const Registro = () => {
               required
               value={formData.email}
               onChange={handleInputChange}
-              className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2 mb-4 w-full"
+              className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2  w-full"
             />
+            </Form.Item>
           </div>
           <div>
             <label
@@ -133,6 +164,7 @@ const Registro = () => {
             >
               Contraseña
             </label>
+            <Form.Item name="password" rules={[Rules.required]}>
             <input
               id="password"
               name="password"
@@ -141,18 +173,19 @@ const Registro = () => {
               required
               value={formData.password}
               onChange={handleInputChange}
-              className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2 mb-4 w-full"
+              className="border border-gray-300 rounded-md text-neutral-900 px-3 py-2  w-full"
             />
+            </Form.Item>
           </div>
           <div>
             <button
-              type="submit"
+              onClick={handleSubmit}
               className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-neutral-700 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
             >
               Registrarse
             </button>
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   );
