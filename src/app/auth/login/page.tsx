@@ -19,10 +19,11 @@ export default function Login() {
       const response = await axios.post('http://127.0.0.1:3000/api/users/login', user) 
 
       sessionStorage.setItem('usuario', JSON.stringify({
-        cedula: response.data.u_cedula,
-        nombre: response.data.u_name, 
-        apellido: response.data.u_lastname,
-        cuenta: response.data.account_id_fk.account_id 
+        cedula: response.data.user.u_cedula,
+        nombre: response.data.user.u_name, 
+        apellido: response.data.user.u_lastname,
+        cuenta: response.data.user.account_id_fk.account_id,
+        token: response.data.token
       }));
       console.log(response.data)
       

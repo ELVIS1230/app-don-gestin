@@ -102,8 +102,6 @@ export default function Recordatorios() {
                       <div className='mx-4'>
                         <UpdateNames itemID={item.remind_id} endpoint={endpoint} />
                         </div> 
-                      
-                  
                   </div>                  
                 </div>
 

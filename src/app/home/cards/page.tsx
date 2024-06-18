@@ -10,6 +10,7 @@ import { HiOutlineTrash } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { TransactionsI } from '../../../../interfaces/Interfaces';
 import UpdateNames from '@/componentes/UpdateNames';
+import { Modal } from 'antd';
 
 function Tarjetas() {
 
@@ -19,23 +20,28 @@ function Tarjetas() {
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
 
 
-  // Verificar si hay datos y ordenar por fecha
   const dataORD = data && [...data].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
 
   useEffect(() => {
-    // Función asíncrona para realizar la petición GET
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/cards/${credentialUser.cuenta}`)
-        setData(response.data); // Guarda los datos en el estado
-
+        const response = await axios.get(`http://localhost:3000/api/cards/${credentialUser.cuenta}`,
+          {
+            headers: {
+              Authorization: credentialUser.token
+            }
+          }
+        )
+        setData(response.data); 
         const transactionsWithCards = await axios.get(`http://localhost:3000/api/transactions/cards/${credentialUser.cuenta}`)
-        setTransactionsCard(transactionsWithCards.data); // Guarda los datos en el estado
-
-
+        setTransactionsCard(transactionsWithCards.data); 
       } catch (error) {
-        console.error('Error al obtener los datos:', error);
+        const message = error.response?.data?.message;
+        Modal.error({
+          title: "Hubo un error",
+          content: message ? message : "Ocurrio un error",
+        });
       }
     };
 
