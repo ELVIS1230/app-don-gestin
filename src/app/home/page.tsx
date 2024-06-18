@@ -34,9 +34,9 @@ export default function Home() {
 
         const dataLineChartIncomes: any = Object.values(response.data.comparaciones).map((mes: any) => mes["1"]);
         const dataLineChartExpenses: any = Object.values(response.data.comparaciones).map((mes: any) => mes["2"]);
-        const dataTableTransactions: any = response.data.trasacciones
-        const labelsSavings: any = Object.values(responseSavings.data).map((nombre: any) => nombre['aho_nombre']);
-        const valuesSavings: any = Object.values(responseSavings.data).map((nombre: any) => parseFloat(nombre['aho_cantidad_total']));
+        const dataTableTransactions: any = response.data.transactions
+        const labelsSavings: any = Object.values(responseSavings.data).map((nombre: any) => nombre['saving_name']);
+        const valuesSavings: any = Object.values(responseSavings.data).map((nombre: any) => parseFloat(nombre['saving_quantity_total']));
         const dataReminders = responseReminders.data.slice(0, 2)
 
         // console.log(valuesSavings)
@@ -45,7 +45,7 @@ export default function Home() {
         setDataIncomes(dataLineChartIncomes)
         setDataExpenses(dataLineChartExpenses)
         setDataTrasanctions(dataTableTransactions)
-        setDataCards(response.data.tarjetas)
+        setDataCards(response.data.cards)
         setDataReminders(dataReminders)
 
       } catch (error) {
@@ -101,7 +101,7 @@ export default function Home() {
         <div className="w-full h-56  rounded-2xl flex gap-4 ">
           <div className="w-1/3 h-full p-4 bg-gray-200 rounded-2xl shadow-xl">
             <h1 className='font-bold text-2xl p-1'>Trasacciones billetera </h1>
-            <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
+            <ul role="list" className="divide-y divide-gray-200 ">
               {dataTrasanctions && dataTrasanctions.map((item) => (
                 <li key={item.trasac_id} className="py-3 sm:py-4">
                   <div className="flex items-center space-x-4">
@@ -113,27 +113,27 @@ export default function Home() {
 
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
-                        {item.trasac_nombre}
+                      <p className="text-sm font-extrabold text-gray-900 truncate ">
+                        {item.trasac_name}
                       </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.trasac_descripcion}
+                      <p className="text-sm text-gray-500 truncate ">
+                        {item.trasac_description}
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
+                      <p className="text-sm font-extrabold text-gray-900 truncate ">
                         Cantidad
                       </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.trasac_cantidad}
+                      <p className="text-sm text-gray-500 truncate ">
+                        {item.trasac_quantity}
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
+                      <p className="text-sm font-extrabold text-gray-900 truncate ">
                         Total
                       </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.trasac_saldo}
+                      <p className="text-sm text-gray-500 truncate ">
+                        {item.trasac_balance}
                       </p>
                     </div>
 
@@ -156,27 +156,27 @@ export default function Home() {
 
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
-                        {item.trasac_nombre}
+                      <p className="text-sm font-extrabold text-gray-900 truncate ">
+                        {item.trasac_name}
                       </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.trasac_descripcion}
+                      <p className="text-sm text-gray-500 truncate ">
+                        {item.trasac_description}
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
+                      <p className="text-sm font-extrabold text-gray-900 truncate ">
                         Cantidad
                       </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.trasac_cantidad}
+                      <p className="text-sm text-gray-500 truncate ">
+                        {item.trasac_quantity}
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
+                      <p className="text-sm font-extrabold text-gray-900 truncate ">
                         Total
                       </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.trasac_saldo}
+                      <p className="text-sm text-gray-500 truncate ">
+                        {item.trasac_balance}
                       </p>
                     </div>
 
@@ -187,19 +187,19 @@ export default function Home() {
           </div>
           <div className="w-1/3 h-full p-4 bg-gray-200 rounded-2xl shadow-2xl">
             <h1 className='font-bold text-2xl p-1'>Recordatorios </h1>
-            <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
+            <ul role="list" className="divide-y divide-gray-200 ">
               {dataReminders && dataReminders.map((item) => (
-                <li key={item.record_id} className="py-2 px-4 sm:py-3 border-4 border-black rounded-2xl">
+                <li key={item.remind_id} className="py-2 px-4 sm:py-3 border-4 border-black rounded-2xl">
                   <div className="flex justify-between items-center  ">
-                    <p className="text-xl font-extrabold text-gray-900 truncate dark:text-white">
-                      {item.record_nombre}
+                    <p className="text-xl font-extrabold text-gray-900 truncate ">
+                      {item.remind_name}
                     </p>
                     <div className=" min-w-0">
-                      <p className="text-sm font-extrabold text-gray-900 truncate dark:text-white">
+                      <p className="text-sm font-extrabold text-gray-900 truncate ">
                         Fecha
                       </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {item.record_fecha}
+                      <p className="text-sm text-gray-500 truncate ">
+                        {item.remind_date}
                       </p>
                     </div>
                   </div>

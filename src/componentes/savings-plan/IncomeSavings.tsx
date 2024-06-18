@@ -20,9 +20,9 @@ const Modal = ({ show, handleClose, credentialUser, selectedAhorroId, }: any) =>
         // console.log(credentialUser)
         const data = {
             amount: parseFloat(amount),
-            cuenta_id_fk: { cuenta_id: credentialUser.cuenta },
+            account_id_fk: { account_id: credentialUser.cuenta },
             ttrac_id_fk: { ttrac_id: 3},
-            aho_id_fk: { aho_id: selectedAhorroId },
+            saving_id_fk: { saving_id: selectedAhorroId },
         };
         console.log(data)
 
@@ -86,7 +86,7 @@ const Modal = ({ show, handleClose, credentialUser, selectedAhorroId, }: any) =>
 };
 
 
-export default function ModalIngresoAhorro({ credentialUser, selectedAhorroId }:any) {
+export default function ModalIncomesSavings({ credentialUser, selectedAhorroId }:any) {
     const [showModal, setShowModal] = useState(false);
 
     const openModal = () => {

@@ -31,9 +31,9 @@ const Modal = ({ show, handleClose, handleAccept }: any) => {
     const amount = parseFloat(value);
     const ttrac = parseFloat(movementType);
     const data = {
-      trasac_nombre: name,
-      trasac_descripcion: description,
-      trasac_cantidad: amount,
+      trasac_name: name,
+      trasac_description: description,
+      trasac_quantity: amount,
       ttrac_id_fk: ttrac,
     };
 console.log(amount)

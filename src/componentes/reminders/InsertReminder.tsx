@@ -57,9 +57,9 @@ export function Modal ({ show, handleClose,credentialUser}:any) {
   const handleCreateClick = async() => {
     if (title && date && description && !errors.title && !errors.date && !errors.description) {
       const data = {
-        record_nombre:title,
-        record_descripcion:description,
-        record_fecha:date,
+        remind_name:title,
+        remind_description:description,
+        remind_date:date,
         u_cedula_fk: { u_cedula :credentialUser.credentialUser.cedula}
         
       };
