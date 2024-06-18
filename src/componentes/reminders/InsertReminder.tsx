@@ -124,7 +124,7 @@ export function Modal ({ show, handleClose,credentialUser}:any) {
               value={date}
               onChange={(e) => handleInputChange('date', e.target.value)}
               className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
-            />
+            />credentialUser={credentialUser}
             {errors.date && <p className="text-red-500 text-sm">{errors.date}</p>}
           </div>
         </div>

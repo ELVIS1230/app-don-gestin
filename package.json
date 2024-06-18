@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
+    "antd": "^5.18.2",
     "apexcharts": "^3.44.2",
     "axios": "^1.6.2",
     "chart.js": "^4.4.1",
