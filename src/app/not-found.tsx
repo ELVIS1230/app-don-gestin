@@ -1,19 +1,21 @@
 // import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { Button, Result } from 'antd';
 
 const Custom404 = () => {
 
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>404 - Page Not Found</h1>
-      <p>Regresar atras</p>
-      {/* <button onClick={() => router.push('/')}>Go Home</button> */}
-      <br />
-      <Link href="/home" className="border-2 bg-black text-white p-4 rounded-md ">
-        Atras
-      </Link>
+      <Result
+        status="404"
+        title="404"
+        subTitle="La pagina que visita no existe"
+        extra={<Link href="/auth/login" className="border-2 bg-black text-white px-3 py-2 text-xl rounded-md ">
+          Atras
+        </Link>}
+      />
     </div>
   );
 };
