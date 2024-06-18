@@ -92,7 +92,7 @@ export function Modal({ show, handleClose, itemID, endpoint }: any) {
             placeholder="Nombre"
             value={form.name}
             onChange={handleChange}
-            className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
+            className="border border-gray-300 rounded-md px-3 py-2 w-full"
             required
           />
           {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
@@ -102,7 +102,7 @@ export function Modal({ show, handleClose, itemID, endpoint }: any) {
             placeholder="Descripción"
             value={form.description}
             onChange={handleChange}
-            className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
+            className="border border-gray-300 rounded-md px-3 py-2 w-full"
             required
           />
           {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
