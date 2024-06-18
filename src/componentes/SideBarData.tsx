@@ -101,7 +101,7 @@ export default function SideBarData({ toggle }:{toggle:any})  {
                 </div>
              </Link>  
             <Link
-            href="/login"
+            href="/auth/login"
             className={`${
                 toggle ? "last:w-[3.6rem]" : "last:w-[17rem]"
             } sidebar last:absolute left-4 bottom-4`} 

@@ -5,10 +5,11 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
-import { FaCcMastercard } from "react-icons/fa";
+import { FaCcMastercard, FaEdit } from "react-icons/fa";
 import { HiOutlineTrash } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { TransactionsI } from '../../../../interfaces/Interfaces';
+import UpdateNames from '@/componentes/UpdateNames';
 
 function Tarjetas() {
 
@@ -42,7 +43,7 @@ function Tarjetas() {
     fetchData();
   }, []);
   console.log(transactionsCards)
-
+  const endpoint = 'cards/one'
   // console.log(data)
   // console.log(saldo)
 
@@ -106,17 +107,21 @@ function Tarjetas() {
                     }
                   </div>
 
-                  <div className="">
+                  {/* <div className="">
                     <div className="">
                       <span
-                        className="bg-black text-white py-2 px-4 mr-1 rounded-lg ml-auto hover:bg-red-600 inline-flex items-center cursor-pointer"
+                        className="bg-black text-white py-2 px-4 mr-1 rounded-lg ml-auto hover:bg-amber-600 inline-flex items-center cursor-pointer"
                         role="button"
-                        onClick={(item.card_id)}
+                        
                       >
-                        <HiOutlineTrash style={{ color: 'white', marginRight: '2px' }} size={25} />
+                        <Link href={`/home/cards/${item.card_id_fk.card_id}`}>
+                          <FaEdit style={{ color: 'white', }} size={25} />
+                        </Link>
+                        
                       </span>
                     </div>
-                  </div>
+                  </div> */}
+                  
                 </div>
               );
             })}
@@ -128,19 +133,16 @@ function Tarjetas() {
 
         <div className='max-h-[750px] overflow-auto scrollbar-thumb:!rounded scroll-container'>
           {dataORD && dataORD.map((item) => {
-            console.log(item);
+            // console.log(item);
             return (
               <div key={item.card_id} className="p-4">
                 <div className="py-4 bg-gray-200 rounded-2xl shadow-lg">
                   <div className="border-b-4 border-white">
                     <div className="font-bold text-xl mb-2 flex justify-center items-center">
                       <div className='text-lg text-center ml-6'>Banco: {item.card_name}</div>
+                      
                       <span className='ml-auto mr-2 cursor-pointer rounded-lg'>
-                        <IoClose
-                          style={{ color: 'black', transition: 'color 0.3s ease-in-out' }}
-                          onMouseOver={(e) => e.target.style.color = 'red'}
-                          onMouseOut={(e) => e.target.style.color = 'black'}
-                        />
+                      <UpdateNames itemID={item.card_id} endpoint={endpoint} />
                       </span>
                     </div>
                   </div>

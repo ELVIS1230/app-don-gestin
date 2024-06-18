@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 
 
-export function Modal ({ show, handleClose,cardID}:any){
+export function Modal({ show, handleClose, cardID }: any) {
   const [value, setValue] = useState('');
   const [cantidad, setCantidad] = useState(0);
   const [valueError, setValueError] = useState('');
@@ -15,9 +15,10 @@ export function Modal ({ show, handleClose,cardID}:any){
   const [descriptionError, setDescriptionError] = useState('');
   const [valueVisible, setValueVisible] = useState(false);
 
-  const handleAcceptClick = async() => {
+  const handleAcceptClick = async () => {
     let isValid = true;
 
+    const letters = /^[a-zA-Z]*$/;
     // Validaciones para el campo de valor numérico
     const regex = /^\d{1,10}(\.\d{0,2})?$/;
     if (!regex.test(value)) {
@@ -28,22 +29,32 @@ export function Modal ({ show, handleClose,cardID}:any){
     }
 
     // Validaciones para los campos de texto
-    if (['2', '1'].includes(movementType)) {
-      if (name.length > 35) {
-        setNameError('El nombre debe tener menos de 35 caracteres.');
-        isValid = false;
-      } else {
-        setNameError('');
-      }
-
-      if (description.length > 35) {
-        setDescriptionError('La descripción debe tener menos de 35 caracteres.');
-        isValid = false;
-      } else {
-        setDescriptionError('');
-      }
+    // if (['2', '1'].includes(movementType)) {
+    if (name.length > 35 || !letters.test(name)) {
+      setNameError('El nombre debe tener menos de 35 caracteres válidos.');
+      isValid = false;
+      return null;
+    } else {
+      setNameError('');
     }
 
+    if (description.length > 35 || !letters.test(description)) {
+      setDescriptionError('La descripción debe tener menos de 35 caracteres válidos.');
+      isValid = false;
+      return null;
+    } else {
+      setDescriptionError('');
+
+    }
+
+    if (!regex.test(value)) {
+      setValueError('Por favor ingrese un valor numérico válido.');
+      isValid = false;
+    } else {
+      setValueError('');
+    }
+
+    console.log(nameError, descriptionError)
     // Validación de campos requeridos
     if (
       isValid &&
@@ -51,24 +62,25 @@ export function Modal ({ show, handleClose,cardID}:any){
       movementType &&
       (['2', '1'].includes(movementType) && name && description)
     ) {
+      console.log(nameError, descriptionError)
       const cantidad = parseFloat(value);
       const ttrac = parseFloat(movementType);
       setCantidad(cantidad);
       setTypetrac(ttrac);
-    //   console.log(cantidad);
-    //   console.log(ttrac);
+      //   console.log(cantidad);
+      //   console.log(ttrac);
       const data = {
-        trasac_name:name,
-        trasac_description:description,
-        trasac_quantity:cantidad,
-        ttrac_id_fk:{ttrac_id:ttrac},
-        card_id_fk: {card_id: cardID}
-}
-        
+        trasac_name: name,
+        trasac_description: description,
+        trasac_quantity: cantidad,
+        ttrac_id_fk: { ttrac_id: ttrac },
+        card_id_fk: { card_id: cardID }
+      }
+
 
       console.log(data);
       try {
-        const response = await axios.post('http://localhost:3000/api/transactions/cards',data);
+        const response = await axios.post('http://localhost:3000/api/transactions/cards', data);
 
       } catch (error) {
         console.error(error);
@@ -77,6 +89,9 @@ export function Modal ({ show, handleClose,cardID}:any){
 
       handleClose();
       handleResetFields();
+    }
+    else {
+      setDescriptionError('Complete los campos');
     }
   };
 
@@ -105,7 +120,7 @@ export function Modal ({ show, handleClose,cardID}:any){
     return null;
   };
 
-  const handleMovementTypeChange = (selectedMovementType:any) => {
+  const handleMovementTypeChange = (selectedMovementType: any) => {
     setMovementType(selectedMovementType);
     setCardType('');
     setName('');
@@ -115,9 +130,8 @@ export function Modal ({ show, handleClose,cardID}:any){
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center ${
-        show ? 'block' : 'hidden'
-      }`}
+      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center ${show ? 'block' : 'hidden'
+        }`}
     >
       <div className="bg-white p-6 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-bold mb-4 text-center">Ingresar Movimiento</h2>
@@ -194,7 +208,7 @@ export function Modal ({ show, handleClose,cardID}:any){
   );
 };
 
-export default function TransactionCard({cardID}:{cardID:string}){
+export default function TransactionCard({ cardID }: { cardID: string }) {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -207,7 +221,7 @@ export default function TransactionCard({cardID}:{cardID:string}){
 
   return (
     <div className="flex justify-center">
-    <button onClick={openModal} className="bg-black hover:bg-gray-800 text-white py-2 px-4 mr-1 rounded-lg ml-auto">
+      <button onClick={openModal} className="bg-black hover:bg-gray-800 text-white py-2 px-4 mr-1 rounded-lg ml-auto">
         Nueva Transaccion
       </button>
       <Modal show={showModal} cardID={cardID} handleClose={closeModal} />

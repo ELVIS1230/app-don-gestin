@@ -12,6 +12,7 @@ import { useEffect, useState } from "react"
 import { format } from 'date-fns';
 import { HiOutlineTrash } from "react-icons/hi";
 import { Handlee } from 'next/font/google';
+import UpdateNames from '@/componentes/UpdateNames';
 
 
 {/* <RiSubtractFill /> */ }
@@ -70,7 +71,7 @@ export function BilleteraG() {
     deleteTransaction(trasac_id);
   }
   console.log({ dataORD })
-
+  const endpoint = 'transactions'
 
   return (
     <div className='flex'>
@@ -108,7 +109,7 @@ export function BilleteraG() {
                       )}
                     </div>
                   </div>
-                  <div className="col-span-4 ">
+                  <div className="col-span-3 ">
                     <p className='font-bold text-base' >{item.trasac_name}</p>
                     <p className='text-sm'>{item.trasac_description}</p>
                   </div>
@@ -134,8 +135,15 @@ export function BilleteraG() {
                     <p className='text-base'>Total</p>
                     <p className='text-lg'>${item.trasac_balance}</p>
                   </div>
-                  <div className="font-bold col-span-1 grid text-center items-center " onClick={() => handleDelete(item.trasac_id)}>
-                    <span className='bg-black p-1 rounded-lg mx-4 hover:bg-red-600'  ><HiOutlineTrash style={{ color: 'white' }} size={25} /></span>
+                  <div className="font-bold col-span-2 grid text-center items-center ">
+                    <span className='bg-black p-1 rounded-lg mx-4 hover:bg-red-600'
+                    role="button"
+                    onClick={() => handleDelete(item.trasac_id)}
+                    >
+                      <HiOutlineTrash style={{ color: 'white' }} size={25} /></span>
+                  <div className='mx-4'>
+                        <UpdateNames itemID={item.trasac_id} endpoint={endpoint} />
+                        </div> 
                   </div>
 
                 </div>

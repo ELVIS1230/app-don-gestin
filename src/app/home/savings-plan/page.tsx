@@ -8,6 +8,7 @@ import { MdOutlineSavings } from "react-icons/md";
 import { FaRegChartBar } from "react-icons/fa";
 import { MdSavings } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
+import UpdateNames from '@/componentes/UpdateNames';
 
 const SavingsPlan = () => {
 
@@ -36,6 +37,8 @@ const SavingsPlan = () => {
     fetchData();
   }, []);
   console.log(data)
+
+  const endpoint = 'savings'
 
   return (
     <div className='flex'>
@@ -114,6 +117,9 @@ const SavingsPlan = () => {
                   <div className="flex-grow text-center">
                     <ModalIncomesSavings credentialUser={credentialUser} selectedAhorroId={item.saving_id} />
 
+                  </div>
+                  <div className="flex-grow text-center">
+                  <UpdateNames itemID={item.saving_id} endpoint={endpoint} />
                   </div>
 
                   {/* <div className="">
