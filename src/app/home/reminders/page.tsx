@@ -8,6 +8,7 @@ import { TbCalendarStats, TbHome2 } from "react-icons/tb";
 import { format } from 'date-fns';
 import { HiOutlineTrash } from 'react-icons/hi';
 import UpdateNames from '@/componentes/UpdateNames';
+import { Modal } from 'antd';
 
 export default function Recordatorios() {
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string);
@@ -22,8 +23,8 @@ export default function Recordatorios() {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://127.0.0.1:3000/api/reminders/${credentialUser.cedula}`)
-        console.log(response)
-        setData(response.data); // Guarda los datos en el estado
+        // console.log(response)
+        setData(response.data); 
 
         // const account = await axios.get(`http://localhost:3000/api/users/account/${credentialUser.cuenta}`)
         // setAccount(account.data); // Guarda los datos en el estado
@@ -33,11 +34,9 @@ export default function Recordatorios() {
         console.error('Error al obtener los datos:', error);
       }
     };
-
-    // Llama a la función para realizar la petición cuando el componente se monta
     fetchData();
   }, []);
-  console.log({ dataORD })
+  // console.log({ dataORD })
 
   const deleteTransaction = async (remind_id: any) => {
 
@@ -54,6 +53,18 @@ export default function Recordatorios() {
 
     deleteTransaction(remind_id);
   }
+  const sendReminders = async() => {
+      try {
+        await axios.post(`http://localhost:3000/api/reminders/send-reminders`)
+      } catch (error) {
+        const message = error.response?.data?.message;
+        Modal.error({
+        title: "Hubo un error",
+        content: message ? message : "Ocurrio un error",
+      });
+      }
+
+  }
   const endpoint = 'reminders'
   return (
     <div className='flex'>
@@ -66,7 +77,7 @@ export default function Recordatorios() {
               <div className='item-center'>
                 <h1 className='font-black text-5xl py-4'>Recordatorios</h1>
                 <p>Tu sitio para revisar todos tus pendientes económicos</p>
-
+                <button className="border-2 bg-black text-white px-3 py-2 rounded-md " onClick={sendReminders}>Enviar</button>
               </div>
               <span className=''><TbCalendarStats size={95} /></span>
             </div>
