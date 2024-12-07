@@ -25,7 +25,7 @@ const SavingsPlan = () => {
     // Función asíncrona para realizar la petición GET
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/savings/${credentialUser.cuenta}`)
+        const response = await axios.get(`http://localhost:3000/api/savings/${credentialUser?.cuenta}`)
         setData(response.data); // Guarda los datos en el estado
 
       } catch (error) {

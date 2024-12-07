@@ -27,10 +27,10 @@ function Tarjetas() {
     // Función asíncrona para realizar la petición GET
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/cards/${credentialUser.cuenta}`)
+        const response = await axios.get(`http://localhost:3000/api/cards/${credentialUser?.cuenta}`)
         setData(response.data); // Guarda los datos en el estado
 
-        const transactionsWithCards = await axios.get(`http://localhost:3000/api/transactions/cards/${credentialUser.cuenta}`)
+        const transactionsWithCards = await axios.get(`http://localhost:3000/api/transactions/cards/${credentialUser?.cuenta}`)
         setTransactionsCard(transactionsWithCards.data); // Guarda los datos en el estado
 
 

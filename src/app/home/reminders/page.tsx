@@ -21,7 +21,7 @@ export default function Recordatorios() {
     // Función asíncrona para realizar la petición GET
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:3000/api/reminders/${credentialUser.cedula}`)
+        const response = await axios.get(`http://127.0.0.1:3000/api/reminders/${credentialUser?.cedula}`)
         console.log(response)
         setData(response.data); // Guarda los datos en el estado
 

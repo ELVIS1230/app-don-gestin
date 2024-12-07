@@ -3,7 +3,9 @@ import Image from 'next/image'
 import user from '../assets/user.jpg'
 
 export default function UserPerfil({ toggle }:{toggle:any}) {
-    const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string)
+    const credentialUser = {} as any
+    // const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string)
+
     console.log(credentialUser)
     return (
         <div className={`flex gap-5 items-center ${ toggle ? 

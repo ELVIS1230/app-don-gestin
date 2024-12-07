@@ -35,10 +35,10 @@ export function BilleteraG() {
     // Función asíncrona para realizar la petición GET
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:3000/api/transactions/${credentialUser.cuenta}`)
+        const response = await axios.get(`http://127.0.0.1:3000/api/transactions/${credentialUser?.cuenta}`)
         setData(response.data); // Guarda los datos en el estado
 
-        const account = await axios.get(`http://localhost:3000/api/users/account/${credentialUser.cuenta}`)
+        const account = await axios.get(`http://localhost:3000/api/users/account/${credentialUser?.cuenta}`)
         setAccount(account.data); // Guarda los datos en el estado
 
         setReloadData(true); // Resetea el modal usado
