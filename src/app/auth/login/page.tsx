@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Form, Input, Modal } from "antd";
 import { useRouter } from "next/navigation";
 import { FaArrowRight, FaGlobe, FaRegEnvelope } from "react-icons/fa";
+import { login } from "@/app/lib/actions";
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -16,25 +17,11 @@ export default function Login() {
 
   const handleSubmit = async (values: { username: string; password: string })=> {
     try {
-      console.log(values);
-
-      // const response = await axios.post(
-      //   "http://127.0.0.1:3000/api/users/login",
-      //   user
-      // );
-
-      // sessionStorage.setItem(
-      //   "usuario",
-      //   JSON.stringify({
-      //     cedula: response.data.u_cedula,
-      //     nombre: response.data.u_name,
-      //     apellido: response.data.u_lastname,
-      //     cuenta: response.data.account_id_fk.account_id,
-      //   })
-      // );
-      // console.log(response.data);
-
-      // router.push("/home", { scroll: false });
+      const token = await login(values.username, values.password);
+      if(token){
+        router.push('/home')
+      }
+     
     } catch (error: any) {
       const message = error.response?.data?.message;
       Modal.error({
