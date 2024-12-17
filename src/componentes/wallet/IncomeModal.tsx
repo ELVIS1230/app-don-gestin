@@ -66,11 +66,11 @@ export function Modal({ show, handleClose, credentialUser }: any) {
       console.log(cantidad);
       console.log(ttrac);
       const data = {
-        trasac_name: name,
-        trasac_description: description,
-        trasac_quantity: cantidad,
-        ttrac_id_fk: { ttrac_id: ttrac },
-        account_id_fk: { account_id: credentialUser.credentialUser.cuenta },
+        name: name,
+        description: description,
+        quantity: cantidad,
+        type: { id: ttrac },
+        account: { id: credentialUser.credentialUser.account.id },
       };
 
       try {
@@ -92,11 +92,11 @@ export function Modal({ show, handleClose, credentialUser }: any) {
       console.log('Form is valid:', values);
       const ttrac = parseFloat(movementType);
       const data = {
-        trasac_name: values.name,
-        trasac_description: values.description,
-        trasac_quantity: values.quantity,
-        ttrac_id_fk: { ttrac_id: ttrac },
-        account_id_fk: { account_id: credentialUser.credentialUser.cuenta },
+        name: values.name,
+        description: values.description,
+        quantity: values.quantity,
+        type: { id: ttrac },
+        account: { id: credentialUser.credentialUser.account.id },
       };
       const response = await axios.post(
         "http://localhost:3000/api/transactions",

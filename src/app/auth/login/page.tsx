@@ -17,8 +17,10 @@ export default function Login() {
 
   const handleSubmit = async (values: { username: string; password: string })=> {
     try {
-      const token = await login(values.username, values.password);
-      if(token){
+      const data = await login(values.username, values.password);
+      console.log("Este es el token", data)
+      await sessionStorage.setItem('usuario', JSON.stringify(data.user))
+      if(data){
         router.push('/home')
       }
      
@@ -26,7 +28,7 @@ export default function Login() {
       const message = error.response?.data?.message;
       Modal.error({
         title: "Hubo un error",
-        content: message ? message : "Ocurrio un error",
+        content: message ? message : "Ocurrió un error",
       });
     }
   };

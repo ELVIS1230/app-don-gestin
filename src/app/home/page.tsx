@@ -22,15 +22,15 @@ export default function Home() {
 
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string)
   const handleDownload = async () => {
-    window.open(`http://localhost:3000/api/transactions/reports/${credentialUser.cedula}`, '_blank');
+    window.open(`http://localhost:3000/api/transactions/reports/${credentialUser.ci}`, '_blank');
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/transactions/dash/${credentialUser.cuenta}`)
-        const responseSavings = await axios.get(`http://127.0.0.1:3000/api/savings/${credentialUser.cuenta}`)
-        const responseReminders = await axios.get(`http://localhost:3000/api/reminders/${credentialUser.cedula}`)
+        const response = await axios.get(`http://localhost:3000/api/transactions/dash/${credentialUser.account}`)
+        const responseSavings = await axios.get(`http://127.0.0.1:3000/api/savings/${credentialUser.account}`)
+        const responseReminders = await axios.get(`http://localhost:3000/api/reminders/${credentialUser.ci}`)
 
         const dataLineChartIncomes: any = Object.values(response.data.comparaciones).map((mes: any) => mes["1"]);
         const dataLineChartExpenses: any = Object.values(response.data.comparaciones).map((mes: any) => mes["2"]);
@@ -64,8 +64,8 @@ export default function Home() {
           <div className='p-4'>
             <div className="flex justify-between items-center">
               <div>
-                <h1 className='font-bold text-3xl'>Bienvenido de nuevo, {credentialUser.nombre}</h1>
-                <p>El reporte de todas tus estadisticas esta al dia</p>
+                <h1 className='font-bold text-3xl'>Bienvenido de nuevo, {credentialUser.name}</h1>
+                <p>El reporte de todas tus estadísticas esta al dia</p>
               </div>
               <button onClick={handleDownload} 
               className="bg-black hover:bg-[#808080] text-white font-bold py-2 px-4 h-12 rounded">
@@ -103,10 +103,10 @@ export default function Home() {
             <h1 className='font-bold text-2xl p-1'>Trasacciones billetera </h1>
             <ul role="list" className="divide-y divide-gray-200 ">
               {dataTrasanctions && dataTrasanctions.map((item) => (
-                <li key={item.trasac_id} className="py-3 sm:py-4">
+                <li key={item.id} className="py-3 sm:py-4">
                   <div className="flex items-center space-x-4">
                     <div className="flex-shrink-0">
-                      {item.ttrac_id_fk.ttrac_id === 1
+                      {item.type.id === 1
                         ? <IoIosAdd size={35} className="mr-2 text-white bg-black rounded-xl" />
                         : <IoIosRemove size={35} className="mr-2 text-white bg-[#808080] rounded-lg" />
                       }
@@ -114,10 +114,10 @@ export default function Home() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-extrabold text-gray-900 truncate ">
-                        {item.trasac_name}
+                        {item.name}
                       </p>
                       <p className="text-sm text-gray-500 truncate ">
-                        {item.trasac_description}
+                        {item.description}
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -125,7 +125,7 @@ export default function Home() {
                         Cantidad
                       </p>
                       <p className="text-sm text-gray-500 truncate ">
-                        {item.trasac_quantity}
+                        {item.quantity}
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -133,7 +133,7 @@ export default function Home() {
                         Total
                       </p>
                       <p className="text-sm text-gray-500 truncate ">
-                        {item.trasac_balance}
+                        {item.balance}
                       </p>
                     </div>
 
@@ -146,10 +146,10 @@ export default function Home() {
             <h1 className='font-bold text-2xl p-1'>Trasacciones tarjetas </h1>
             <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
               {dataCards && dataCards.map((item) => (
-                <li key={item.trasac_id} className="py-3 sm:py-4">
+                <li key={item.transactions} className="py-3 sm:py-4">
                   <div className="flex items-center space-x-4">
                     <div className="flex-shrink-0">
-                      {item.ttrac_id_fk.ttrac_id === 1
+                      {item.type.id === 1
                         ? <IoIosAdd size={35} className="mr-2 text-white bg-black rounded-xl" />
                         : <IoIosRemove size={35} className="mr-2 text-white bg-[#808080] rounded-lg" />
                       }
@@ -157,10 +157,10 @@ export default function Home() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-extrabold text-gray-900 truncate ">
-                        {item.trasac_name}
+                        {item.name}
                       </p>
                       <p className="text-sm text-gray-500 truncate ">
-                        {item.trasac_description}
+                        {item.description}
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -168,7 +168,7 @@ export default function Home() {
                         Cantidad
                       </p>
                       <p className="text-sm text-gray-500 truncate ">
-                        {item.trasac_quantity}
+                        {item.quantity}
                       </p>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -176,7 +176,7 @@ export default function Home() {
                         Total
                       </p>
                       <p className="text-sm text-gray-500 truncate ">
-                        {item.trasac_balance}
+                        {item.balance}
                       </p>
                     </div>
 
