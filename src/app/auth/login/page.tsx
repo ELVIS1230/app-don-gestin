@@ -17,18 +17,19 @@ export default function Login() {
         console.log(user)
     
       const response = await axios.post('http://127.0.0.1:3000/api/users/login', user) 
-
+      console.log(response)
       sessionStorage.setItem('usuario', JSON.stringify({
-        cedula: response.data.u_cedula,
-        nombre: response.data.u_name, 
-        apellido: response.data.u_lastname,
-        cuenta: response.data.account_id_fk.account_id 
+        cedula: response.data.user.u_cedula,
+        nombre: response.data.user.u_name, 
+        apellido: response.data.user.u_lastname,
+        cuenta: response.data.user.account_id_fk.account_id 
       }));
       console.log(response.data)
       
       router.push('/home', { scroll: false })
     }catch (error:any){
       const message = error.response?.data?.message;
+      console.log(error)
       Modal.error({
         title: "Hubo un error",
         content: message ? message : "Ocurrio un error",
