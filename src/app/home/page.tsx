@@ -21,8 +21,72 @@ export default function Home() {
   })
 
   const credentialUser = JSON.parse(sessionStorage.getItem('usuario') as string)
+
+  function downloadDocx(buffer: any, fileName = "document.docx") {
+
+    const uint8Array = new Uint8Array(buffer.data);
+    // Convierte el Buffer a un Blob
+    const blob = new Blob([uint8Array], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+  
+    // Crea un enlace temporal para la descarga
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = fileName;
+  
+    // Simula un clic para iniciar la descarga
+    document.body.appendChild(link);
+    link.click();
+  
+    // Limpia el enlace temporal
+    document.body.removeChild(link);
+  }
+
+  const report = {
+    title: 'Informe General',
+    sectionOne: {
+      title: 'Datos Iniciales',
+      responsibleName: 'Ana Gómez',
+      date: '20-11-2024',
+    },
+    sectionTwo: {
+      title: 'Resumen',
+      subsection:
+        'Este informe detalla las actividades realizadas durante el mes, incluyendo avances y desafíos encontrados en el proyecto.',
+    },
+    sectionThree: {
+      title: 'Objetivos',
+      titleTwo: 'Resultados',
+      subsection: [
+        'Incrementar la eficiencia operativa',
+        'Reducir costos en un 10%',
+        'Optimizar los procesos de comunicación',
+      ],
+      subsectionTwo: [
+        'La eficiencia operativa aumentó un 12%',
+        'Se lograron ahorros de un 8% en costos',
+        'Los tiempos de respuesta se redujeron en un 15%',
+      ],
+    },
+    sectionFour: {
+      title: 'Conclusión',
+      subsection:
+        'Los resultados obtenidos superaron las expectativas iniciales, mostrando una clara mejora en las métricas clave gracias al enfoque estratégico adoptado.',
+    },
+  }
+
   const handleDownload = async () => {
-    window.open(`http://localhost:3000/api/transactions/reports/${credentialUser.cedula}`, '_blank');
+    try {
+      // Realiza la solicitud POST
+      const response = await axios.post(
+        'http://localhost:3000/api/report/excel',
+        { data: report }, 
+      );
+
+      console.log(response.data)
+      downloadDocx(response.data, 'miDocumento.xlsx');
+    } catch (error) {
+      console.error('Error al generar el archivo DOCX:', error);
+    }        
   };
 
   useEffect(() => {
